@@ -1,7 +1,12 @@
+import BurgerMaker from "./components/BurgerMaker/BurgerMaker";
+import { Route, Switch, Redirect } from "react-router-dom";
+
 function App() {
   return (
     <div className="App">
-      <h1>start</h1>
+      <Switch>
+        <Route path="/" component={BurgerMaker} />
+      </Switch>
     </div>
   );
 }
