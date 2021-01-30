@@ -1,9 +1,9 @@
 import React from "react";
 
-import Layout from "../UI/Layout/Layout";
+import Layout from "../Layout/Layout";
 
 const BurgerMaker = () => {
-  return <Layout />;
+  return <h2>im a burger-maker</h2>;
 };
 
 export default BurgerMaker;

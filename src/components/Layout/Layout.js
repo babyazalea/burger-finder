@@ -1,12 +1,13 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-import Navigation from "../Header/Navigation";
+import Navigation from "../UI/Header/Navigation";
 
 const Layout = (props) => {
   return (
     <Container fluid="true">
       <Navigation />
+      <main>{props.children}</main>
     </Container>
   );
 };
