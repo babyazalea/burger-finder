@@ -1,9 +1,15 @@
 import React from "react";
-
-import Layout from "../Layout/Layout";
+import { Container } from "react-bootstrap";
+import Burger from "./Burger/Burger";
+import BurgerController from "./BurgerController/BurgerController";
 
 const BurgerMaker = () => {
-  return <h2>im a burger-maker</h2>;
+  return (
+    <Container>
+      <Burger />
+      <BurgerController />
+    </Container>
+  );
 };
 
 export default BurgerMaker;

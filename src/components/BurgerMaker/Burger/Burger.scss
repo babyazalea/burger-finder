@@ -1,0 +1,32 @@
+.burger {
+  div {
+    margin: 2% auto;
+  }
+  .lid-bun {
+    width: 50%;
+    height: 13%;
+    background: linear-gradient(#e27d34, #e49057);
+    border-radius: 90% 90% 30% 30%;
+  }
+}
+
+@media (min-width: 500px) and (min-height: 400px) {
+  .burger {
+    width: 350px;
+    height: 300px;
+  }
+}
+
+@media (min-width: 500px) and (min-height: 401px) {
+  .burger {
+    width: 450px;
+    height: 400px;
+  }
+}
+
+@media (min-width: 1000px) and (min-height: 700px) {
+  .burger {
+    width: 700px;
+    height: 600px;
+  }
+}
