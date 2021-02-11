@@ -1,12 +1,30 @@
 .burger {
   div {
-    margin: 2% auto;
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
   }
   .lid-bun {
-    width: 50%;
-    height: 13%;
-    background: linear-gradient(#e27d34, #e49057);
-    border-radius: 90% 90% 30% 30%;
+    img {
+      width: 80%;
+      filter: saturate(1.5);
+    }
+  }
+  .patty {
+    img {
+      width: 80%;
+    }
+  }
+  .lettuce {
+    img {
+      width: 80%;
+    }
+  }
+  .cheese {
+    img {
+      width: 80%;
+    }
   }
 }
 
