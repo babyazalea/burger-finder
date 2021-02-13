@@ -12,7 +12,7 @@ const BurgerIngredient = (props) => {
   let ingredient = null;
 
   switch (props.type) {
-    case "lid-bun":
+    case "lidBun":
       ingredient = (
         <div className="lid-bun">
           <img src={lidBunImage} alt="lid-bun" />
@@ -40,7 +40,7 @@ const BurgerIngredient = (props) => {
         </div>
       );
       break;
-    case "bottom-bun":
+    case "bottomBun":
       ingredient = (
         <div className="lettuce">
           <img src={bottomBunImage} alt="bottom-bun" />
