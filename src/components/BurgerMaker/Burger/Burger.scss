@@ -1,30 +1,14 @@
 .burger {
+  width: 100%;
+  height: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
   div {
     width: 50%;
-    margin: auto;
     display: flex;
     justify-content: center;
-  }
-  .lid-bun {
-    img {
-      width: 80%;
-      filter: saturate(1.5);
-    }
-  }
-  .patty {
-    img {
-      width: 80%;
-    }
-  }
-  .lettuce {
-    img {
-      width: 80%;
-    }
-  }
-  .cheese {
-    img {
-      width: 80%;
-    }
+    position: absolute;
   }
 }
 

@@ -3,9 +3,11 @@ import { Container } from "react-bootstrap";
 import Burger from "./Burger/Burger";
 import BurgerController from "./BurgerController/BurgerController";
 
+import "./BurgerMaker.scss";
+
 const BurgerMaker = () => {
   return (
-    <Container>
+    <Container className="burger-maker">
       <Burger />
       <BurgerController />
     </Container>
