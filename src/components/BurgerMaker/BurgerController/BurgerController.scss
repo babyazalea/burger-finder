@@ -1,5 +1,16 @@
 .burger-controller {
-  margin-top: 100px;
   width: 100%;
   height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+  font-family: "Poor Story", cursive;
+  input {
+    width: 40%;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-size: 45px;
+  }
 }

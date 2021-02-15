@@ -5,7 +5,7 @@ import "./BurgerController.scss";
 
 const BurgerController = (props) => (
   <Container className="burger-controller">
-    <h2>controller is here</h2>
+    <input type="text" autoFocus />
   </Container>
 );
 

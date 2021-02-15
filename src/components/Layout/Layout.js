@@ -6,7 +6,7 @@ import "./Layout.scss";
 
 const Layout = (props) => {
   return (
-    <Container fluid="true">
+    <Container className="layout" fluid="true">
       <Navigation />
       <main>{props.children}</main>
     </Container>

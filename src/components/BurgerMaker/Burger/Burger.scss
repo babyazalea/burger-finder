@@ -1,14 +1,16 @@
 .burger {
   width: 100%;
   height: 50%;
-  position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  font-family: "Poor Story", cursive;
   div {
     width: 50%;
     display: flex;
     justify-content: center;
-    position: absolute;
   }
 }
 

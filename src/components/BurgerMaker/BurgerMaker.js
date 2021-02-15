@@ -9,14 +9,15 @@ const BurgerMaker = () => {
   const [ingredients, setIngredients] = useState({
     lidBun: 1,
     lettuce: 1,
+    cheese: 1,
     patty: 1,
     bottomBun: 1,
   });
 
   return (
     <Container className="burger-maker">
-      <Burger ingredients={ingredients} />
       <BurgerController />
+      <Burger ingredients={ingredients} />
     </Container>
   );
 };
