@@ -5,12 +5,16 @@
   justify-content: center;
   align-items: center;
   border: 1px solid red;
-  font-family: "Poor Story", cursive;
-  input {
-    width: 40%;
-    border: none;
-    outline: none;
-    text-align: center;
-    font-size: 45px;
+  form {
+    display: flex;
+    justify-content: center;
+    input {
+      width: 40%;
+      border: none;
+      outline: none;
+      text-align: center;
+      font-size: 45px;
+      font-family: "Poor Story", cursive;
+    }
   }
 }
