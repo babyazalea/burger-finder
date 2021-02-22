@@ -20,7 +20,6 @@ const BurgerController = (props) => {
         }}
       >
         <input type="text" autoFocus onChange={handleText} ref={textInput} />
-        <button>submit</button>
       </form>
     </Container>
   );

@@ -7,11 +7,11 @@ import "./BurgerMaker.scss";
 
 const BurgerMaker = () => {
   const [ingredients, setIngredients] = useState({
-    // lidBun: 0,
-    // lettuce: 0,
-    // cheese: 0,
-    // patty: 0,
-    // bottomBun: 0,
+    lidBun: 1,
+    lettuce: 0,
+    cheese: 0,
+    patty: 0,
+    bottomBun: 1,
   });
 
   const addIngredient = (event, text) => {
