@@ -60,9 +60,22 @@ const BurgerMaker = () => {
     setIngredients(updatedIngredients);
   };
 
+  const clearIngredients = () => {
+    setIngredients({
+      lidBun: 1,
+      lettuce: 0,
+      cheese: 0,
+      patty: 0,
+      bottomBun: 1,
+    });
+  };
+
   return (
     <Container className="burger-maker">
-      <BurgerController addIngredient={addIngredient} />
+      <BurgerController
+        addIngredient={addIngredient}
+        clearIngredients={clearIngredients}
+      />
       <Burger ingredients={ingredients} />
     </Container>
   );
