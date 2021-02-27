@@ -33,7 +33,9 @@ const BurgerController = (props) => {
             ref={textInput}
           />
           <InputGroup.Append>
-            <Button variant="info">찾기</Button>
+            <Button className="add-button" variant="info" type="submit">
+              <span>+</span>
+            </Button>
           </InputGroup.Append>
         </InputGroup>
       </form>
