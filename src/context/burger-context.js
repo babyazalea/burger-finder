@@ -1,12 +1,21 @@
 import React, { useState } from "react";
-import { Container } from "react-bootstrap";
-import Burger from "./Burger/Burger";
-import BurgerController from "./BurgerController/BurgerController";
 
-import "./BurgerMaker.scss";
+export const BurgerContext = React.createContext({
+  ingredients: {
+    lidBun: 1,
+    lettuce: 0,
+    cheese: 0,
+    patty: 0,
+    bottomBun: 1,
+  },
+  isAnalyzed: false,
+  addIngredient: () => {},
+  clearIngredients: () => {},
+  fixedIngredients: () => {},
+});
 
-const BurgerMaker = () => {
-  const [ingredients, setIngredients] = useState({
+const BurgerContextProvider = (props) => {
+  const [ings, setIngs] = useState({
     lidBun: 1,
     lettuce: 0,
     cheese: 0,
@@ -14,9 +23,11 @@ const BurgerMaker = () => {
     bottomBun: 1,
   });
 
-  const addIngredient = (event, text) => {
+  const [stateOfAnalyze, setStateOfAnalyze] = useState(false);
+
+  const onAddIngredient = (event, text) => {
     event.preventDefault();
-    const oldIngredients = ingredients;
+    const oldIngredients = ings;
     let convertedText = "";
 
     switch (text) {
@@ -54,14 +65,14 @@ const BurgerMaker = () => {
       updatedLidBunCount = 1;
     }
     const updatedIngredients = {
-      ...ingredients,
+      ...ings,
     };
     updatedIngredients[convertedText] = updatedLidBunCount;
-    setIngredients(updatedIngredients);
+    setIngs(updatedIngredients);
   };
 
-  const clearIngredients = () => {
-    setIngredients({
+  const onClearIngredients = () => {
+    setIngs({
       lidBun: 1,
       lettuce: 0,
       cheese: 0,
@@ -70,15 +81,23 @@ const BurgerMaker = () => {
     });
   };
 
+  const onFixedIngredients = () => {
+    setStateOfAnalyze(true);
+  };
+
   return (
-    <Container className="burger-maker">
-      <BurgerController
-        addIngredient={addIngredient}
-        clearIngredients={clearIngredients}
-      />
-      <Burger ingredients={ingredients} />
-    </Container>
+    <BurgerContext.Provider
+      value={{
+        ingredients: ings,
+        addIngredient: onAddIngredient,
+        clearIngredients: onClearIngredients,
+        isAnalyzed: stateOfAnalyze,
+        fixedIngredients: onFixedIngredients,
+      }}
+    >
+      {props.children}
+    </BurgerContext.Provider>
   );
 };
 
-export default BurgerMaker;
+export default BurgerContextProvider;

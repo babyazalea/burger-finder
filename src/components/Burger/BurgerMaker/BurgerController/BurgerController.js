@@ -1,4 +1,5 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
+import { BurgerContext } from "../../../../context/burger-context";
 
 import { Button, Container, FormControl, InputGroup } from "react-bootstrap";
 import "./BurgerController.scss";
@@ -7,15 +8,21 @@ const BurgerController = (props) => {
   const [enteredText, setEnteredText] = useState("");
   const textInput = useRef(null);
 
+  const burgerContext = useContext(BurgerContext);
+
   const handleText = () => setEnteredText(textInput.current.value);
 
   const addingIngredient = (event, text) => {
-    props.addIngredient(event, text);
+    burgerContext.addIngredient(event, text);
     textInput.current.value = "";
   };
 
   const clearingIngredients = () => {
-    props.clearIngredients();
+    burgerContext.clearIngredients();
+  };
+
+  const fixedIngredients = () => {
+    burgerContext.fixedIngredients();
   };
 
   return (
@@ -40,8 +47,11 @@ const BurgerController = (props) => {
         </InputGroup>
       </form>
       <div className="buttons">
-        <Button variant="info" active onClick={clearingIngredients}>
+        <Button variant="info" onClick={clearingIngredients}>
           다시 하기
+        </Button>
+        <Button variant="success" onClick={fixedIngredients}>
+          만들기
         </Button>
       </div>
     </Container>
