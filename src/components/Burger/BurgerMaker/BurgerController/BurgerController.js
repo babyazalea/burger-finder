@@ -1,4 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
+import { withRouter } from "react-router-dom";
 import { BurgerContext } from "../../../../context/burger-context";
 
 import { Button, Container, FormControl, InputGroup } from "react-bootstrap";
@@ -23,6 +24,7 @@ const BurgerController = (props) => {
 
   const fixedIngredients = () => {
     burgerContext.fixedIngredients();
+    props.history.push("/analyze");
   };
 
   return (
@@ -58,4 +60,4 @@ const BurgerController = (props) => {
   );
 };
 
-export default BurgerController;
+export default withRouter(BurgerController);

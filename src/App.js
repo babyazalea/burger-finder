@@ -6,11 +6,13 @@ import BurgerContextProvider from "./context/burger-context";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "./components/Layout/Layout";
 import Burger from "./components/Burger/Burger";
+import BurgerAnalyzer from "./components/Burger/BurgerAnalyzer/BurgerAnalyzer";
 
 function App() {
   let routes = (
     <Switch>
       <BurgerContextProvider>
+        <Route path="/analyze" component={BurgerAnalyzer} exact />
         <Route path="/" component={Burger} exact />
       </BurgerContextProvider>
     </Switch>

@@ -5,7 +5,7 @@ import BurgerController from "./BurgerController/BurgerController";
 
 import "./BurgerMaker.scss";
 
-const BurgerMaker = (props) => {
+const BurgerMaker = () => {
   return (
     <Container className="burger-maker">
       <BurgerController />
