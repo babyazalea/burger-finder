@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import { BurgerContext } from "../../../context/burger-context";
-import burgers from "../../../assets/data/burgers";
+import burgers from "../../../assets/data/burgers-data";
 
 import { Container } from "react-bootstrap";
 
