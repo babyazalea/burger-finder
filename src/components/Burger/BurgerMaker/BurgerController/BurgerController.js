@@ -2,6 +2,8 @@ import React, { useContext, useRef, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { BurgerContext } from "../../../../context/burger-context";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { Button, Container, FormControl, InputGroup } from "react-bootstrap";
 import "./BurgerController.scss";
 
@@ -15,7 +17,6 @@ const BurgerController = (props) => {
 
   const addingIngredient = (event, text) => {
     burgerContext.addIngredient(event, text);
-    textInput.current.value = "";
   };
 
   const clearingIngredients = () => {
@@ -27,6 +28,16 @@ const BurgerController = (props) => {
     props.history.push("/analyze");
   };
 
+  const resetInput = () => {
+    textInput.current.value = "";
+  };
+
+  const escapeOnInput = (event) => {
+    if (event.key === "Escape") {
+      textInput.current.value = "";
+    }
+  };
+
   return (
     <Container className="burger-controller">
       <form
@@ -35,15 +46,29 @@ const BurgerController = (props) => {
         }}
       >
         <InputGroup className="mb-3">
+          <InputGroup.Prepend>
+            <Button
+              className="reset-button"
+              variant="info"
+              type="button"
+              onClick={resetInput}
+            >
+              <FontAwesomeIcon icon="eraser" />
+            </Button>
+          </InputGroup.Prepend>
           <FormControl
             aria-label="Recipient's username"
             aria-describedby="basic-addon2"
             onChange={handleText}
             ref={textInput}
+            onKeyUp={(event) => {
+              escapeOnInput(event);
+            }}
+            autoFocus
           />
           <InputGroup.Append>
             <Button className="add-button" variant="info" type="submit">
-              <span>+</span>
+              <FontAwesomeIcon icon="plus" />
             </Button>
           </InputGroup.Append>
         </InputGroup>

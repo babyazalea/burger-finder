@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import BurgerText from "./BurgerText/BurgerText";
 import BurgerController from "./BurgerController/BurgerController";

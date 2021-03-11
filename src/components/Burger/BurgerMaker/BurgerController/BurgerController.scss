@@ -18,14 +18,15 @@
         text-align: center;
         font-size: 45px;
       }
-      .add-button {
-        span {
-          font-size: 25px;
-          font-weight: bold;
-        }
+      input:focus {
+        box-shadow: inset 0 -1px 0 #ddd;
+      }
+      .reset-button {
+        width: 40px;
       }
     }
   }
+
   .buttons {
     margin-top: 30px;
     button:not(:last-child) {
