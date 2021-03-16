@@ -48,7 +48,7 @@ const BurgerController = (props) => {
         <InputGroup className="mb-3">
           <InputGroup.Prepend>
             <Button
-              className="reset-button"
+              className="ingredients-reset-button"
               variant="info"
               type="button"
               onClick={resetInput}
@@ -67,13 +67,17 @@ const BurgerController = (props) => {
             autoFocus
           />
           <InputGroup.Append>
-            <Button className="add-button" variant="info" type="submit">
+            <Button
+              className="ingredient-add-button"
+              variant="info"
+              type="submit"
+            >
               <FontAwesomeIcon icon="plus" />
             </Button>
           </InputGroup.Append>
         </InputGroup>
       </form>
-      <div className="buttons">
+      <div className="burger-controller-output-btn">
         <Button variant="info" onClick={clearingIngredients}>
           다시 하기
         </Button>

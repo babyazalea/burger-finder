@@ -3,6 +3,9 @@ import React, { useContext } from "react";
 import { BurgerContext } from "../../../context/burger-context";
 import burgers from "../../../assets/data/burgers-data";
 
+import AnalysisResults from "./AnalysisResults/AnalysisResults";
+
+import "./BurgerAnalyzer.scss";
 import { Container } from "react-bootstrap";
 
 const BurgerAnalyzer = () => {
@@ -42,7 +45,7 @@ const BurgerAnalyzer = () => {
     };
     scoreBoard.push(burgerResult);
   }
-  //burger finder done
+  // burger finder end
 
   /// burgers sorting start
 
@@ -58,21 +61,35 @@ const BurgerAnalyzer = () => {
     return 0;
   });
 
+  /// burgers sorting end
+
   let analyzer = <p>not...ok</p>;
 
   if (burgerContext.isAnalyzed && sortedScoreBoard.length) {
     analyzer = sortedScoreBoard.map((burgerResult, index) => {
       return (
-        <li key={burgerResult.name}>
-          <span>{index + 1}</span>
-          <span>{burgerResult.name}</span>
-          <span>{burgerResult.score}</span>
-        </li>
+        // <li key={burgerResult.name}>
+        //   <span className="burger__ranking__rank">{index + 1}</span>
+        //   <span className="burger__ranking__name">{burgerResult.name}</span>
+        //   <span className="burger__ranking__score">{burgerResult.score}</span>
+        // </li>
+        <AnalysisResults
+          key={burgerResult.name}
+          name={burgerResult.name}
+          index={index}
+          score={burgerResult.score}
+        />
       );
     });
   }
 
-  return <Container className="burger-analyzer">{analyzer}</Container>;
+  return (
+    <Container className="burger-analyzer">
+      <div className="result-board">
+        <ul>{analyzer}</ul>
+      </div>
+    </Container>
+  );
 };
 
 export default BurgerAnalyzer;

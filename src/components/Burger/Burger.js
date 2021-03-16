@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { BurgerContext } from "../../context/burger-context";
 
@@ -7,6 +7,9 @@ import BurgerMaker from "./BurgerMaker/BurgerMaker";
 
 const Burger = () => {
   const burgerContext = useContext(BurgerContext);
+  useEffect(() => {
+    burgerContext.initBurgerAnalyze();
+  });
 
   let burger = <BurgerMaker />;
 

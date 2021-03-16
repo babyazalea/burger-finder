@@ -12,6 +12,7 @@ export const BurgerContext = React.createContext({
   addIngredient: () => {},
   clearIngredients: () => {},
   fixedIngredients: () => {},
+  initBurgerAnalyze: () => {},
 });
 
 const BurgerContextProvider = (props) => {
@@ -85,6 +86,10 @@ const BurgerContextProvider = (props) => {
     setStateOfAnalyze(true);
   };
 
+  const onInitBurgerAnalyze = () => {
+    setStateOfAnalyze(false);
+  };
+
   return (
     <BurgerContext.Provider
       value={{
@@ -93,6 +98,7 @@ const BurgerContextProvider = (props) => {
         clearIngredients: onClearIngredients,
         isAnalyzed: stateOfAnalyze,
         fixedIngredients: onFixedIngredients,
+        initBurgerAnalyze: onInitBurgerAnalyze,
       }}
     >
       {props.children}
