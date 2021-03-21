@@ -34,17 +34,18 @@ const BurgerAnalyzer = () => {
     return score;
   };
 
-  for (let burgerKey of burgerKeys) {
+  for (let i = 0; i < 3; i++) {
+    const burgerName = burgerKeys[i];
     const score = scoringFunction(
       burgerContext.ingredients,
-      burgers[burgerKey]
+      burgers[burgerName]
     );
     const burgerResult = {
-      name: burgerKey,
+      name: burgerName,
       score: score,
     };
     scoreBoard.push(burgerResult);
-  }
+  } // : found three burger from the top of rank
   // burger finder end
 
   /// burgers sorting start
@@ -63,12 +64,10 @@ const BurgerAnalyzer = () => {
 
   /// burgers sorting end
 
-  const finalsScoreBoard = sortedScoreBoard.slice(0, 3); // sorted burgers cutting
-
   let analyzer = <p>not...ok</p>;
 
-  if (burgerContext.isAnalyzed && finalsScoreBoard.length) {
-    analyzer = finalsScoreBoard.map((burgerResult, index) => {
+  if (burgerContext.isAnalyzed && sortedScoreBoard.length) {
+    analyzer = sortedScoreBoard.map((burgerResult, index) => {
       return (
         <AnalysisResults
           key={burgerResult.name}
