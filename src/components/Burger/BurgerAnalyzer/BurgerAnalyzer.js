@@ -63,16 +63,13 @@ const BurgerAnalyzer = () => {
 
   /// burgers sorting end
 
+  const finalsScoreBoard = sortedScoreBoard.slice(0, 3); // sorted burgers cutting
+
   let analyzer = <p>not...ok</p>;
 
-  if (burgerContext.isAnalyzed && sortedScoreBoard.length) {
-    analyzer = sortedScoreBoard.map((burgerResult, index) => {
+  if (burgerContext.isAnalyzed && finalsScoreBoard.length) {
+    analyzer = finalsScoreBoard.map((burgerResult, index) => {
       return (
-        // <li key={burgerResult.name}>
-        //   <span className="burger__ranking__rank">{index + 1}</span>
-        //   <span className="burger__ranking__name">{burgerResult.name}</span>
-        //   <span className="burger__ranking__score">{burgerResult.score}</span>
-        // </li>
         <AnalysisResults
           key={burgerResult.name}
           name={burgerResult.name}

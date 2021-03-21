@@ -13,6 +13,7 @@ function App() {
     <Switch>
       <BurgerContextProvider>
         <Route path="/analyze" component={BurgerAnalyzer} exact />
+        <Route path="/burger-maker" component={Burger} exact />
         <Route path="/" component={Burger} exact />
       </BurgerContextProvider>
     </Switch>
