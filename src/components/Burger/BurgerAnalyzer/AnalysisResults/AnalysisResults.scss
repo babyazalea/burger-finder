@@ -1,5 +1,33 @@
 .burger-ranking-item:nth-child(1) {
   .burger-ranking-rank {
     font-size: 50px;
+    font-weight: bold;
+  }
+  .burger-ranking-name {
+    font-size: 35px;
+  }
+}
+
+.burger-ranking-item:nth-child(2) {
+  .burger-ranking-rank {
+    font-size: 40px;
+  }
+  .burger-ranking-name {
+    font-size: 25px;
+  }
+}
+
+.burger-ranking-item:nth-child(3) {
+  .burger-ranking-rank {
+    font-size: 30px;
+  }
+  .burger-ranking-name {
+    font-size: 15px;
+  }
+}
+
+.burger-ranking-item {
+  span:not(last-child) {
+    margin-right: 30px;
   }
 }

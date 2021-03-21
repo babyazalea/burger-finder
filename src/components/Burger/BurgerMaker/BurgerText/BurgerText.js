@@ -16,13 +16,7 @@ const BurgerText = (props) => {
     }
   );
   return (
-    <Container className="burger-text">
-      {/* <BurgerIngredient type="lid-bun" />
-      <BurgerIngredient type="lettuce" />
-      <BurgerIngredient type="patty" />
-      <BurgerIngredient type="bottom-bun" /> */}
-      {transformedIngredients}
-    </Container>
+    <Container className="burger-text">{transformedIngredients}</Container>
   );
 };
 
