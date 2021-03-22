@@ -3,12 +3,12 @@
   height: 60%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   border: 1px solid black;
+  overflow: auto;
   div {
     width: 50%;
-    display: flex;
-    justify-content: center;
+    margin: auto;
+    text-align: center;
   }
 }
