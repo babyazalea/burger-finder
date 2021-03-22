@@ -29,4 +29,4 @@ yarn-error.log*
 burgers-data.js
 
 #vscode
-/.vscode
+.vscode
