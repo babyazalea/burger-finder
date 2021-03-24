@@ -9,16 +9,14 @@
 
 .burger-ranking-item {
   .base-card {
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      color: black;
-      padding: 1rem;
-      text-decoration: none;
-    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: black;
+    padding: 1rem;
+    cursor: pointer;
   }
 }
 

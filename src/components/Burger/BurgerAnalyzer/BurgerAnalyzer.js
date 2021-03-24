@@ -1,14 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 
 import { BurgerContext } from "../../../context/burger-context";
 import burgers from "../../../assets/data/burgers-data";
 
 import AnalysisResults from "./AnalysisResults/AnalysisResults";
+import Modal from "../../UI/Modal/Modal";
 
 import "./BurgerAnalyzer.scss";
 import { Container } from "react-bootstrap";
 
 const BurgerAnalyzer = () => {
+  const [modalState, setModalState] = useState(false);
   const burgerContext = useContext(BurgerContext);
 
   let scoreBoard = [];
@@ -50,7 +52,7 @@ const BurgerAnalyzer = () => {
 
   /// burgers sorting start
 
-  const sortedScoreBoard = scoreBoard.sort(function(a, b) {
+  const sortedScoreBoard = scoreBoard.sort(function (a, b) {
     if (a.score > b.score) {
       return -1;
     }
@@ -64,6 +66,17 @@ const BurgerAnalyzer = () => {
 
   /// burgers sorting end
 
+  // show or hide Modal
+
+  const showModal = () => {
+    setModalState(true);
+  };
+
+  const closeModal = () => {
+    setModalState(false);
+  };
+  // show or hide Modal end
+
   let analyzer = <p>not...ok</p>;
 
   if (burgerContext.isAnalyzed && sortedScoreBoard.length) {
@@ -74,6 +87,7 @@ const BurgerAnalyzer = () => {
           name={burgerResult.name}
           index={index}
           score={burgerResult.score}
+          showModal={showModal}
         />
       );
     });
@@ -84,6 +98,7 @@ const BurgerAnalyzer = () => {
       <div className="result-board">
         <ul>{analyzer}</ul>
       </div>
+      <Modal isOpen={modalState} onClose={closeModal}></Modal>
     </Container>
   );
 };

@@ -1,0 +1,12 @@
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  width: 250px;
+  height: 200px;
+  z-index: 500;
+  border: 1px solid #000;
+  background-color: blanchedalmond;
+}

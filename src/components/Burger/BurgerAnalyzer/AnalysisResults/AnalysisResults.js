@@ -21,11 +21,10 @@ const AnalysisResults = (props) => {
         height: widthAndHeight + "%",
         fontSize: fontSize,
       }}
+      onClick={props.showModal}
     >
       <BaseCard>
-        <a href="#">
-          <span className="burger-ranking-name">{props.name}</span>
-        </a>
+        <span className="burger-ranking-name">{props.name}</span>
       </BaseCard>
     </li>
   );
