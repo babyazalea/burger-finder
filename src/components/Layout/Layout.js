@@ -6,7 +6,11 @@ import "./Layout.scss";
 
 const Layout = (props) => {
   return (
-    <Container className="burger-finder-layout" fluid="true">
+    <Container
+      id="burger-finder-layout"
+      className="burger-finder-layout"
+      fluid="true"
+    >
       <Navigation />
       <main>{props.children}</main>
     </Container>

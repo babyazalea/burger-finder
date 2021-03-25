@@ -6,9 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faRedo, faPlus, faEraser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faRedo,
+  faPlus,
+  faEraser,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 
-library.add(faRedo, faPlus, faEraser);
+library.add(faRedo, faPlus, faEraser, faTimes);
 
 const app = (
   <React.StrictMode>

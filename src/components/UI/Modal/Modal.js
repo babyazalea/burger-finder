@@ -1,18 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import BaseCard from "../BaseCard/BaseCard";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import "./Modal.scss";
 
-// import BaseCard from "../BaseCard/BaseCard";
-
-const Modal = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
+const Modal = (props) => {
+  const app = document.getElementById("App");
+  if (!props.isOpen) return null;
   return ReactDOM.createPortal(
-    <div className="modal">
-      <span>ok</span>
-      <button onClick={onClose}>Close</button>
+    <div className="backdrop" onClick={props.closeModal}>
+      <BaseCard>
+        <div className="burger-modal-text">
+          <span>{props.burgerRank}</span>
+          <span>{props.burgerName}</span>
+          <span>{props.burgerScore}</span>
+        </div>
+        <button
+          className="burger-modal-close-button"
+          onClick={props.closeModal}
+        >
+          <FontAwesomeIcon icon="times" />
+        </button>
+      </BaseCard>
     </div>,
-    document.getElementById("modal-root")
+    app
   );
 };
 
