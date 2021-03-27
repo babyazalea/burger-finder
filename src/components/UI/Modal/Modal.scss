@@ -1,11 +1,22 @@
-.backdrop {
+.modal {
   width: 100%;
   height: 100vh;
+  display: block;
+}
+
+.backdrop {
+  width: 100%;
+  height: 100%;
   position: fixed;
   z-index: 100;
   left: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-inside {
+  width: 100%;
+  height: 100%;
   .base-card {
     display: flex;
     justify-content: center;
@@ -16,11 +27,49 @@
     transform: translate(-50%, -50%);
     z-index: 500;
     width: 30%;
-    height: 20%;
+    height: 25%;
     min-width: 350px;
     min-height: 180px;
     background-color: #feca57;
     .burger-modal-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: "Poor Story";
+      .burger-ranking-rank {
+        font-size: 1rem;
+      }
+      .burger-ranking-name {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 10px 0;
+      }
+      .burger-ranking-score {
+        font-size: 0.8rem;
+        font-style: italic;
+      }
+      .modal-expension-btn {
+        position: absolute;
+        bottom: 0.3%;
+        outline: none;
+        background: none;
+        border: none;
+        color: rgba(0, 0, 0, 0.5);
+        transition: color 0.3s;
+      }
+      .modal-expension-btn:hover {
+        color: rgba(0, 0, 0, 1);
+        animation: upAndDown 1.5s ease infinite;
+      }
+      @keyframes upAndDown {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(2px);
+        }
+      }
     }
     .burger-modal-close-button {
       display: block;
@@ -31,6 +80,10 @@
       border: none;
       font-size: 2rem;
       color: rgba(0, 0, 0, 0.5);
+      transition: color 0.3s;
+    }
+    .burger-modal-close-button:hover {
+      color: rgba(0, 0, 0, 1);
     }
   }
 }
