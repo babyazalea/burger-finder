@@ -14,9 +14,9 @@ const Modal = (props) => {
     <div className="backdrop" onClick={props.closeModal}>
       <BaseCard>
         <div className="burger-modal-text">
-          <span>{props.burgerRank}</span>
-          <span>{props.burgerName}</span>
-          <span>{props.burgerScore}</span>
+          <span className="burger-ranking-rank">{props.burgerRankText}</span>
+          <span className="burger-ranking-name">{props.burgerName}</span>
+          <span className="burger-ranking-score">{props.burgerScoreText}</span>
         </div>
         <button
           className="burger-modal-close-button"

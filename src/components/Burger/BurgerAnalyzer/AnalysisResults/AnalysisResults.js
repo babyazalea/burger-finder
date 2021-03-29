@@ -24,6 +24,18 @@ const AnalysisResults = (props) => {
     setModalState(!prevState);
   };
 
+  // converted burger result
+  let burgerRankText = "";
+  let burgerScoreText = "";
+
+  if (props.index === 0 && props.score === 100) {
+    burgerRankText = "햄버거와 통했습니다.";
+    burgerScoreText = "백점 만점";
+  } else if (props.index === 1 && props.score > 97) {
+    burgerRankText = "그리 멀지 않은 곳에....";
+    burgerScoreText = "";
+  }
+
   return (
     <React.Fragment>
       <li
@@ -43,8 +55,8 @@ const AnalysisResults = (props) => {
         isOpen={modalState}
         closeModal={closeModal}
         burgerName={props.name}
-        burgerRank={props.index + 1}
-        burgerScore={props.score}
+        burgerRankText={props.index + 1}
+        burgerScoreText={props.score}
       ></Modal>
     </React.Fragment>
   );
