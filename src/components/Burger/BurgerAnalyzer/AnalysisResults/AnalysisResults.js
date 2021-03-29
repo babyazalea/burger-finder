@@ -24,16 +24,23 @@ const AnalysisResults = (props) => {
     setModalState(!prevState);
   };
 
-  // converted burger result
+  // converted rank & score
+
   let burgerRankText = "";
   let burgerScoreText = "";
 
   if (props.index === 0 && props.score === 100) {
-    burgerRankText = "햄버거와 통했습니다.";
+    burgerRankText = "햄버거와 통한 것 같습니다.";
     burgerScoreText = "백점 만점";
-  } else if (props.index === 1 && props.score > 97) {
-    burgerRankText = "그리 멀지 않은 곳에....";
-    burgerScoreText = "";
+  } else if (props.index >= 1 || (props.index < 3 && props.score > 96)) {
+    burgerRankText = "당신이 찾던 그 햄버거일지도 모릅니다.";
+    burgerScoreText = "점 하나 부족한 정도랄까요?";
+  } else if (props.index > 2 && props.score > 80) {
+    burgerRankText = "어딘가 닮긴 했는데...";
+    burgerScoreText = "점점 멀어지나봐..?";
+  } else if (props.index > 3 && props.score < 80) {
+    burgerRankText = "찾는 버거가 아닐지도 몰라요.";
+    burgerScoreText = "햄버거는 무수히 많은 점으로 이루어져 있다";
   }
 
   return (
@@ -55,8 +62,8 @@ const AnalysisResults = (props) => {
         isOpen={modalState}
         closeModal={closeModal}
         burgerName={props.name}
-        burgerRankText={props.index + 1}
-        burgerScoreText={props.score}
+        burgerRankText={burgerRankText}
+        burgerScoreText={burgerScoreText}
       ></Modal>
     </React.Fragment>
   );
