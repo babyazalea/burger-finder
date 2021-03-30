@@ -13,10 +13,31 @@ const BurgerIngredient = (props) => {
         </div>
       );
       break;
-    case "patty":
+    case "cheese":
       ingredient = (
-        <div className="ingredient patty">
+        <div className="ingredient cheese">
+          <h2>치즈</h2>
+        </div>
+      );
+      break;
+    case "hamburgPatty":
+      ingredient = (
+        <div className="ingredient hamburg-patty">
           <h2>고기 패티</h2>
+        </div>
+      );
+      break;
+    case "porkPatty":
+      ingredient = (
+        <div className="ingredient pork-patty">
+          <h2>돼지고기 패티</h2>
+        </div>
+      );
+      break;
+    case "beefPatty":
+      ingredient = (
+        <div className="ingredient beef-patty">
+          <h2>소고기 패티</h2>
         </div>
       );
       break;
@@ -24,13 +45,6 @@ const BurgerIngredient = (props) => {
       ingredient = (
         <div className="ingredient lettuce">
           <h2>양상추</h2>
-        </div>
-      );
-      break;
-    case "cheese":
-      ingredient = (
-        <div className="ingredient cheese">
-          <h2>치즈</h2>
         </div>
       );
       break;

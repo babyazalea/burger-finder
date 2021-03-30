@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 
 import { BurgerContext } from "../../../context/burger-context";
 import burgers from "../../../assets/data/burgers-data";

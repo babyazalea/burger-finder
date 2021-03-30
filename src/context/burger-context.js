@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 
+import initialIngredients from "../assets/data/initial-ingredients";
+
 export const BurgerContext = React.createContext({
-  ingredients: {
-    lidBun: 1,
-    lettuce: 0,
-    cheese: 0,
-    patty: 0,
-    bottomBun: 1,
-  },
+  ingredients: {},
   isAnalyzed: false,
   addIngredient: () => {},
   clearIngredients: () => {},
@@ -17,10 +13,8 @@ export const BurgerContext = React.createContext({
 
 const BurgerContextProvider = (props) => {
   const [ings, setIngs] = useState({
+    ...initialIngredients,
     lidBun: 1,
-    lettuce: 0,
-    cheese: 0,
-    patty: 0,
     bottomBun: 1,
   });
 
@@ -29,27 +23,109 @@ const BurgerContextProvider = (props) => {
   const onAddIngredient = (event, text) => {
     event.preventDefault();
     const oldIngredients = ings;
+    const convertedTextArg = text.replace(/\s/g, "");
+
     let convertedText = "";
 
-    switch (text) {
+    switch (convertedTextArg) {
+      // lidBun
       case "뚜껑":
       case "top":
         convertedText = "lidBun";
         break;
+      // cheese
+      case "치즈":
+      case "노랑":
+      case "cheese":
+        convertedText = "cheese";
+        break;
+      // hamburg patty
       case "패티":
       case "고기":
       case "고기패티":
-        convertedText = "patty";
+      case "hamburgpatty":
+        convertedText = "hamburgPatty";
         break;
+      // pork patty
+      case "돼지고기":
+      case "돼지고기패티":
+      case "porkpatty":
+        convertedText = "porkPatty";
+        break;
+      // beef patty
+      case "소고기":
+      case "소고기패티":
+      case "beefpatty":
+        convertedText = "beefPatty";
+        break;
+      // fish patty
+      case "생선":
+      case "생선패티":
+      case "명태":
+      case "fishpatty":
+        convertedText = "fishPatty";
+        break;
+      // vegetable patty
+      case "비건패티":
+      case "vegetablepatty":
+        convertedText = "vegetablePatty";
+        break;
+      // lettuce
       case "양상추":
       case "채소":
       case "풀":
+      case "lettuce":
         convertedText = "lettuce";
         break;
-      case "치즈":
-      case "노랑":
-        convertedText = "cheese";
+      // pickle
+      case "피클":
+      case "오이":
+      case "pickle":
+        convertedText = "pickle";
         break;
+      // onion
+      case "양파":
+      case "onion":
+        convertedText = "onion";
+        break;
+      // tomato
+      case "토마토":
+      case "tomato":
+        convertedText = "tomato";
+        break;
+      // spicy sauce
+      case "매운맛":
+      case "매운맛소스":
+      case "매운":
+      case "고추장베이스":
+      case "spicysauce":
+        convertedText = "spicySauce";
+        break;
+      // bicMac sauce
+      case "빅맥소스":
+      case "bicmacsauce":
+        convertedText = "bicMacSauce";
+        break;
+      // teriyaki sauce
+      case "데리야키":
+      case "데리야키소스":
+      case "teriyakisauce":
+        convertedText = "teriyakiSauce";
+        break;
+      // ketchup sauce
+      case "기본소스":
+      case "케첩":
+      case "케첩소스":
+      case "ketchupsauce":
+        convertedText = "ketchupSauce";
+        break;
+      // mayonnaise sauce
+      case "마요네즈":
+      case "마요네즈소스":
+      case "mayonnaisesauce":
+        convertedText = "mayonnaiseSauce";
+        break;
+      // bottomBun
       case "받침대":
       case "bottom":
         convertedText = "bottomBun";
@@ -74,10 +150,8 @@ const BurgerContextProvider = (props) => {
 
   const onClearIngredients = () => {
     setIngs({
+      ...initialIngredients,
       lidBun: 1,
-      lettuce: 0,
-      cheese: 0,
-      patty: 0,
       bottomBun: 1,
     });
   };

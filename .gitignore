@@ -27,6 +27,7 @@ yarn-error.log*
 
 #assets
 burgers-data.js
+initial-ingredients.js
 
 #vscode
 .vscode
