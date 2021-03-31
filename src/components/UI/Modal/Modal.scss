@@ -11,7 +11,7 @@
   z-index: 100;
   left: 0;
   top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-inside {
@@ -49,8 +49,6 @@
         font-style: italic;
       }
       .modal-expension-btn {
-        position: absolute;
-        bottom: 0.3%;
         outline: none;
         background: none;
         border: none;
@@ -69,6 +67,8 @@
         50% {
           transform: translateY(2px);
         }
+      }
+      .real-burger-url {
       }
     }
     .burger-modal-close-button {

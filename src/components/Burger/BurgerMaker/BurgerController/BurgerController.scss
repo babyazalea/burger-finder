@@ -7,6 +7,7 @@
   align-items: center;
   border: 1px solid red;
   form {
+    max-width: 450px;
     display: flex;
     justify-content: center;
     .input-group {

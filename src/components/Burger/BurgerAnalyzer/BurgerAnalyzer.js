@@ -34,8 +34,8 @@ const BurgerAnalyzer = () => {
     return score;
   };
 
-  for (let i = 0; i < 3; i++) {
-    const burgerName = burgerKeys[i];
+  for (let burgerKey in burgerKeys) {
+    const burgerName = burgerKeys[burgerKey];
     const score = scoringFunction(
       burgerContext.ingredients,
       burgers[burgerName]
@@ -43,24 +43,29 @@ const BurgerAnalyzer = () => {
     const burgerResult = {
       name: burgerName,
       score: score,
+      url: burgers[burgerName].realBurgerUrl
+        ? burgers[burgerName].realBurgerUrl
+        : null,
     };
     scoreBoard.push(burgerResult);
-  } // : found three burger from the top of rank
+  }
   // burger finder end
 
   /// burgers sorting start
 
-  const sortedScoreBoard = scoreBoard.sort(function (a, b) {
-    if (a.score > b.score) {
-      return -1;
-    }
+  const sortedScoreBoard = scoreBoard
+    .sort(function (a, b) {
+      if (a.score > b.score) {
+        return -1;
+      }
 
-    if (a.score < b.score) {
-      return 1;
-    }
+      if (a.score < b.score) {
+        return 1;
+      }
 
-    return 0;
-  });
+      return 0;
+    })
+    .slice(0, 3);
 
   /// burgers sorting end
 
@@ -74,6 +79,7 @@ const BurgerAnalyzer = () => {
           name={burgerResult.name}
           index={index}
           score={burgerResult.score}
+          url={burgerResult.url}
         />
       );
     });

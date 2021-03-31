@@ -104,7 +104,7 @@ const BurgerContextProvider = (props) => {
       // bicMac sauce
       case "빅맥소스":
       case "bicmacsauce":
-        convertedText = "bicMacSauce";
+        convertedText = "bicmacSauce";
         break;
       // teriyaki sauce
       case "데리야끼":

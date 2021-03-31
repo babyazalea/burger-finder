@@ -9,11 +9,11 @@ const AnalysisResults = (props) => {
   const [modalState, setModalState] = useState(false);
 
   let className = "burger-ranking-item";
-  const widthAndHeight = 150 - (props.index + 1) * 10;
+  const widthAndHeight = 110 - (props.index + 1) * 10;
   const fontSize = -props.index + 3 + "rem";
 
   if (props.score === 100) {
-    className += " perfect-match-burger";
+    className = " perfect-match-burger";
   }
 
   const showModal = () => {
@@ -64,6 +64,7 @@ const AnalysisResults = (props) => {
         burgerName={props.name}
         burgerRankText={burgerRankText}
         burgerScoreText={burgerScoreText}
+        url={props.url}
       ></Modal>
     </React.Fragment>
   );

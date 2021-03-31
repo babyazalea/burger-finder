@@ -1,21 +1,29 @@
+@import "../../../../scss//variables";
+
 .perfect-match-burger {
   background: no-repeat url("../../../../assets/images/highlighting.png");
   background-position: 45% 50%;
   background-size: 50%;
+  margin-bottom: 30px;
   .base-card {
-    background-color: rgba(252, 186, 3, 0.2);
+    background-color: rgb(240, 192, 60);
+    width: 100%;
+    height: 100%;
+    color: black;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
   }
 }
 
 .burger-ranking-item {
   .base-card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: rgb(233, 212, 156);
     width: 100%;
     height: 100%;
     color: black;
     padding: 1rem;
+    text-align: center;
     cursor: pointer;
   }
 }
