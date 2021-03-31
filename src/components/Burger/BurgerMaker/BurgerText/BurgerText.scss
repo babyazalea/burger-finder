@@ -6,6 +6,39 @@
   align-items: center;
   border: 1px solid black;
   overflow: auto;
+  background-color: hsl(0, 0%, 90%);
+  box-shadow: inset hsla(0, 0%, 15%, 0.8) 0 -1px 5px 4px,
+    /* soft SD */ inset hsla(0, 0%, 0%, 0.25) 0 -1px 0px 7px,
+    /* bottom SD */ inset hsla(0, 0%, 100%, 0.7) 0 2px 1px 7px,
+    /* top HL */ hsla(0, 0%, 0%, 0.15) 0 -5px 6px 4px,
+    /* outer SD */ hsla(0, 0%, 100%, 0.5) 0 5px 6px 4px; /* outer HL */
+  background-image: -webkit-repeating-linear-gradient(
+      left,
+      hsla(0, 0%, 100%, 0) 0%,
+      hsla(0, 0%, 100%, 0) 6%,
+      hsla(0, 0%, 100%, 0.1) 7.5%
+    ),
+    -webkit-repeating-linear-gradient(left, hsla(0, 0%, 0%, 0) 0%, hsla(
+            0,
+            0%,
+            0%,
+            0
+          )
+          4%, hsla(0, 0%, 0%, 0.03) 4.5%),
+    -webkit-repeating-linear-gradient(left, hsla(0, 0%, 100%, 0) 0%, hsla(
+            0,
+            0%,
+            100%,
+            0
+          )
+          1.2%, hsla(0, 0%, 100%, 0.15) 2.2%),
+    linear-gradient(
+      180deg,
+      hsl(0, 0%, 78%) 0%,
+      hsl(0, 0%, 90%) 47%,
+      hsl(0, 0%, 78%) 53%,
+      hsl(0, 0%, 70%) 100%
+    );
   div {
     width: 50%;
     margin: auto;

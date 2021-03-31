@@ -59,11 +59,11 @@ const BurgerContextProvider = (props) => {
         convertedText = "beefPatty";
         break;
       // fish patty
-      case "생선":
-      case "생선패티":
+      case "새우":
+      case "새우패티":
       case "명태":
-      case "fishpatty":
-        convertedText = "fishPatty";
+      case "shrimppatty":
+        convertedText = "shrimpPatty";
         break;
       // vegetable patty
       case "비건패티":
@@ -107,8 +107,8 @@ const BurgerContextProvider = (props) => {
         convertedText = "bicMacSauce";
         break;
       // teriyaki sauce
-      case "데리야키":
-      case "데리야키소스":
+      case "데리야끼":
+      case "데리야끼소스":
       case "teriyakisauce":
         convertedText = "teriyakiSauce";
         break;
@@ -120,10 +120,10 @@ const BurgerContextProvider = (props) => {
         convertedText = "ketchupSauce";
         break;
       // mayonnaise sauce
-      case "마요네즈":
-      case "마요네즈소스":
-      case "mayonnaisesauce":
-        convertedText = "mayonnaiseSauce";
+      case "마요":
+      case "마요소스":
+      case "mayosauce":
+        convertedText = "mayoSauce";
         break;
       // bottomBun
       case "받침대":
