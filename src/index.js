@@ -12,9 +12,10 @@ import {
   faEraser,
   faTimes,
   faChevronDown,
+  faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faRedo, faPlus, faEraser, faTimes, faChevronDown);
+library.add(faRedo, faPlus, faEraser, faTimes, faChevronDown, faChevronUp);
 
 const app = (
   <React.StrictMode>

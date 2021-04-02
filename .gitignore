@@ -31,3 +31,6 @@ initial-ingredients.js
 
 #vscode
 .vscode
+
+# environment
+.env
