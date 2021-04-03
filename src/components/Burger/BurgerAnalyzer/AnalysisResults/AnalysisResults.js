@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import BaseCard from "../../../UI/BaseCard/BaseCard";
 import Modal from "../../../UI/Modal/Modal";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import "./AnalysisResults.scss";
 
 const AnalysisResults = (props) => {
@@ -55,7 +57,16 @@ const AnalysisResults = (props) => {
         onClick={showModal}
       >
         <BaseCard>
-          <span className="burger-ranking-name">{props.name}</span>
+          {props.score === 100 && (
+            <div className="celebration-stars">
+              <FontAwesomeIcon icon="star" />
+              <FontAwesomeIcon icon="star" />
+              <FontAwesomeIcon icon="star" />
+            </div>
+          )}
+          <div className="burger-ranking-name">
+            <span>{props.name}</span>
+          </div>
         </BaseCard>
       </li>
       <Modal

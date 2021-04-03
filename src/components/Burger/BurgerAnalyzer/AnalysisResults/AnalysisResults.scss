@@ -1,18 +1,44 @@
 @import "../../../../scss//variables";
 
 .perfect-match-burger {
-  background: no-repeat url("../../../../assets/images/highlighting.png");
-  background-position: 45% 50%;
-  background-size: 50%;
   margin-bottom: 30px;
   .base-card {
     background-color: rgb(240, 192, 60);
     width: 100%;
     height: 100%;
     color: black;
-    padding: 1rem;
     text-align: center;
     cursor: pointer;
+    position: relative;
+    .celebration-stars {
+      color: $main_red;
+      svg:nth-child(1) {
+        position: absolute;
+        top: 10%;
+        right: 6%;
+        font-size: 1.3rem;
+        transform: rotate(0.3turn);
+      }
+      svg:nth-child(2) {
+        position: absolute;
+        top: 18%;
+        right: 2%;
+        transform: rotate(0.1turn);
+        font-size: 0.9rem;
+      }
+      svg:nth-child(3) {
+        position: absolute;
+        top: 32%;
+        right: 1%;
+        transform: rotate(-0.1turn);
+        font-size: 0.5rem;
+      }
+    }
+    .burger-ranking-name {
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
+    }
   }
 }
 
