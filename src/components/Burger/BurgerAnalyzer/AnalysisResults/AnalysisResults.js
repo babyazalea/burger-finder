@@ -9,6 +9,8 @@ import "./AnalysisResults.scss";
 
 const AnalysisResults = (props) => {
   const [modalState, setModalState] = useState(false);
+  const [urlExtensionState, setUrlExtexsionState] = useState(false);
+  const [cardAnimationClass, setCardAnimationClass] = useState("");
 
   let className = "burger-ranking-item";
   const widthAndHeight = 110 - (props.index + 1) * 10;
@@ -24,6 +26,7 @@ const AnalysisResults = (props) => {
 
   const closeModal = (prevState) => {
     setModalState(!prevState);
+    setUrlExtexsionState(false);
   };
 
   // converted rank & score
@@ -43,6 +46,81 @@ const AnalysisResults = (props) => {
   } else if (props.index > 3 && props.score < 80) {
     burgerRankText = "찾는 버거가 아닐지도 몰라요.";
     burgerScoreText = "햄버거는 무수히 많은 점으로 이루어져 있다";
+  }
+
+  // modal
+
+  let urlExtensionBtn = "";
+  let urlExtension = "";
+
+  const openExtension = () => {
+    setUrlExtexsionState(true);
+    setCardAnimationClass("clicked");
+  };
+
+  const closeExtension = () => {
+    setUrlExtexsionState(false);
+    setCardAnimationClass("");
+  };
+
+  if (props.url && !urlExtensionState) {
+    urlExtensionBtn = (
+      <button onClick={openExtension} className="modal-expension-btn">
+        <FontAwesomeIcon icon="chevron-down" />
+      </button>
+    );
+  } else if (props.url && urlExtensionState) {
+    urlExtensionBtn = (
+      <button onClick={closeExtension} className="modal-expension-btn">
+        <FontAwesomeIcon icon="chevron-up" />
+      </button>
+    );
+  }
+
+  if (urlExtensionState) {
+    const brandUrl = props.url.url;
+    const brandNameEN = props.url.brandName;
+    let brandNameKR = "";
+
+    switch (brandNameEN) {
+      case "burgerking":
+        brandNameKR = "버거킹";
+        break;
+      case "mcdonalds":
+        brandNameKR = "맥도날드";
+        break;
+      case "lotteria":
+        brandNameKR = "롯데리아";
+        break;
+      case "kfc":
+        brandNameKR = "KFC";
+        break;
+      case "momstouch":
+        brandNameKR = "맘스터치";
+        break;
+      case "shakeshack":
+        brandNameKR = "셰이크쉑";
+        break;
+      case "subway":
+        brandNameKR = "서브웨이";
+        break;
+      default:
+        brandNameKR = "브랜드";
+        break;
+    }
+
+    urlExtension = (
+      <BaseCard customClassName="modal-child-base-card">
+        <a
+          href={brandUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${brandNameEN}-link`}
+        >
+          <span>{brandNameKR} 바로가기</span>
+        </a>
+      </BaseCard>
+    );
   }
 
   return (
@@ -69,14 +147,19 @@ const AnalysisResults = (props) => {
           </div>
         </BaseCard>
       </li>
-      <Modal
-        isOpen={modalState}
-        closeModal={closeModal}
-        burgerName={props.name}
-        burgerRankText={burgerRankText}
-        burgerScoreText={burgerScoreText}
-        url={props.url}
-      ></Modal>
+      <Modal isOpen={modalState} closeModal={closeModal}>
+        <BaseCard
+          customClassName={`${cardAnimationClass} modal-parent-base-card`}
+        >
+          <div className="burger-modal-text">
+            <span className="burger-ranking-rank">{burgerRankText}</span>
+            <span className="burger-ranking-name">{props.name}</span>
+            <span className="burger-ranking-score">( {burgerScoreText} )</span>
+            {urlExtensionBtn}
+            {urlExtension}
+          </div>
+        </BaseCard>
+      </Modal>
     </React.Fragment>
   );
 };
