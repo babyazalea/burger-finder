@@ -67,6 +67,7 @@ const BurgerContextProvider = (props) => {
         break;
       // vegetable patty
       case "비건패티":
+      case "식물성패티":
       case "vegetablepatty":
         convertedText = "vegetablePatty";
         break;

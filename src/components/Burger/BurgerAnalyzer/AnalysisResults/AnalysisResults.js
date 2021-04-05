@@ -27,6 +27,7 @@ const AnalysisResults = (props) => {
   const closeModal = (prevState) => {
     setModalState(!prevState);
     setUrlExtexsionState(false);
+    setCardAnimationClass("");
   };
 
   // converted rank & score
