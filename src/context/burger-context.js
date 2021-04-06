@@ -163,6 +163,11 @@ const BurgerContextProvider = (props) => {
 
   const onInitBurgerAnalyze = () => {
     setStateOfAnalyze(false);
+    setIngs({
+      ...initialIngredients,
+      lidBun: 1,
+      bottomBun: 1,
+    });
   };
 
   return (

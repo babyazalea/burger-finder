@@ -9,7 +9,7 @@ const Burger = () => {
   const burgerContext = useContext(BurgerContext);
   useEffect(() => {
     burgerContext.initBurgerAnalyze();
-  });
+  }, []);
 
   let burger = <BurgerMaker />;
 
