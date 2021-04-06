@@ -141,6 +141,11 @@
       }
       .mcdonalds-link {
         background-image: url("../../../../assets/images/logos/mcdonalds_logo.png");
+        background-position: right 13% bottom 50%;
+        background-size: 25%;
+        span {
+          padding-left: 18%;
+        }
       }
       .lotteria-link {
         background-image: url("../../../../assets/images/logos/lotteria_logo.png");

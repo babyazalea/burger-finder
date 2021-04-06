@@ -32,9 +32,13 @@ const BurgerController = (props) => {
     textInput.current.value = "";
   };
 
-  const escapeOnInput = (event) => {
+  const keyActivate = (event) => {
     if (event.key === "Escape") {
-      textInput.current.value = "";
+      resetInput();
+    } else if (event.keyCode === 13 && event.ctrlKey) {
+      fixedIngredients();
+    } else if (event.keyCode === 78 && event.altKey) {
+      clearingIngredients();
     }
   };
 
@@ -52,6 +56,7 @@ const BurgerController = (props) => {
               variant="info"
               type="button"
               onClick={resetInput}
+              title="esc"
             >
               <FontAwesomeIcon icon="eraser" />
             </Button>
@@ -62,7 +67,7 @@ const BurgerController = (props) => {
             onChange={handleText}
             ref={textInput}
             onKeyUp={(event) => {
-              escapeOnInput(event);
+              keyActivate(event);
             }}
             autoFocus
           />
@@ -71,6 +76,7 @@ const BurgerController = (props) => {
               className="ingredient-add-button"
               variant="info"
               type="submit"
+              title="enter"
             >
               <FontAwesomeIcon icon="plus" />
             </Button>
@@ -78,10 +84,14 @@ const BurgerController = (props) => {
         </InputGroup>
       </form>
       <div className="burger-controller-output-btn">
-        <Button variant="info" onClick={clearingIngredients}>
+        <Button variant="info" onClick={clearingIngredients} title="alt + n">
           다시 하기
         </Button>
-        <Button variant="success" onClick={fixedIngredients}>
+        <Button
+          variant="success"
+          onClick={fixedIngredients}
+          title="ctrl + enter"
+        >
           만들기
         </Button>
       </div>
