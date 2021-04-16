@@ -64,13 +64,13 @@ const AnalysisResults = (props) => {
     setCardAnimationClass("");
   };
 
-  if (props.url && !urlExtensionState) {
+  if (props.realBurger && !urlExtensionState) {
     urlExtensionBtn = (
       <button onClick={openExtension} className="modal-expension-btn">
         <FontAwesomeIcon icon="chevron-down" />
       </button>
     );
-  } else if (props.url && urlExtensionState) {
+  } else if (props.realBurger && urlExtensionState) {
     urlExtensionBtn = (
       <button onClick={closeExtension} className="modal-expension-btn">
         <FontAwesomeIcon icon="chevron-up" />
@@ -79,8 +79,8 @@ const AnalysisResults = (props) => {
   }
 
   if (urlExtensionState) {
-    const brandUrl = props.url.url;
-    const brandNameEN = props.url.brandName;
+    const brandUrl = props.realBurger.url;
+    const brandNameEN = props.realBurger.brandName;
     let brandNameKR = "";
 
     switch (brandNameEN) {

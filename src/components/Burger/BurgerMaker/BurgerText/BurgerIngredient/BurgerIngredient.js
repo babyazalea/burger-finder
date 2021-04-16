@@ -111,10 +111,31 @@ const BurgerIngredient = (props) => {
         </div>
       );
       break;
+    case "chickenPatty":
+      ingredient = (
+        <div className="ingredient chicken-patty">
+          <h2>치킨 패티</h2>
+        </div>
+      );
+      break;
     case "vegetablePatty":
       ingredient = (
         <div className="ingredient vegetable-patty">
           <h2>식물성 패티</h2>
+        </div>
+      );
+      break;
+    case "extraBread":
+      ingredient = (
+        <div className="ingredient extra-bread">
+          <h2>빵</h2>
+        </div>
+      );
+      break;
+    case "hashBrown":
+      ingredient = (
+        <div className="ingredient hash-brown">
+          <h2>해쉬브라운</h2>
         </div>
       );
       break;

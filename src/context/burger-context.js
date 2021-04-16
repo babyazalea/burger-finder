@@ -58,6 +58,12 @@ const BurgerContextProvider = (props) => {
       case "beefpatty":
         convertedText = "beefPatty";
         break;
+      // chiken patty
+      case "치킨":
+      case "치킨패티":
+      case "chickenpatty":
+        convertedText = "chickenPatty";
+        break;
       // fish patty
       case "새우":
       case "새우패티":
@@ -125,6 +131,16 @@ const BurgerContextProvider = (props) => {
       case "마요소스":
       case "mayosauce":
         convertedText = "mayoSauce";
+        break;
+      // extra bread
+      case "빵":
+      case "탄수화물":
+        convertedText = "extraBread";
+        break;
+      // hash brown
+      case "해쉬브라운":
+      case "감자":
+        convertedText = "hashBrown";
         break;
       // bottomBun
       case "받침대":

@@ -35,7 +35,7 @@ const BurgerController = (props) => {
   const keyActivate = (event) => {
     if (event.key === "Escape") {
       resetInput();
-    } else if (event.keyCode === 13 && event.ctrlKey) {
+    } else if (event.keyCode === 80 && event.ctrlKey) {
       fixedIngredients();
     } else if (event.keyCode === 78 && event.altKey) {
       clearingIngredients();

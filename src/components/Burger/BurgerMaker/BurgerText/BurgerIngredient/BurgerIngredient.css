@@ -62,8 +62,20 @@
   color: #f0a951;
 }
 
+.chicken-patty h2 {
+  color: #f7b946;
+}
+
 .vegetable-patty h2 {
   color: #673827;
+}
+
+.extra-bread h2 {
+  color: #e89e44;
+}
+
+.hash-brown h2 {
+  color: #f7d49c;
 }
 
 .bottom-bun h2 {

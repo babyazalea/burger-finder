@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 
 import { BurgerContext } from "../../../context/burger-context";
 import burgers from "../../../assets/data/burgers-data";
@@ -20,10 +20,6 @@ const BurgerAnalyzer = () => {
     let score = 100;
 
     const userIngsKeys = Object.keys(userIngs);
-    // const burgerIngsKeys = Object.keys(burgerIngs);
-    // const keysAbs = Math.abs(userIngsKeys - burgerIngsKeys);
-
-    // score -= keysAbs;
 
     userIngsKeys.forEach((key) => {
       if (userIngs[key] !== burgerIngs[key]) {
@@ -36,15 +32,13 @@ const BurgerAnalyzer = () => {
 
   for (let burgerKey in burgerKeys) {
     const burgerName = burgerKeys[burgerKey];
-    const score = scoringFunction(
-      burgerContext.ingredients,
-      burgers[burgerName]
-    );
+    let score = scoringFunction(burgerContext.ingredients, burgers[burgerName]);
+
     const burgerResult = {
       name: burgerName,
-      score: score,
-      url: burgers[burgerName].realBurgerUrl
-        ? burgers[burgerName].realBurgerUrl
+      score: burgers[burgerName].realBurger ? (score += 1) : score,
+      realBurger: burgers[burgerName].realBurger
+        ? burgers[burgerName].realBurger
         : null,
     };
     scoreBoard.push(burgerResult);
@@ -79,7 +73,7 @@ const BurgerAnalyzer = () => {
           name={burgerResult.name}
           index={index}
           score={burgerResult.score}
-          url={burgerResult.url}
+          realBurger={burgerResult.realBurger}
         />
       );
     });
