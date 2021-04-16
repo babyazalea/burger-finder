@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./BaseCard.scss";
+import "./BaseCard.css";
 
 const BaseCard = (props) => (
   <div

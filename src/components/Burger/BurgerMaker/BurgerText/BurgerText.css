@@ -6,9 +6,9 @@
   align-items: center;
   border: 1px solid black;
   overflow: auto;
-  div {
-    width: 50%;
-    margin: auto;
-    text-align: center;
-  }
+}
+.burger-text div {
+  width: 50%;
+  margin: auto;
+  text-align: center;
 }

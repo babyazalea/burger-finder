@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./BurgerIngredient.scss";
+import "./BurgerIngredient.css";
 
 const BurgerIngredient = (props) => {
   let ingredient = null;

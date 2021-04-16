@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "./Modal.scss";
+import "./Modal.css";
 
 const Modal = (props) => {
   const app = document.getElementById("App");

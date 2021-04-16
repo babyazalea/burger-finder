@@ -1,0 +1,36 @@
+.burger-controller {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid red;
+}
+.burger-controller form {
+  max-width: 450px;
+  display: flex;
+  justify-content: center;
+}
+
+.burger-controller form .input-group input {
+  width: 40%;
+  border: 1px solid rgba(204, 204, 204, 0.7);
+  border-radius: 10px;
+  outline: none;
+  text-align: center;
+  font-size: 45px;
+}
+.burger-controller form .input-group input:focus {
+  box-shadow: inset 0 -1px 0 #ddd;
+}
+.ingredients-reset-button {
+  width: 40px;
+}
+
+.burger-controller-output-btn {
+  margin-top: 30px;
+}
+.burger-controller-output-btn button:not(:last-child) {
+  margin-right: 20px;
+}

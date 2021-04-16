@@ -5,7 +5,7 @@ import Modal from "../../../UI/Modal/Modal";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import "./AnalysisResults.scss";
+import "./AnalysisResults.css";
 
 const AnalysisResults = (props) => {
   const [modalState, setModalState] = useState(false);
@@ -143,7 +143,7 @@ const AnalysisResults = (props) => {
               <FontAwesomeIcon icon="star" />
             </div>
           )}
-          <div className="burger-ranking-name">
+          <div className="burger-ranking">
             <span>{props.name}</span>
           </div>
         </BaseCard>

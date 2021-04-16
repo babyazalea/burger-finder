@@ -3,7 +3,7 @@ import React from "react";
 import { Nav } from "react-bootstrap";
 import { Navbar } from "react-bootstrap";
 
-import "./Navigation.scss";
+import "./Navigation.css";
 
 const Navigation = (props) => {
   return (

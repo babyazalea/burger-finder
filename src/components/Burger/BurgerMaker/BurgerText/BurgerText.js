@@ -3,7 +3,7 @@ import { BurgerContext } from "../../../../context/burger-context";
 
 import BurgerIngredient from "./BurgerIngredient/BurgerIngredient";
 import { Container } from "react-bootstrap";
-import "./BurgerText.scss";
+import "./BurgerText.css";
 
 const BurgerText = (props) => {
   const burgerContext = useContext(BurgerContext);

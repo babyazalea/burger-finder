@@ -5,7 +5,7 @@ import burgers from "../../../assets/data/burgers-data";
 
 import AnalysisResults from "./AnalysisResults/AnalysisResults";
 
-import "./BurgerAnalyzer.scss";
+import "./BurgerAnalyzer.css";
 import { Container } from "react-bootstrap";
 
 const BurgerAnalyzer = () => {

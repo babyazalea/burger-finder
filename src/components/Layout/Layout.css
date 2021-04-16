@@ -1,9 +1,10 @@
 .burger-finder-layout {
   font-family: "Poor Story", cursive;
   background-color: #263238;
-  main {
-    margin-top: 50px;
-    width: 100%;
-    height: 100vh;
-  }
+}
+
+.burger-finder-layout main {
+  margin-top: 50px;
+  width: 100%;
+  height: 100vh;
 }

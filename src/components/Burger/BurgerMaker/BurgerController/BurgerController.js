@@ -5,7 +5,7 @@ import { BurgerContext } from "../../../../context/burger-context";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { Button, Container, FormControl, InputGroup } from "react-bootstrap";
-import "./BurgerController.scss";
+import "./BurgerController.css";
 
 const BurgerController = (props) => {
   const [enteredText, setEnteredText] = useState("");
