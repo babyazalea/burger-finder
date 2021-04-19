@@ -35,7 +35,7 @@ const BurgerController = (props) => {
   const keyActivate = (event) => {
     if (event.key === "Escape") {
       resetInput();
-    } else if (event.keyCode === 80 && event.ctrlKey) {
+    } else if (event.keyCode === 66 && event.ctrlKey) {
       fixedIngredients();
     } else if (event.keyCode === 78 && event.altKey) {
       clearingIngredients();
@@ -62,7 +62,7 @@ const BurgerController = (props) => {
             </Button>
           </InputGroup.Prepend>
           <FormControl
-            aria-label="Recipient's username"
+            aria-label="ingredient"
             aria-describedby="basic-addon2"
             onChange={handleText}
             ref={textInput}
@@ -87,11 +87,7 @@ const BurgerController = (props) => {
         <Button variant="info" onClick={clearingIngredients} title="alt + n">
           다시 하기
         </Button>
-        <Button
-          variant="success"
-          onClick={fixedIngredients}
-          title="ctrl + enter"
-        >
+        <Button variant="success" onClick={fixedIngredients} title="ctrl + b">
           만들기
         </Button>
       </div>

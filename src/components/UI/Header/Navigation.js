@@ -15,6 +15,9 @@ const Navigation = (props) => {
           <Nav.Link href="/burger-maker">버거만들기</Nav.Link>
           <Nav.Link href="/credits">크레딧</Nav.Link>
         </Nav>
+        <Nav>
+          <Nav.Link href="/auth">로그인 / 가입</Nav.Link>
+        </Nav>
       </Navbar.Collapse>
     </Navbar>
   );

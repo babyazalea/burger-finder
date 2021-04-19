@@ -1,4 +1,5 @@
 .burger-maker {
+  margin-top: 50px;
   display: flex;
   flex-direction: column;
   height: 80%;
