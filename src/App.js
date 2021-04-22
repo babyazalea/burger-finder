@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
+import AuthContextProvider from "./context/auth-context";
 import BurgerContextProvider from "./context/burger-context";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -12,12 +13,14 @@ import BurgerAnalyzer from "./components/Burger/BurgerAnalyzer/BurgerAnalyzer";
 function App() {
   let routes = (
     <Switch>
-      <BurgerContextProvider>
-        <Route path="/analyze" component={BurgerAnalyzer} exact />
-        <Route path="/burger-maker" component={Burger} exact />
-        <Route path="/auth" component={Auth} />
-        <Route path="/" component={Burger} exact />
-      </BurgerContextProvider>
+      <AuthContextProvider>
+        <BurgerContextProvider>
+          <Route path="/analyze" component={BurgerAnalyzer} exact />
+          <Route path="/burger-maker" component={Burger} exact />
+          <Route path="/auth" component={Auth} />
+          <Route path="/" component={Burger} exact />
+        </BurgerContextProvider>
+      </AuthContextProvider>
     </Switch>
   );
 

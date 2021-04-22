@@ -152,16 +152,16 @@ const BurgerContextProvider = (props) => {
         break;
     }
 
-    let updatedLidBunCount;
+    let updatedIngredientCount;
     if (oldIngredients[convertedText]) {
-      updatedLidBunCount = oldIngredients[convertedText] + 1;
+      updatedIngredientCount = oldIngredients[convertedText] + 1;
     } else {
-      updatedLidBunCount = 1;
+      updatedIngredientCount = 1;
     }
     const updatedIngredients = {
       ...ings,
     };
-    updatedIngredients[convertedText] = updatedLidBunCount;
+    updatedIngredients[convertedText] = updatedIngredientCount;
     setIngs(updatedIngredients);
   };
 
