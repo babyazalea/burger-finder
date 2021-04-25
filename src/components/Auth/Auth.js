@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router";
 
 import { AuthContext } from "../../context/auth-context";
 
@@ -9,6 +10,20 @@ import "./Auth.css";
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [authSuccess, setAuthSuccess] = useState(false);
+
+  const location = useLocation();
+
+  // useEffect(() => {
+  //   // if (location.hash.split("&")[1].split("=")[1] !== undefined) {
+  //   //   console.log(location.hash.split("&")[1].split("=")[1]);
+  //   // } else {
+  //   //   return;
+  //   // }
+  //   // if (accessToken !== null) {
+  //   //   setAuthSuccess(true);
+  //   // }
+  // }, [location]);
 
   const authContext = useContext(AuthContext);
 
@@ -33,6 +48,14 @@ const Auth = () => {
     event.preventDefault();
     authContext.authWithEmailAndPassword(email, password, "login");
   };
+
+  // const googleLogin = (event) => {};
+
+  const cliId = process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID;
+
+  const redirectUri = encodeURIComponent("http://localhost:3000/auth/google/");
+
+  const url = `https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&include_granted_scopes=true&response_type=token&state=state_parameter_passthrough_value&redirect_uri=${redirectUri}&client_id=${cliId}`;
 
   return (
     <Container className="authentication-wrapper">
@@ -69,6 +92,7 @@ const Auth = () => {
         <Button variant="success" onClick={onLogin}>
           로그인
         </Button>
+        <a href={url}>google</a>
       </div>
     </Container>
   );
