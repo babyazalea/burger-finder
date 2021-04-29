@@ -39,7 +39,7 @@ const AuthContextProvider = (props) => {
   };
 
   const signInWithGoogle = async (callback) => {
-    const accessToken = localStorage.getItem("access_token");
+    const accessToken = document.cookie.split(";")[0].split("=")[1];
 
     const authData = {
       postBody: `access_token=${accessToken}&providerId=google.com`,
@@ -53,12 +53,42 @@ const AuthContextProvider = (props) => {
     axios
       .post(url, authData)
       .then((response) => {
+        console.log(response);
         const authData = response.data;
         const authDataKeys = Object.keys(authData);
 
+        const setCookie = (name, value, options = {}) => {
+          options = {
+            path: "/",
+            ...options,
+          };
+
+          if (options.expires instanceof Date) {
+            options.expires = options.expires.toUTCString();
+          }
+
+          let updatedCookie =
+            encodeURIComponent(name) + "=" + encodeURIComponent(value);
+
+          for (let optionKey in options) {
+            updatedCookie += "; " + optionKey;
+            let optionValue = options[optionKey];
+            if (optionValue !== true) {
+              updatedCookie += "=" + optionValue;
+            }
+          }
+
+          document.cookie = updatedCookie;
+        };
+
+        const expiresInTime = authData["expiresIn"];
+
         for (let key in authDataKeys) {
           const name = authDataKeys[key];
-          localStorage.setItem(name, authData[name]);
+          setCookie(name, authData[name], {
+            secure: true,
+            "max-age": expiresInTime,
+          });
         }
 
         callback();

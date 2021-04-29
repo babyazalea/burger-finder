@@ -1,0 +1,15 @@
+.google-auth-message-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.google-auth-message {
+  width: 50%;
+}
+
+.google-auth-message p {
+  color: white;
+}

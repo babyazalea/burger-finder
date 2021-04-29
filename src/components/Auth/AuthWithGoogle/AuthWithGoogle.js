@@ -3,7 +3,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/auth-context";
 import { Container } from "react-bootstrap";
 import { useHistory } from "react-router";
-import { Link } from "react-router-dom";
+
+import "./AuthWithGoogle.css";
+import { Button } from "react-bootstrap";
 
 const AuthWithGoogle = () => {
   const [authSuccess, setAuthSuccess] = useState(false);
@@ -15,35 +17,50 @@ const AuthWithGoogle = () => {
   useEffect(() => {
     if (tokenFromParams) {
       setAuthSuccess(true);
-      localStorage.setItem("access_token", tokenFromParams);
+      document.cookie =
+        "access_token=" + tokenFromParams + "; max-age=3600; path=/; secure";
     }
   }, [tokenFromParams]);
 
   const loginWithGoogleInFirebase = () => {
     const callback = () => {
-      const id = localStorage.getItem("localId");
+      const getCookie = (name) => {
+        let matches = document.cookie.match(
+          new RegExp(
+            "(?:^|; )" +
+              name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
+              "=([^;]*)"
+          )
+        );
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+      };
+      const id = getCookie("localId");
       history.push(`/auth/profile/${id}`);
     };
 
     authContext.signInWithGoogle(callback);
   };
 
+  const backToAuth = () => {
+    history.push("/auth");
+  };
+
   const welcomeAndRedirect = (
-    <div>
+    <div className="google-auth-message">
       <p>구글 인증이 완료되었습니다. 구글 아이디로 로그인 하시겠습니까?</p>
-      <button onClick={loginWithGoogleInFirebase}>로그인</button>
+      <Button onClick={loginWithGoogleInFirebase}>로그인</Button>
     </div>
   );
 
   const noAccessTokenRedirect = (
-    <div>
+    <div className="google-auth-message">
       <p>구글 인증에 실패했습니다.</p>
-      <Link to="/auth">로그인 창으로 돌아가기</Link>
+      <Button onClick={backToAuth}>로그인 창으로 돌아가기</Button>
     </div>
   );
 
   return (
-    <Container>
+    <Container className="google-auth-message-container">
       {authSuccess ? welcomeAndRedirect : noAccessTokenRedirect}
     </Container>
   );
