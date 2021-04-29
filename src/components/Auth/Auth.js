@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation } from "react-router";
+// import { useLocation } from "react-router";
 
 import { AuthContext } from "../../context/auth-context";
 
@@ -10,9 +10,9 @@ import "./Auth.css";
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [authSuccess, setAuthSuccess] = useState(false);
+  // const [authSuccess, setAuthSuccess] = useState(false);
 
-  const location = useLocation();
+  // const location = useLocation();
 
   // useEffect(() => {
   //   // if (location.hash.split("&")[1].split("=")[1] !== undefined) {

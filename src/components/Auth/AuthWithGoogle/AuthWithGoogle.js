@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 
+import { getCookie } from "../../../utils/cookie";
 import { AuthContext } from "../../../context/auth-context";
+
 import { Container } from "react-bootstrap";
 import { useHistory } from "react-router";
 
@@ -24,16 +26,6 @@ const AuthWithGoogle = () => {
 
   const loginWithGoogleInFirebase = () => {
     const callback = () => {
-      const getCookie = (name) => {
-        let matches = document.cookie.match(
-          new RegExp(
-            "(?:^|; )" +
-              name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-              "=([^;]*)"
-          )
-        );
-        return matches ? decodeURIComponent(matches[1]) : undefined;
-      };
       const id = getCookie("localId");
       history.push(`/auth/profile/${id}`);
     };

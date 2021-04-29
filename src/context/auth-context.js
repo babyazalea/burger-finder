@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+import { setCookie } from "../utils/cookie";
+
 export const AuthContext = React.createContext({
   isAuthenticate: false,
   authWithEmailAndPassword: () => {},
@@ -56,30 +58,6 @@ const AuthContextProvider = (props) => {
         console.log(response);
         const authData = response.data;
         const authDataKeys = Object.keys(authData);
-
-        const setCookie = (name, value, options = {}) => {
-          options = {
-            path: "/",
-            ...options,
-          };
-
-          if (options.expires instanceof Date) {
-            options.expires = options.expires.toUTCString();
-          }
-
-          let updatedCookie =
-            encodeURIComponent(name) + "=" + encodeURIComponent(value);
-
-          for (let optionKey in options) {
-            updatedCookie += "; " + optionKey;
-            let optionValue = options[optionKey];
-            if (optionValue !== true) {
-              updatedCookie += "=" + optionValue;
-            }
-          }
-
-          document.cookie = updatedCookie;
-        };
 
         const expiresInTime = authData["expiresIn"];
 
