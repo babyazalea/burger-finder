@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import { setCookie } from "../utils/cookie";
+import { getCookie, setCookie } from "../utils/cookie";
 
 export const AuthContext = React.createContext({
   isAuthenticate: false,
+  user: null,
   authWithEmailAndPassword: () => {},
   signInWithGoogle: () => {},
+  getUserProfile: () => {},
 });
 
 const AuthContextProvider = (props) => {
   const [isAuth, setIsAuth] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userPhotoUrl, setUserPhotoUrl] = useState("");
 
   const authWithEmailAndPassword = async (email, password, authMode) => {
     const authData = {
@@ -41,7 +46,7 @@ const AuthContextProvider = (props) => {
   };
 
   const signInWithGoogle = async (callback) => {
-    const accessToken = document.cookie.split(";")[0].split("=")[1];
+    const accessToken = getCookie("access_token");
 
     const authData = {
       postBody: `access_token=${accessToken}&providerId=google.com`,
@@ -59,29 +64,37 @@ const AuthContextProvider = (props) => {
         const authData = response.data;
         const authDataKeys = Object.keys(authData);
 
-        const expiresInTime = authData["expiresIn"];
+        // const expiresInTime = authData["expiresIn"];
 
         for (let key in authDataKeys) {
           const name = authDataKeys[key];
           setCookie(name, authData[name], {
             secure: true,
-            "max-age": expiresInTime,
           });
         }
 
         callback();
+        setIsAuth(true);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
+  const getUserProfile = () => {
+    setUserEmail(getCookie("email"));
+    setUserName(getCookie("displayName"));
+    setUserPhotoUrl(getCookie("photoUrl"));
+  };
+
   return (
     <AuthContext.Provider
       value={{
         isAuthenticate: isAuth,
+        user: { email: userEmail, name: userName, photoUrl: userPhotoUrl },
         authWithEmailAndPassword: authWithEmailAndPassword,
         signInWithGoogle: signInWithGoogle,
+        getUserProfile: getUserProfile,
       }}
     >
       {props.children}

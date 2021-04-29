@@ -20,14 +20,14 @@ const AuthWithGoogle = () => {
     if (tokenFromParams) {
       setAuthSuccess(true);
       document.cookie =
-        "access_token=" + tokenFromParams + "; max-age=3600; path=/; secure";
+        "access_token=" + tokenFromParams + "; path=/; samesite=strict";
     }
   }, [tokenFromParams]);
 
   const loginWithGoogleInFirebase = () => {
     const callback = () => {
       const id = getCookie("localId");
-      history.push(`/auth/profile/${id}`);
+      history.push(`/users/${id}`);
     };
 
     authContext.signInWithGoogle(callback);
