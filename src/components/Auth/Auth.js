@@ -10,20 +10,6 @@ import "./Auth.css";
 const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [authSuccess, setAuthSuccess] = useState(false);
-
-  // const location = useLocation();
-
-  // useEffect(() => {
-  //   // if (location.hash.split("&")[1].split("=")[1] !== undefined) {
-  //   //   console.log(location.hash.split("&")[1].split("=")[1]);
-  //   // } else {
-  //   //   return;
-  //   // }
-  //   // if (accessToken !== null) {
-  //   //   setAuthSuccess(true);
-  //   // }
-  // }, [location]);
 
   const authContext = useContext(AuthContext);
 
@@ -48,8 +34,6 @@ const Auth = () => {
     event.preventDefault();
     authContext.authWithEmailAndPassword(email, password, "login");
   };
-
-  // const googleLogin = (event) => {};
 
   const cliId = process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID;
 

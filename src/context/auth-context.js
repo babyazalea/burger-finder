@@ -4,18 +4,13 @@ import axios from "axios";
 import { getCookie, setCookie } from "../utils/cookie";
 
 export const AuthContext = React.createContext({
-  isAuthenticate: false,
-  user: null,
+  isAuthenticated: false,
   authWithEmailAndPassword: () => {},
-  signInWithGoogle: () => {},
-  getUserProfile: () => {},
+  signInToFirebase: () => {},
 });
 
 const AuthContextProvider = (props) => {
   const [isAuth, setIsAuth] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
-  const [userName, setUserName] = useState("");
-  const [userPhotoUrl, setUserPhotoUrl] = useState("");
 
   const authWithEmailAndPassword = async (email, password, authMode) => {
     const authData = {
@@ -45,8 +40,10 @@ const AuthContextProvider = (props) => {
     }
   };
 
-  const signInWithGoogle = async (callback) => {
-    const accessToken = getCookie("access_token");
+  const signInToFirebase = async () => {
+    const accessToken = localStorage.getItem("access_token");
+
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
 
     const authData = {
       postBody: `access_token=${accessToken}&providerId=google.com`,
@@ -55,46 +52,29 @@ const AuthContextProvider = (props) => {
       returnSecureToken: true,
     };
 
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+    try {
+      const response = await axios.post(url, authData);
+      const responseData = await response.data;
 
-    axios
-      .post(url, authData)
-      .then((response) => {
-        console.log(response);
-        const authData = response.data;
-        const authDataKeys = Object.keys(authData);
+      const responseDataKeys = Object.keys(responseData);
 
-        // const expiresInTime = authData["expiresIn"];
-
-        for (let key in authDataKeys) {
-          const name = authDataKeys[key];
-          setCookie(name, authData[name], {
-            secure: true,
-          });
-        }
-
-        callback();
-        setIsAuth(true);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getUserProfile = () => {
-    setUserEmail(getCookie("email"));
-    setUserName(getCookie("displayName"));
-    setUserPhotoUrl(getCookie("photoUrl"));
+      for (let key in responseDataKeys) {
+        const name = responseDataKeys[key];
+        localStorage.setItem(name, responseData[name]);
+      }
+      setIsAuth(true);
+    } catch (err) {
+      console.log(err);
+      throw err;
+    }
   };
 
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticate: isAuth,
-        user: { email: userEmail, name: userName, photoUrl: userPhotoUrl },
+        isAuthenticated: isAuth,
         authWithEmailAndPassword: authWithEmailAndPassword,
-        signInWithGoogle: signInWithGoogle,
-        getUserProfile: getUserProfile,
+        signInToFirebase: signInToFirebase,
       }}
     >
       {props.children}

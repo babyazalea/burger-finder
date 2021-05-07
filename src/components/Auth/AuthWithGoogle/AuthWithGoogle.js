@@ -19,18 +19,18 @@ const AuthWithGoogle = () => {
   useEffect(() => {
     if (tokenFromParams) {
       setAuthSuccess(true);
-      document.cookie =
-        "access_token=" + tokenFromParams + "; path=/; samesite=strict";
+      localStorage.setItem("access_token", tokenFromParams);
     }
   }, [tokenFromParams]);
 
-  const loginWithGoogleInFirebase = () => {
-    const callback = () => {
-      const id = getCookie("localId");
+  const loginWithGoogleInFirebase = async () => {
+    try {
+      await authContext.signInToFirebase();
+      const id = localStorage.getItem("localId");
       history.push(`/users/${id}`);
-    };
-
-    authContext.signInWithGoogle(callback);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const backToAuth = () => {

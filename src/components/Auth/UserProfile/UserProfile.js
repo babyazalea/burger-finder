@@ -6,24 +6,30 @@ import { AuthContext } from "../../../context/auth-context";
 import "./UserProfile.css";
 
 const UserProfile = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [userProfile, setUserProfile] = useState({
+    email: "",
+    userName: "",
+    photoUrl: "",
+  });
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
-    if (authContext.isAuthenticate) {
-      authContext.getUserProfile();
-      setIsLoggedIn(true);
+    if (authContext.isAuthenticated) {
+      setUserProfile({
+        email: localStorage.getItem("email"),
+        userName: localStorage.getItem("fullName"),
+        photoUrl: localStorage.getItem("photoUrl"),
+      });
     }
-  }, [authContext]);
+  }, []);
 
   let profile = (
     <div className="user-profile">
       <p className="user-image">
-        <img src={authContext.user.photoUrl} alt="profile" />
+        <img src={userProfile.photoUrl} alt="profile" />
       </p>
-      <p className="user-email">{authContext.user.email}</p>
-      <p className="user-name">{authContext.user.name}</p>
+      <p className="user-email">{userProfile.email}</p>
+      <p className="user-name">{userProfile.userName}</p>
     </div>
   );
 
@@ -35,7 +41,7 @@ const UserProfile = () => {
 
   return (
     <Container className="profile-container">
-      {isLoggedIn ? profile : profileLoadFailed}
+      {userProfile ? profile : profileLoadFailed}
     </Container>
   );
 };
