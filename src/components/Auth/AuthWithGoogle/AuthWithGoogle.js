@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { getCookie } from "../../../utils/cookie";
 import { AuthContext } from "../../../context/auth-context";
 
 import { Container } from "react-bootstrap";
