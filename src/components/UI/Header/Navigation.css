@@ -2,3 +2,40 @@ nav {
   background-color: rgb(252, 186, 3);
   font-weight: bold;
 }
+
+.nav-link__home {
+  color: rgba(0, 0, 0, 1);
+}
+
+.nav-link__home:hover {
+  color: rgba(0, 0, 0, 1);
+}
+
+.nav-links__burger a:not(:last-child) {
+  margin-right: 10px;
+}
+
+nav a {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+nav a:hover {
+  color: rgba(0, 0, 0, 1);
+  text-decoration: none;
+}
+
+.nav-link__user-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout__btn {
+  margin-left: 20px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.logout__btn:hover {
+  color: rgba(0, 0, 0, 1);
+  text-decoration: none;
+}

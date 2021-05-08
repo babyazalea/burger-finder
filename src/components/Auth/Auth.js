@@ -29,7 +29,7 @@ const Auth = () => {
     authContext.authWithEmailAndPassword(email, password, "signup");
   };
 
-  const onLogin = (event) => {
+  const onLogin = async (event) => {
     event.preventDefault();
     authContext.authWithEmailAndPassword(email, password, "login");
   };
