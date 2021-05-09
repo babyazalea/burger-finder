@@ -32,6 +32,8 @@ nav a:hover {
 
 .logout__btn {
   margin-left: 20px;
+  background: none;
+  border: none;
   color: rgba(0, 0, 0, 0.5);
 }
 

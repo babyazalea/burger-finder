@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 
 import { Nav } from "react-bootstrap";
@@ -35,17 +34,13 @@ const Navigation = (props) => {
               to={`/users/${authContext.userId}`}
               className="nav-link__user-profile"
             >
-              <FontAwesomeIcon icon="user" />
+              <div className="user-name__display">{authContext.userName}</div>
             </NavLink>
           )}
           {authContext.isLoggedIn && (
-            <Button
-              className="logout__btn"
-              variant="link"
-              onClick={authContext.logout}
-            >
+            <button className="logout__btn" onClick={authContext.logout}>
               로그아웃
-            </Button>
+            </button>
           )}
         </Nav>
       </Navbar.Collapse>

@@ -14,7 +14,6 @@ import {
   faChevronDown,
   faChevronUp,
   faStar,
-  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
@@ -24,8 +23,7 @@ library.add(
   faTimes,
   faChevronDown,
   faChevronUp,
-  faStar,
-  faUser
+  faStar
 );
 
 const app = (
