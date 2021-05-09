@@ -26,8 +26,8 @@
       - 이리저리 헤메다가, 끝내 구글 로그인을 추가했습니다. firebase와 관련된 패키지를 설치하지 않고 REST API 방식으로만 구현하겠다는 고집을 부리다가...너무 오래 걸린 듯..(2021.04.26)
         - [x] 로그인 후, 주어진 데이터를 바탕으로 유저의 프로필 페이지 보여주기.
         - [x] ~~cookie에 auth-data 저장.~~ localStroage로 변경
-        - [ ] http-request-hook 추가.
-        - [ ] auth-context에는 auth와 관련된 상태 및 유저 정보만 저장하도록.
+        - [x] ~~http-request-hook 추가.~~ auth-hook 추가
+        - [x] auth-context에는 auth와 관련된 상태 및 유저 정보만 저장하도록.
         - [ ] Loading Spinner 추가.
         - [x] 로그아웃 기능 추가하기.
         - [ ] 이메일로 회원가입할 때, 이메일 확인 링크를 해당 이메일 주소로 보내는 기능 넣기.
