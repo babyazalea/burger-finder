@@ -1,10 +1,12 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../context/auth-context";
 
 import { Container, FormControl, InputGroup, Button } from "react-bootstrap";
 
 import "./Auth.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Auth = () => {
   const [email, setEmail] = useState("");
@@ -24,10 +26,10 @@ const Auth = () => {
     }
   };
 
-  const onSignup = (event) => {
-    event.preventDefault();
-    authContext.authWithEmailAndPassword(email, password, "signup");
-  };
+  // const onSignup = (event) => {
+  //   event.preventDefault();
+  //   authContext.authWithEmailAndPassword(email, password, "signup");
+  // };
 
   const onLogin = async (event) => {
     event.preventDefault();
@@ -68,14 +70,18 @@ const Auth = () => {
           />
         </InputGroup>
       </form>
-      <div className="authentication-buttons">
-        <Button variant="info" onClick={onSignup}>
-          가입하기
-        </Button>
+      <div className="authentication-control">
+        <a href={url}>
+          <Button>
+            <FontAwesomeIcon icon={["fab", "google"]} />
+          </Button>
+        </a>
+        <Link>
+          <Button>가입하기</Button>
+        </Link>
         <Button variant="success" onClick={onLogin}>
           로그인
         </Button>
-        <a href={url}>google</a>
       </div>
     </Container>
   );

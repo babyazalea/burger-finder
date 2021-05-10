@@ -16,6 +16,8 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+
 library.add(
   faRedo,
   faPlus,
@@ -23,7 +25,8 @@ library.add(
   faTimes,
   faChevronDown,
   faChevronUp,
-  faStar
+  faStar,
+  faGoogle
 );
 
 const app = (
