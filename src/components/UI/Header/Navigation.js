@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
-
-import { Nav } from "react-bootstrap";
-import { Navbar } from "react-bootstrap";
-import { Button } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+
+import { Nav, Navbar } from "react-bootstrap";
 
 import { AuthContext } from "../../../context/auth-context";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navigation.css";
 
 const Navigation = (props) => {
@@ -34,13 +33,26 @@ const Navigation = (props) => {
               to={`/users/${authContext.userId}`}
               className="nav-link__user-profile"
             >
-              <div className="user-name__display">{authContext.userName}</div>
+              {authContext.userName !== "" && (
+                <div className="user-name__display">
+                  <FontAwesomeIcon icon="user-circle" />
+                  <span>{authContext.userName}</span>
+                </div>
+              )}
+              {authContext.userName === "" && (
+                <div className="user-name__display-warning">
+                  <FontAwesomeIcon icon="exclamation-circle" />
+                  <span>프로필 수정이 필요합니다</span>
+                </div>
+              )}
             </NavLink>
           )}
           {authContext.isLoggedIn && (
-            <button className="logout__btn" onClick={authContext.logout}>
-              로그아웃
-            </button>
+            <div>
+              <button className="logout__btn" onClick={authContext.logout}>
+                로그아웃
+              </button>
+            </div>
           )}
         </Nav>
       </Navbar.Collapse>

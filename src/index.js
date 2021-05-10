@@ -14,6 +14,8 @@ import {
   faChevronDown,
   faChevronUp,
   faStar,
+  faUserCircle,
+  faExclamationCircle,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -26,7 +28,9 @@ library.add(
   faChevronDown,
   faChevronUp,
   faStar,
-  faGoogle
+  faGoogle,
+  faUserCircle,
+  faExclamationCircle
 );
 
 const app = (

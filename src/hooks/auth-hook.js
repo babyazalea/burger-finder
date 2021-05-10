@@ -29,10 +29,14 @@ export const useAuth = () => {
 
     try {
       const response = await axios.post(url, authData);
+      const responseData = await response.data;
+
       if (response.status === 200 && authMode === "signup") {
         console.log("signup success");
       } else if (response.status === 200 && authMode === "login") {
         console.log("login success.");
+        setUserId(responseData["localId"]);
+        setUserName(responseData["displayName"]);
         setIsAuth(true);
       }
       setIsLoading(false);
@@ -70,7 +74,7 @@ export const useAuth = () => {
       if (responseData) {
         setIsAuth(true);
         setUserId(responseData["localId"]);
-        setUserName(responseData["fullName"]);
+        setUserName(responseData["displayName"]);
         history.push("/");
       }
 

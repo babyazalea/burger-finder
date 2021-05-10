@@ -24,20 +24,37 @@ nav a:hover {
   text-decoration: none;
 }
 
-.nav-link__user-profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .logout__btn {
-  margin-left: 20px;
+  display: block;
   background: none;
   border: none;
   color: rgba(0, 0, 0, 0.5);
+  padding: 0;
 }
 
 .logout__btn:hover {
   color: rgba(0, 0, 0, 1);
   text-decoration: none;
+}
+
+.nav-link__user-profile {
+  margin-right: 15px;
+}
+
+.nav-link__user-profile > div {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link__user-profile > div > span {
+  margin-left: 5px;
+}
+
+/* .user-name__display,
+.user-name__display-warning {
+  display: flex;
+  align-items: center;
+} */
+
+.user-name__display-warning span {
 }
