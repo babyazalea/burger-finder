@@ -2,19 +2,21 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import { AuthContext } from "./context/auth-context";
+import { useAuth } from "./hooks/auth-hook";
 import BurgerContextProvider from "./context/burger-context";
 
-import "bootstrap/dist/css/bootstrap.min.css";
 import Layout from "./components/Layout/Layout";
 import Auth from "./components/Auth/Auth";
 import Burger from "./components/Burger/Burger";
 import BurgerAnalyzer from "./components/Burger/BurgerAnalyzer/BurgerAnalyzer";
 import AuthWithGoogle from "./components/Auth/AuthWithGoogle/AuthWithGoogle";
 import UserProfile from "./components/Auth/UserProfile/UserProfile";
-import { useAuth } from "./hooks/auth-hook";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const {
+    isLoading,
     isAuth,
     userId,
     userName,
@@ -38,6 +40,7 @@ function App() {
     <div className="App" id="App">
       <AuthContext.Provider
         value={{
+          isLoading: isLoading,
           isLoggedIn: isAuth,
           userId: userId,
           userName: userName,

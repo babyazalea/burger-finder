@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import React, { useContext, useEffect, useState } from "react";
+import { Container, Spinner } from "react-bootstrap";
+import { AuthContext } from "../../../context/auth-context";
 
 import "./UserProfile.css";
 
 const UserProfile = () => {
   const [userProfile, setUserProfile] = useState();
+
+  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     setUserProfile({
@@ -33,7 +36,17 @@ const UserProfile = () => {
     );
   }
 
-  return <Container className="profile-container">{profile}</Container>;
+  return (
+    <Container className="profile-container">
+      {authContext.isLoading ? (
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      ) : (
+        profile
+      )}
+    </Container>
+  );
 };
 
 export default UserProfile;

@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
+
 import axios from "axios";
 
 export const useAuth = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
@@ -10,6 +12,7 @@ export const useAuth = () => {
   const history = useHistory();
 
   const authWithEmailAndPassword = async (email, password, authMode) => {
+    setIsLoading(true);
     const authData = {
       email,
       password,
@@ -32,12 +35,15 @@ export const useAuth = () => {
         console.log("login success.");
         setIsAuth(true);
       }
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
   const signInToFirebase = async () => {
+    setIsLoading(true);
     const accessToken = localStorage.getItem("access_token");
 
     const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
@@ -65,8 +71,11 @@ export const useAuth = () => {
         setUserId(responseData["localId"]);
         setUserName(responseData["fullName"]);
       }
+
+      setIsLoading(false);
     } catch (err) {
       console.log(err);
+      setIsLoading(false);
       throw err;
     }
   };
@@ -80,6 +89,7 @@ export const useAuth = () => {
   };
 
   return {
+    isLoading,
     isAuth,
     userId,
     userName,

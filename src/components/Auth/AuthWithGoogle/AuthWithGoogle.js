@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "../../../context/auth-context";
 
-import { Container } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import { useHistory } from "react-router";
 
 import "./AuthWithGoogle.css";
 import { Button } from "react-bootstrap";
 
 const AuthWithGoogle = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [authSuccess, setAuthSuccess] = useState(false);
   const authContext = useContext(AuthContext);
 
@@ -19,14 +20,14 @@ const AuthWithGoogle = () => {
     if (tokenFromParams) {
       setAuthSuccess(true);
       localStorage.setItem("access_token", tokenFromParams);
+      setIsLoading(false);
     }
   }, [tokenFromParams]);
 
   const loginWithGoogleInFirebase = async () => {
     try {
       await authContext.signInToFirebase();
-      const id = localStorage.getItem("localId");
-      history.push(`/users/${id}`);
+      history.push("/");
     } catch (err) {
       console.log(err);
     }
@@ -36,23 +37,32 @@ const AuthWithGoogle = () => {
     history.push("/auth");
   };
 
-  const welcomeAndRedirect = (
-    <div className="google-auth-message">
-      <p>구글 인증이 완료되었습니다. 구글 아이디로 로그인 하시겠습니까?</p>
-      <Button onClick={loginWithGoogleInFirebase}>로그인</Button>
-    </div>
-  );
-
-  const noAccessTokenRedirect = (
+  let messageAndLink = (
     <div className="google-auth-message">
       <p>구글 인증에 실패했습니다.</p>
       <Button onClick={backToAuth}>로그인 창으로 돌아가기</Button>
     </div>
   );
 
+  if (authSuccess) {
+    messageAndLink = (
+      <div className="google-auth-message">
+        <p>구글 인증이 완료되었습니다. 구글 아이디로 로그인 하시겠습니까?</p>
+        <Button onClick={loginWithGoogleInFirebase}>로그인</Button>
+      </div>
+    );
+  }
+
   return (
     <Container className="google-auth-message-container">
-      {authSuccess ? welcomeAndRedirect : noAccessTokenRedirect}
+      {isLoading ? (
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      ) : (
+        messageAndLink
+      )}
+      {/* {authSuccess && !isLoading ? welcomeAndRedirect : noAccessTokenRedirect} */}
     </Container>
   );
 };
