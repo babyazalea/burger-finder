@@ -28,7 +28,7 @@
         - [x] ~~cookie에 auth-data 저장.~~ localStroage로 변경
         - [x] ~~http-request-hook 추가.~~ auth-hook 추가
         - [x] auth-context에는 auth와 관련된 상태 및 유저 정보만 저장하도록.
-        - [ ] Loading Spinner 추가.
+        - [x] Loading Spinner 추가.
         - [x] 로그아웃 기능 추가하기.
         - [ ] 이메일로 회원가입할 때, 이메일 확인 링크를 해당 이메일 주소로 보내는 기능 넣기.
         - [ ] 이메일로 가입한 회원과 구글로 로그인한 회원 간에 충돌 여부 확인 해보기(이메일이 같을 때).
