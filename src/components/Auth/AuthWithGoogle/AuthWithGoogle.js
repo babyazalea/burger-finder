@@ -24,13 +24,8 @@ const AuthWithGoogle = () => {
     }
   }, [tokenFromParams]);
 
-  const loginWithGoogleInFirebase = async () => {
-    try {
-      await authContext.signInToFirebase();
-      history.push("/");
-    } catch (err) {
-      console.log(err);
-    }
+  const loginWithGoogleInFirebase = () => {
+    authContext.signInToFirebase();
   };
 
   const backToAuth = () => {

@@ -36,6 +36,7 @@ export const useAuth = () => {
         setIsAuth(true);
       }
       setIsLoading(false);
+      history.push("/");
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -70,6 +71,7 @@ export const useAuth = () => {
         setIsAuth(true);
         setUserId(responseData["localId"]);
         setUserName(responseData["fullName"]);
+        history.push("/");
       }
 
       setIsLoading(false);

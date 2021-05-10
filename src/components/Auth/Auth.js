@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../context/auth-context";
 
@@ -26,12 +25,12 @@ const Auth = () => {
     }
   };
 
-  // const onSignup = (event) => {
-  //   event.preventDefault();
-  //   authContext.authWithEmailAndPassword(email, password, "signup");
-  // };
+  const onSignup = (event) => {
+    event.preventDefault();
+    authContext.authWithEmailAndPassword(email, password, "signup");
+  };
 
-  const onLogin = async (event) => {
+  const onLogin = (event) => {
     event.preventDefault();
     authContext.authWithEmailAndPassword(email, password, "login");
   };
@@ -76,9 +75,7 @@ const Auth = () => {
             <FontAwesomeIcon icon={["fab", "google"]} />
           </Button>
         </a>
-        <Link>
-          <Button>가입하기</Button>
-        </Link>
+        <Button onClick={onSignup}>가입하기</Button>
         <Button variant="success" onClick={onLogin}>
           로그인
         </Button>
