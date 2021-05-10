@@ -49,12 +49,3 @@ nav a:hover {
 .nav-link__user-profile > div > span {
   margin-left: 5px;
 }
-
-/* .user-name__display,
-.user-name__display-warning {
-  display: flex;
-  align-items: center;
-} */
-
-.user-name__display-warning span {
-}
