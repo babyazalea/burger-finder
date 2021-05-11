@@ -36,7 +36,11 @@ const Navigation = (props) => {
               {authContext.isVerified ? (
                 <div className="user-name__display">
                   <FontAwesomeIcon icon="user-circle" />
-                  <span>{authContext.userName}</span>
+                  {authContext.userName !== "" ? (
+                    <span>{authContext.userName}</span>
+                  ) : (
+                    <span>이름 없음</span>
+                  )}
                 </div>
               ) : (
                 <div className="user-name__display-warning">

@@ -16,7 +16,7 @@ const UserProfile = () => {
       userName:
         localStorage.getItem("displayName") !== ""
           ? localStorage.getItem("displayName")
-          : "알 수 없음",
+          : "이름 없음",
       photoUrl: localStorage.getItem("photoUrl")
         ? localStorage.getItem("photoUrl")
         : null,
