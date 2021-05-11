@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "react-bootstrap";
 
-import Navigation from "../UI/Header/Navigation";
+import Navigation from "../UI/Navigation/Navigation";
 import "./Layout.css";
 
 const Layout = (props) => {
@@ -11,7 +11,9 @@ const Layout = (props) => {
       className="burger-finder-layout"
       fluid="true"
     >
-      <Navigation />
+      <header>
+        <Navigation />
+      </header>
       <main>{props.children}</main>
     </Container>
   );
