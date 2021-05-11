@@ -33,13 +33,12 @@ const Navigation = (props) => {
               to={`/users/${authContext.userId}`}
               className="nav-link__user-profile"
             >
-              {authContext.userName !== "" && (
+              {authContext.isVerified ? (
                 <div className="user-name__display">
                   <FontAwesomeIcon icon="user-circle" />
                   <span>{authContext.userName}</span>
                 </div>
-              )}
-              {authContext.userName === "" && (
+              ) : (
                 <div className="user-name__display-warning">
                   <FontAwesomeIcon icon="exclamation-circle" />
                   <span>프로필 수정이 필요합니다</span>

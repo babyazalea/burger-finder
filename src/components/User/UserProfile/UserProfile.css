@@ -19,6 +19,11 @@
   height: 96px;
   border-radius: 50%;
   overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.user-image span {
+  font-size: 5rem;
 }
 
 .user-email {

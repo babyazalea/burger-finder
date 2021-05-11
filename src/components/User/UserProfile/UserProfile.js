@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Spinner } from "react-bootstrap";
 import { AuthContext } from "../../../context/auth-context";
@@ -12,8 +13,13 @@ const UserProfile = () => {
   useEffect(() => {
     setUserProfile({
       email: localStorage.getItem("email"),
-      userName: localStorage.getItem("fullName"),
-      photoUrl: localStorage.getItem("photoUrl"),
+      userName:
+        localStorage.getItem("displayName") !== ""
+          ? localStorage.getItem("displayName")
+          : "알 수 없음",
+      photoUrl: localStorage.getItem("photoUrl")
+        ? localStorage.getItem("photoUrl")
+        : null,
     });
   }, []);
 
@@ -21,9 +27,15 @@ const UserProfile = () => {
   if (userProfile) {
     profile = (
       <div className="user-profile">
-        <p className="user-image">
-          <img src={userProfile.photoUrl} alt="profile" />
-        </p>
+        <div className="user-image">
+          {userProfile.photoUrl !== null ? (
+            <img src={userProfile.photoUrl} alt="profile" />
+          ) : (
+            <span>
+              <FontAwesomeIcon icon="user-circle" />
+            </span>
+          )}
+        </div>
         <p className="user-email">{userProfile.email}</p>
         <p className="user-name">{userProfile.userName}</p>
       </div>

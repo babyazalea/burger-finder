@@ -10,7 +10,7 @@ import Auth from "./components/Auth/Auth";
 import Burger from "./components/Burger/Burger";
 import BurgerAnalyzer from "./components/Burger/BurgerAnalyzer/BurgerAnalyzer";
 import AuthWithGoogle from "./components/Auth/AuthWithGoogle/AuthWithGoogle";
-import UserProfile from "./components/Auth/UserProfile/UserProfile";
+import UserProfile from "./components/User/UserProfile/UserProfile";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -20,6 +20,7 @@ function App() {
     isAuth,
     userId,
     userName,
+    isVerified,
     authWithEmailAndPassword,
     signInToFirebase,
     logout,
@@ -44,6 +45,7 @@ function App() {
           isLoggedIn: isAuth,
           userId: userId,
           userName: userName,
+          isVerified: isVerified,
           authWithEmailAndPassword: authWithEmailAndPassword,
           signInToFirebase: signInToFirebase,
           logout: logout,

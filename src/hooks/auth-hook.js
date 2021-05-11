@@ -8,6 +8,7 @@ export const useAuth = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
+  const [isVerified, setIsVerified] = useState(false);
 
   const history = useHistory();
 
@@ -31,13 +32,31 @@ export const useAuth = () => {
       const response = await axios.post(url, authData);
       const responseData = await response.data;
 
-      if (response.status === 200 && authMode === "signup") {
+      if (responseData && authMode === "signup") {
         console.log("signup success");
-      } else if (response.status === 200 && authMode === "login") {
-        console.log("login success.");
-        setUserId(responseData["localId"]);
-        setUserName(responseData["displayName"]);
-        setIsAuth(true);
+      } else if (responseData && authMode === "login") {
+        try {
+          const responseDataKeys = Object.keys(responseData);
+
+          for (let key in responseDataKeys) {
+            const name = responseDataKeys[key];
+            localStorage.setItem(name, responseData[name]);
+          }
+
+          const getUserDataUrl = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+          const tokenData = { idToken: responseData["idToken"] };
+          const userDataResponse = await axios.post(getUserDataUrl, tokenData);
+          const userData = await userDataResponse.data.users[0];
+
+          console.log("login success.");
+          setUserId(responseData["localId"]);
+          setUserName(responseData["displayName"]);
+          setIsVerified(userData["emailVerified"]);
+          setIsAuth(true);
+        } catch (err) {
+          console.log(err);
+          setIsLoading(false);
+        }
       }
       setIsLoading(false);
       history.push("/");
@@ -64,17 +83,17 @@ export const useAuth = () => {
       const response = await axios.post(url, authData);
       const responseData = await response.data;
 
-      const responseDataKeys = Object.keys(responseData);
-
-      for (let key in responseDataKeys) {
-        const name = responseDataKeys[key];
-        localStorage.setItem(name, responseData[name]);
-      }
-
       if (responseData) {
+        const responseDataKeys = Object.keys(responseData);
+
+        for (let key in responseDataKeys) {
+          const name = responseDataKeys[key];
+          localStorage.setItem(name, responseData[name]);
+        }
         setIsAuth(true);
         setUserId(responseData["localId"]);
         setUserName(responseData["displayName"]);
+        setIsVerified(true);
         history.push("/");
       }
 
@@ -90,6 +109,7 @@ export const useAuth = () => {
     setIsAuth(false);
     setUserId(null);
     setUserName(null);
+    setIsVerified(false);
     localStorage.clear();
     history.push("/");
   };
@@ -99,6 +119,7 @@ export const useAuth = () => {
     isAuth,
     userId,
     userName,
+    isVerified,
     authWithEmailAndPassword,
     signInToFirebase,
     logout,
