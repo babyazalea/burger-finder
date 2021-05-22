@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../context/auth-context";
 
@@ -75,7 +76,9 @@ const Auth = () => {
             <FontAwesomeIcon icon={["fab", "google"]} />
           </Button>
         </a>
-        <Button onClick={onSignup}>가입하기</Button>
+        <Link to="/auth/signup">
+          <Button>가입하기</Button>
+        </Link>
         <Button variant="success" onClick={onLogin}>
           로그인
         </Button>
