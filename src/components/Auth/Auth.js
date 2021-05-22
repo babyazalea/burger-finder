@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../context/auth-context";
 
@@ -9,6 +8,7 @@ import "./Auth.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Auth = () => {
+  const [signUpMode, setSignUpMode] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,6 +24,10 @@ const Auth = () => {
     } else if (name === "password") {
       setPassword(value);
     }
+  };
+
+  const changeToSignUp = () => {
+    setSignUpMode("true");
   };
 
   const onSignup = (event) => {
@@ -43,46 +47,54 @@ const Auth = () => {
   const url = `https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&include_granted_scopes=true&response_type=token&state=state_parameter_passthrough_value&redirect_uri=${redirectUri}&client_id=${cliId}`;
 
   return (
-    <Container className="authentication-wrapper">
+    <Container className="auth__wrapper">
       <form>
-        <InputGroup className="sm-3">
-          <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">ID</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            placeholder="아이디"
-            aria-label="user-email"
-            name="email"
-            onChange={onChange}
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
-        <InputGroup className="sm-3">
-          <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">PW</InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            placeholder="비밀번호"
-            name="password"
-            aria-label="password"
-            onChange={onChange}
-            aria-describedby="basic-addon1"
-          />
-        </InputGroup>
+        <div className="auth__input-group">
+          <InputGroup className="sm-3">
+            <InputGroup.Prepend>
+              <InputGroup.Text id="basic-addon1">ID</InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              placeholder="아이디"
+              aria-label="user-email"
+              name="email"
+              onChange={onChange}
+              aria-describedby="basic-addon1"
+            />
+          </InputGroup>
+          <InputGroup className="sm-3">
+            <InputGroup.Prepend>
+              <InputGroup.Text id="basic-addon1">PW</InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              placeholder="비밀번호"
+              name="password"
+              aria-label="password"
+              onChange={onChange}
+              aria-describedby="basic-addon1"
+            />
+          </InputGroup>
+        </div>
+        <div className="auth__submit-controll">
+          {signUpMode ? (
+            <Button onClick={onSignup}>가입</Button>
+          ) : (
+            <Button variant="success" onClick={onLogin}>
+              로그인
+            </Button>
+          )}
+        </div>
       </form>
-      <div className="authentication-control">
-        <a href={url}>
-          <Button>
-            <FontAwesomeIcon icon={["fab", "google"]} />
-          </Button>
-        </a>
-        <Link to="/auth/signup">
-          <Button>가입하기</Button>
-        </Link>
-        <Button variant="success" onClick={onLogin}>
-          로그인
-        </Button>
-      </div>
+      {signUpMode ? null : (
+        <div className="auth__control">
+          <a href={url}>
+            <Button>
+              <FontAwesomeIcon icon={["fab", "google"]} />
+            </Button>
+          </a>
+          <Button onClick={changeToSignUp}>가입하러 가기</Button>
+        </div>
+      )}
     </Container>
   );
 };
