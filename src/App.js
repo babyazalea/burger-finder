@@ -9,7 +9,6 @@ import Layout from "./components/Layout/Layout";
 import Burger from "./components/Burger/Burger";
 import BurgerAnalyzer from "./components/Burger/BurgerAnalyzer/BurgerAnalyzer";
 import Auth from "./components/Auth/Auth";
-import SignUp from "./components/Auth/SignUp/SignUp";
 import AuthWithGoogle from "./components/Auth/AuthWithGoogle/AuthWithGoogle";
 import UserProfile from "./components/User/UserProfile/UserProfile";
 
@@ -34,7 +33,6 @@ function App() {
       <Route path="/burger-maker" component={Burger} exact />
       <Route path="/users/:id" component={UserProfile} />
       <Route path="/auth" component={Auth} exact />
-      <Route path="/auth/signup" component={SignUp} exact />
       <Route path="/auth/google/" component={AuthWithGoogle} />
     </Switch>
   );
