@@ -5,12 +5,21 @@ import axios from "axios";
 
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [signUpMode, setSignUpMode] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
   const [isVerified, setIsVerified] = useState(false);
 
   const history = useHistory();
+
+  const initializeAuthMode = () => {
+    setSignUpMode(false);
+  };
+
+  const changeToSignUp = () => {
+    setSignUpMode(true);
+  };
 
   const authWithEmailAndPassword = async (email, password, authMode) => {
     setIsLoading(true);
@@ -116,10 +125,13 @@ export const useAuth = () => {
 
   return {
     isLoading,
+    signUpMode,
     isAuth,
     userId,
     userName,
     isVerified,
+    initializeAuthMode,
+    changeToSignUp,
     authWithEmailAndPassword,
     signInToFirebase,
     logout,

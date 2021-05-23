@@ -17,10 +17,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 function App() {
   const {
     isLoading,
+    signUpMode,
     isAuth,
     userId,
     userName,
     isVerified,
+    initializeAuthMode,
+    changeToSignUp,
     authWithEmailAndPassword,
     signInToFirebase,
     logout,
@@ -42,10 +45,13 @@ function App() {
       <AuthContext.Provider
         value={{
           isLoading: isLoading,
+          signUpMode: signUpMode,
           isLoggedIn: isAuth,
           userId: userId,
           userName: userName,
           isVerified: isVerified,
+          initializeAuthMode: initializeAuthMode,
+          changeToSignUp: changeToSignUp,
           authWithEmailAndPassword: authWithEmailAndPassword,
           signInToFirebase: signInToFirebase,
           logout: logout,

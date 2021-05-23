@@ -26,7 +26,9 @@ const Navigation = (props) => {
         </Nav>
         <Nav className="nav-links__auth">
           {!authContext.isLoggedIn && (
-            <NavLink to="/auth">로그인 / 가입</NavLink>
+            <NavLink to="/auth" onClick={authContext.initializeAuthMode}>
+              로그인 / 가입
+            </NavLink>
           )}
           {authContext.isLoggedIn && (
             <NavLink

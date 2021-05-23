@@ -8,7 +8,6 @@ import "./Auth.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Auth = () => {
-  const [signUpMode, setSignUpMode] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,10 +23,6 @@ const Auth = () => {
     } else if (name === "password") {
       setPassword(value);
     }
-  };
-
-  const changeToSignUp = () => {
-    setSignUpMode("true");
   };
 
   const onSignup = (event) => {
@@ -76,7 +71,7 @@ const Auth = () => {
           </InputGroup>
         </div>
         <div className="auth__submit-controll">
-          {signUpMode ? (
+          {authContext.signUpMode ? (
             <Button onClick={onSignup}>가입</Button>
           ) : (
             <Button variant="success" onClick={onLogin}>
@@ -85,14 +80,14 @@ const Auth = () => {
           )}
         </div>
       </form>
-      {signUpMode ? null : (
+      {authContext.signUpMode ? null : (
         <div className="auth__control">
           <a href={url}>
             <Button>
               <FontAwesomeIcon icon={["fab", "google"]} />
             </Button>
           </a>
-          <Button onClick={changeToSignUp}>가입하러 가기</Button>
+          <Button onClick={authContext.changeToSignUp}>가입하러 가기</Button>
         </div>
       )}
     </Container>
