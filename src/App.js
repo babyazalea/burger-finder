@@ -19,13 +19,16 @@ function App() {
     isLoading,
     signUpMode,
     isAuth,
+    token,
     userId,
     userName,
+    sendedVerification,
     isVerified,
     initializeAuthMode,
     changeToSignUp,
     authWithEmailAndPassword,
     signInToFirebase,
+    emailVerification,
     logout,
   } = useAuth();
 
@@ -47,13 +50,16 @@ function App() {
           isLoading: isLoading,
           signUpMode: signUpMode,
           isLoggedIn: isAuth,
+          token: token,
           userId: userId,
           userName: userName,
+          sendedVerification: sendedVerification,
           isVerified: isVerified,
           initializeAuthMode: initializeAuthMode,
           changeToSignUp: changeToSignUp,
           authWithEmailAndPassword: authWithEmailAndPassword,
           signInToFirebase: signInToFirebase,
+          emailVerification: emailVerification,
           logout: logout,
         }}
       >

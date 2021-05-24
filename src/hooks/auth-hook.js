@@ -7,8 +7,10 @@ export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [signUpMode, setSignUpMode] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
+  const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
+  const [sendedVerification, setSendedVerification] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
 
   const history = useHistory();
@@ -58,6 +60,7 @@ export const useAuth = () => {
           const userData = await userDataResponse.data.users[0];
 
           console.log("login success.");
+          setToken(responseData["idToken"]);
           setUserId(responseData["localId"]);
           setUserName(responseData["displayName"]);
           setIsVerified(userData["emailVerified"]);
@@ -100,6 +103,7 @@ export const useAuth = () => {
           localStorage.setItem(name, responseData[name]);
         }
         setIsAuth(true);
+        setToken(responseData["idToken"]);
         setUserId(responseData["localId"]);
         setUserName(responseData["displayName"]);
         setIsVerified(true);
@@ -111,6 +115,27 @@ export const useAuth = () => {
       console.log(err);
       setIsLoading(false);
       throw err;
+    }
+  };
+
+  const emailVerification = async () => {
+    setIsLoading(true);
+
+    const idToken = localStorage.getItem("idToken");
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+    const verifingData = {
+      requestType: "VERIFY_EMAIL",
+      idToken: idToken,
+    };
+
+    try {
+      const response = await axios.post(url, verifingData);
+      console.log(response);
+      setIsLoading(false);
+      setSendedVerification(true);
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
     }
   };
 
@@ -127,13 +152,16 @@ export const useAuth = () => {
     isLoading,
     signUpMode,
     isAuth,
+    token,
     userId,
     userName,
+    sendedVerification,
     isVerified,
     initializeAuthMode,
     changeToSignUp,
     authWithEmailAndPassword,
     signInToFirebase,
+    emailVerification,
     logout,
   };
 };

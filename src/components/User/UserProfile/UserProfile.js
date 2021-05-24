@@ -1,7 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Spinner } from "react-bootstrap";
+
 import { AuthContext } from "../../../context/auth-context";
+
+import { Container, Spinner, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./UserProfile.css";
 
@@ -26,8 +28,8 @@ const UserProfile = () => {
   let profile;
   if (userProfile) {
     profile = (
-      <div className="user-profile">
-        <div className="user-image">
+      <div className="user__profile">
+        <div className="user__image">
           {userProfile.photoUrl !== null ? (
             <img src={userProfile.photoUrl} alt="profile" />
           ) : (
@@ -36,8 +38,13 @@ const UserProfile = () => {
             </span>
           )}
         </div>
-        <p className="user-email">{userProfile.email}</p>
-        <p className="user-name">{userProfile.userName}</p>
+        <p className="user__email">{userProfile.email}</p>
+        <p className="user__name">{userProfile.userName}</p>
+        {authContext.isVerified ? null : (
+          <div className="user__email__verification">
+            <Button onClick={authContext.emailVerification}>이메일 인증</Button>
+          </div>
+        )}
       </div>
     );
   } else {
