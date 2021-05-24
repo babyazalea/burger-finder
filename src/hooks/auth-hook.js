@@ -129,8 +129,7 @@ export const useAuth = () => {
     };
 
     try {
-      const response = await axios.post(url, verifingData);
-      console.log(response);
+      await axios.post(url, verifingData);
       setIsLoading(false);
       setSendedVerification(true);
     } catch (err) {

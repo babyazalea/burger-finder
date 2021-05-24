@@ -40,11 +40,6 @@ const UserProfile = () => {
         </div>
         <p className="user__email">{userProfile.email}</p>
         <p className="user__name">{userProfile.userName}</p>
-        {authContext.isVerified ? null : (
-          <div className="user__email__verification">
-            <Button onClick={authContext.emailVerification}>이메일 인증</Button>
-          </div>
-        )}
       </div>
     );
   } else {
@@ -62,7 +57,23 @@ const UserProfile = () => {
           <span className="sr-only">Loading...</span>
         </Spinner>
       ) : (
-        profile
+        <React.Fragment>
+          {profile}
+          {authContext.isVerified ? null : (
+            <div className="user__email__verification">
+              {authContext.sendedVerification ? (
+                <p>
+                  인증 메일을 {userProfile.email}로 보냈습니다. 이메일을
+                  확인하시고 다시 로그인 해주세요.
+                </p>
+              ) : (
+                <Button onClick={authContext.emailVerification}>
+                  이메일 인증 하기
+                </Button>
+              )}
+            </div>
+          )}
+        </React.Fragment>
       )}
     </Container>
   );
