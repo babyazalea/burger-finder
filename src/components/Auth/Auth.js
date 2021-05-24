@@ -50,7 +50,7 @@ const Auth = () => {
               <InputGroup.Text id="basic-addon1">ID</InputGroup.Text>
             </InputGroup.Prepend>
             <FormControl
-              placeholder="아이디"
+              placeholder="e-mail"
               aria-label="user-email"
               name="email"
               onChange={onChange}
@@ -62,6 +62,7 @@ const Auth = () => {
               <InputGroup.Text id="basic-addon1">PW</InputGroup.Text>
             </InputGroup.Prepend>
             <FormControl
+              type="password"
               placeholder="비밀번호"
               name="password"
               aria-label="password"
