@@ -6,7 +6,7 @@ import axios from "axios";
 export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [signUpMode, setSignUpMode] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
@@ -64,7 +64,7 @@ export const useAuth = () => {
           setUserId(responseData["localId"]);
           setUserName(responseData["displayName"]);
           setIsVerified(userData["emailVerified"]);
-          setIsAuth(true);
+          setIsLoggedIn(true);
         } catch (err) {
           console.log(err);
           setIsLoading(false);
@@ -102,7 +102,7 @@ export const useAuth = () => {
           const name = responseDataKeys[key];
           localStorage.setItem(name, responseData[name]);
         }
-        setIsAuth(true);
+        setIsLoggedIn(true);
         setToken(responseData["idToken"]);
         setUserId(responseData["localId"]);
         setUserName(responseData["displayName"]);
@@ -138,8 +138,12 @@ export const useAuth = () => {
     }
   };
 
+  // const updateProfile = async () => {
+
+  // }
+
   const logout = () => {
-    setIsAuth(false);
+    setIsLoggedIn(false);
     setUserId(null);
     setUserName(null);
     setIsVerified(false);
@@ -150,7 +154,7 @@ export const useAuth = () => {
   return {
     isLoading,
     signUpMode,
-    isAuth,
+    isLoggedIn,
     token,
     userId,
     userName,

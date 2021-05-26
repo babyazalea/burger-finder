@@ -18,7 +18,7 @@ function App() {
   const {
     isLoading,
     signUpMode,
-    isAuth,
+    isLoggedIn,
     token,
     userId,
     userName,
@@ -49,7 +49,7 @@ function App() {
         value={{
           isLoading: isLoading,
           signUpMode: signUpMode,
-          isLoggedIn: isAuth,
+          isLoggedIn: isLoggedIn,
           token: token,
           userId: userId,
           userName: userName,
