@@ -13,6 +13,7 @@ import AuthWithGoogle from "./components/Auth/AuthWithGoogle/AuthWithGoogle";
 import UserProfile from "./components/User/UserProfile/UserProfile";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import ChangePassword from "./components/User/UserProfile/ChangePassword/ChangePassword";
 
 function App() {
   const {
@@ -30,6 +31,7 @@ function App() {
     signInToFirebase,
     emailVerification,
     updateProfile,
+    sendPasswordReset,
     logout,
   } = useAuth();
 
@@ -38,6 +40,7 @@ function App() {
       <Route path="/" component={Burger} exact />
       <Route path="/analyze" component={BurgerAnalyzer} exact />
       <Route path="/burger-maker" component={Burger} exact />
+      <Route path="/users/:id/password-change" component={ChangePassword} />
       <Route path="/users/:id" component={UserProfile} />
       <Route path="/auth" component={Auth} exact />
       <Route path="/auth/google/" component={AuthWithGoogle} />
@@ -62,6 +65,7 @@ function App() {
           signInToFirebase: signInToFirebase,
           emailVerification: emailVerification,
           updateProfile: updateProfile,
+          sendPasswordReset: sendPasswordReset,
           logout: logout,
         }}
       >

@@ -38,10 +38,10 @@
   font-weight: bold;
 }
 
-.user__profile__edit-btn {
+.user-name__edit-btn {
   display: flex;
 }
 
-.user__profile__edit-btn button:not(:last-child) {
+.user-name__edit-btn button:not(:last-child) {
   margin-right: 10px;
 }

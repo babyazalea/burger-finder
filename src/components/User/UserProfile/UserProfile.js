@@ -6,9 +6,10 @@ import { Container, Spinner, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./UserProfile.css";
+import { Link } from "react-router-dom";
 
 const UserProfile = () => {
-  const [editMode, setEditMode] = useState(false);
+  const [nameEditing, setNameEditing] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
   const [userName, setUserName] = useState(null);
   const [photoUrl, setPhotoUrl] = useState(null);
@@ -26,7 +27,7 @@ const UserProfile = () => {
   }, []);
 
   const toggleEditMode = () => {
-    setEditMode(!editMode);
+    setNameEditing(!nameEditing);
   };
 
   const userNameHandle = (event) => {
@@ -51,7 +52,7 @@ const UserProfile = () => {
           )}
         </div>
         <p className="user__email">{userEmail}</p>
-        {editMode ? (
+        {nameEditing ? (
           <input value={userName} onChange={userNameHandle} />
         ) : (
           <p className="user__name">{userName}</p>
@@ -82,10 +83,10 @@ const UserProfile = () => {
     </div>
   );
 
-  let editButton;
-  editButton = authContext.isVerified ? (
-    <div className="user__profile__edit-btn">
-      {editMode ? (
+  let nameEditButton;
+  nameEditButton = authContext.isVerified ? (
+    <div className="user-name__edit-btn">
+      {nameEditing ? (
         <React.Fragment>
           <Button onClick={toggleEditMode} variant="warning">
             수정 취소
@@ -114,8 +115,15 @@ const UserProfile = () => {
       ) : (
         <React.Fragment>
           {profile}
-          {verficaion}
-          {editButton}
+          <React.Fragment>
+            {verficaion}
+            {nameEditButton}
+            {authContext.isVerified ? (
+              <Link to={`/users/${authContext.userId}/password-change`}>
+                <Button>비밀번호 변경</Button>
+              </Link>
+            ) : null}
+          </React.Fragment>
         </React.Fragment>
       )}
     </Container>

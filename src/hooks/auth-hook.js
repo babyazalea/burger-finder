@@ -8,6 +8,7 @@ export const useAuth = () => {
   const [signUpMode, setSignUpMode] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
   const [sendedVerification, setSendedVerification] = useState(false);
@@ -61,6 +62,7 @@ export const useAuth = () => {
 
           console.log("login success.");
           setToken(responseData["idToken"]);
+          setUserEmail(responseData["email"]);
           setUserId(responseData["localId"]);
           setUserName(responseData["displayName"]);
           setIsVerified(userData["emailVerified"]);
@@ -103,6 +105,7 @@ export const useAuth = () => {
       }
       setIsLoggedIn(true);
       setToken(responseData["idToken"]);
+      setUserEmail(responseData["email"]);
       setUserId(responseData["localId"]);
       setUserName(responseData["displayName"]);
       setIsVerified(true);
@@ -136,7 +139,7 @@ export const useAuth = () => {
   };
 
   const updateProfile = async (newUserName) => {
-    setIsLoggedIn(true);
+    setIsLoading(true);
 
     const dataForUpdate = {
       idToken: token,
@@ -167,6 +170,26 @@ export const useAuth = () => {
     }
   };
 
+  const sendPasswordReset = async () => {
+    setIsLoading(true);
+
+    const data = {
+      requestType: "PASSWORD_RESET",
+      email: userEmail,
+    };
+
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+
+    try {
+      const response = await axios.post(url, data);
+      console.log(response);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
+
   const logout = () => {
     setIsLoggedIn(false);
     setUserId(null);
@@ -191,6 +214,7 @@ export const useAuth = () => {
     signInToFirebase,
     emailVerification,
     updateProfile,
+    sendPasswordReset,
     logout,
   };
 };
