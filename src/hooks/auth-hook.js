@@ -43,9 +43,9 @@ export const useAuth = () => {
       const response = await axios.post(url, authData);
       const responseData = await response.data;
 
-      if (responseData && authMode === "signup") {
+      if (authMode === "signup") {
         console.log("signup success");
-      } else if (responseData && authMode === "login") {
+      } else if (authMode === "login") {
         try {
           const responseDataKeys = Object.keys(responseData);
 
@@ -95,21 +95,18 @@ export const useAuth = () => {
       const response = await axios.post(url, authData);
       const responseData = await response.data;
 
-      if (responseData) {
-        const responseDataKeys = Object.keys(responseData);
+      const responseDataKeys = Object.keys(responseData);
 
-        for (let key in responseDataKeys) {
-          const name = responseDataKeys[key];
-          localStorage.setItem(name, responseData[name]);
-        }
-        setIsLoggedIn(true);
-        setToken(responseData["idToken"]);
-        setUserId(responseData["localId"]);
-        setUserName(responseData["displayName"]);
-        setIsVerified(true);
-        history.push("/");
+      for (let key in responseDataKeys) {
+        const name = responseDataKeys[key];
+        localStorage.setItem(name, responseData[name]);
       }
-
+      setIsLoggedIn(true);
+      setToken(responseData["idToken"]);
+      setUserId(responseData["localId"]);
+      setUserName(responseData["displayName"]);
+      setIsVerified(true);
+      history.push("/");
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -138,9 +135,37 @@ export const useAuth = () => {
     }
   };
 
-  // const updateProfile = async () => {
+  const updateProfile = async (newUserName) => {
+    setIsLoggedIn(true);
 
-  // }
+    const dataForUpdate = {
+      idToken: token,
+      displayName: newUserName,
+      photoUrl: "",
+      deleteAttribute: ["PHOTO_URL"],
+      returnSecureToken: true,
+    };
+
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+
+    try {
+      const response = await axios.post(url, dataForUpdate);
+      const responseData = await response.data;
+      const responseDataKeys = Object.keys(responseData);
+
+      for (let key in responseDataKeys) {
+        const name = responseDataKeys[key];
+        localStorage.setItem(name, responseData[name]);
+      }
+
+      setUserName(responseData["displayName"]);
+      setIsLoading(false);
+      history.push("/");
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
 
   const logout = () => {
     setIsLoggedIn(false);
@@ -165,6 +190,7 @@ export const useAuth = () => {
     authWithEmailAndPassword,
     signInToFirebase,
     emailVerification,
+    updateProfile,
     logout,
   };
 };

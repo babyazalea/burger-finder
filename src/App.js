@@ -29,6 +29,7 @@ function App() {
     authWithEmailAndPassword,
     signInToFirebase,
     emailVerification,
+    updateProfile,
     logout,
   } = useAuth();
 
@@ -60,6 +61,7 @@ function App() {
           authWithEmailAndPassword: authWithEmailAndPassword,
           signInToFirebase: signInToFirebase,
           emailVerification: emailVerification,
+          updateProfile: updateProfile,
           logout: logout,
         }}
       >

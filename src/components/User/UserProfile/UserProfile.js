@@ -22,13 +22,22 @@ const UserProfile = () => {
         ? localStorage.getItem("displayName")
         : "이름 없음"
     );
-    setPhotoUrl(
-      localStorage.getItem("photoUrl") ? localStorage.getItem("photoUrl") : null
-    );
+    setPhotoUrl(localStorage.getItem("photoUrl") || null);
   }, []);
 
-  let profile;
+  const toggleEditMode = () => {
+    setEditMode(!editMode);
+  };
 
+  const userNameHandle = (event) => {
+    const {
+      target: { value },
+    } = event;
+
+    setUserName(value);
+  };
+
+  let profile;
   if (authContext.isLoggedIn && userEmail !== null && userName !== null) {
     profile = (
       <div className="user__profile">
@@ -42,7 +51,11 @@ const UserProfile = () => {
           )}
         </div>
         <p className="user__email">{userEmail}</p>
-        <p className="user__name">{userName}</p>
+        {editMode ? (
+          <input value={userName} onChange={userNameHandle} />
+        ) : (
+          <p className="user__name">{userName}</p>
+        )}
       </div>
     );
   } else {
@@ -54,7 +67,6 @@ const UserProfile = () => {
   }
 
   let verficaion;
-
   verficaion = authContext.isVerified ? null : (
     <div className="user__email__verification">
       {authContext.sendedVerification ? (
@@ -70,12 +82,7 @@ const UserProfile = () => {
     </div>
   );
 
-  const toggleEditMode = () => {
-    setEditMode(!editMode);
-  };
-
   let editButton;
-
   editButton = authContext.isVerified ? (
     <div className="user__profile__edit-btn">
       {editMode ? (
@@ -83,11 +90,16 @@ const UserProfile = () => {
           <Button onClick={toggleEditMode} variant="warning">
             수정 취소
           </Button>
-          <Button variant="success">이대로 수정</Button>
+          <Button
+            variant="success"
+            onClick={() => authContext.updateProfile(userName)}
+          >
+            이대로 수정
+          </Button>
         </React.Fragment>
       ) : (
         <Button onClick={toggleEditMode} variant="success">
-          프로필 수정
+          닉네임 수정
         </Button>
       )}
     </div>
