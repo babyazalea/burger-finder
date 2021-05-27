@@ -36,6 +36,7 @@
         - [x] password 별표 표시.
         - [x] 닉네임 수정 기능 추가.
         - [x] 이메일 재설정은 불가. 비밀번호 및 유저 정보 수정 기능 추가.
-        - [ ] edit-mode styling.
+        - [x] edit-mode styling.
         - [ ] auth-hook 리팩토링.
+        - [ ] error-modal 만들기.
         - [ ] 이메일로 가입한 회원과 구글로 로그인한 회원 간에 충돌 여부 확인 해보기(이메일이 같을 때).
