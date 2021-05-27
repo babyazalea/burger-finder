@@ -108,7 +108,7 @@ const UserProfile = () => {
 
   return (
     <Container className="profile-container">
-      {authContext.isLoading ? (
+      {authContext.isLoading || userEmail === null || userName === null ? (
         <Spinner animation="border" role="status">
           <span className="sr-only">Loading...</span>
         </Spinner>
@@ -119,9 +119,11 @@ const UserProfile = () => {
             {verficaion}
             {nameEditButton}
             {authContext.isVerified ? (
-              <Link to={`/users/${authContext.userId}/password-change`}>
-                <Button>비밀번호 변경</Button>
-              </Link>
+              <div className="user-password__change-btn">
+                <Link to={`/users/${authContext.userId}/password-change`}>
+                  <Button>비밀번호 변경</Button>
+                </Link>
+              </div>
             ) : null}
           </React.Fragment>
         </React.Fragment>

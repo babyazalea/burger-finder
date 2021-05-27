@@ -8,6 +8,10 @@
   color: white;
 }
 
+.profile-container > div:not(:last-child) {
+  margin-bottom: 20px;
+}
+
 .user__profile {
   display: flex;
   flex-direction: column;
