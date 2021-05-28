@@ -11,14 +11,14 @@ import BurgerAnalyzer from "./components/Burger/BurgerAnalyzer/BurgerAnalyzer";
 import Auth from "./components/Auth/Auth";
 import AuthWithGoogle from "./components/Auth/AuthWithGoogle/AuthWithGoogle";
 import UserProfile from "./components/User/UserProfile/UserProfile";
+import ChangePassword from "./components/User/UserProfile/ChangePassword/ChangePassword";
+import Signup from "./components/Auth/Signup/Signup";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import ChangePassword from "./components/User/UserProfile/ChangePassword/ChangePassword";
 
 function App() {
   const {
     isLoading,
-    signUpMode,
     isLoggedIn,
     error,
     token,
@@ -26,9 +26,7 @@ function App() {
     userName,
     sendedVerification,
     isVerified,
-    infitializeError,
-    initializeAuthMode,
-    changeToSignUp,
+    initializeError,
     authWithEmailAndPassword,
     signInToFirebase,
     emailVerification,
@@ -45,7 +43,8 @@ function App() {
       <Route path="/users/:id/password-change" component={ChangePassword} />
       <Route path="/users/:id" component={UserProfile} />
       <Route path="/auth" component={Auth} exact />
-      <Route path="/auth/google/" component={AuthWithGoogle} />
+      <Route path="/auth/signup" component={Signup} exact />
+      <Route path="/auth/google" component={AuthWithGoogle} />
     </Switch>
   );
 
@@ -54,7 +53,6 @@ function App() {
       <AuthContext.Provider
         value={{
           isLoading: isLoading,
-          signUpMode: signUpMode,
           isLoggedIn: isLoggedIn,
           error: error,
           token: token,
@@ -62,9 +60,7 @@ function App() {
           userName: userName,
           sendedVerification: sendedVerification,
           isVerified: isVerified,
-          infitializeError: infitializeError,
-          initializeAuthMode: initializeAuthMode,
-          changeToSignUp: changeToSignUp,
+          initializeError: initializeError,
           authWithEmailAndPassword: authWithEmailAndPassword,
           signInToFirebase: signInToFirebase,
           emailVerification: emailVerification,
