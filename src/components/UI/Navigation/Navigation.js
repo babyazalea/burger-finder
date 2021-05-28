@@ -11,6 +11,10 @@ import "./Navigation.css";
 const Navigation = (props) => {
   const authContext = useContext(AuthContext);
 
+  const clearLocalStorage = () => {
+    localStorage.clear();
+  };
+
   return (
     <Navbar expand="lg">
       <Navbar.Brand variant="dark">
@@ -26,7 +30,7 @@ const Navigation = (props) => {
         </Nav>
         <Nav className="nav-links__auth">
           {!authContext.isLoggedIn && (
-            <NavLink to="/auth" onClick={authContext.initializeAuthMode}>
+            <NavLink to="/auth" onClick={clearLocalStorage}>
               로그인 / 가입
             </NavLink>
           )}
