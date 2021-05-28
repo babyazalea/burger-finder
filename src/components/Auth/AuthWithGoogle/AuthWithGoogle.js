@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useHistory } from "react-router";
 
 import { AuthContext } from "../../../context/auth-context";
 
-import { Container, Spinner } from "react-bootstrap";
-import { useHistory } from "react-router";
+import Spinner from "../../UI/Spinner/Spinner";
 
+import { Container, Button } from "react-bootstrap";
 import "./AuthWithGoogle.css";
-import { Button } from "react-bootstrap";
 
 const AuthWithGoogle = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [authSuccess, setAuthSuccess] = useState(false);
+  const [getToken, setGetToken] = useState(false);
+  const [tokenLoading, setTokenLoading] = useState(true);
   const authContext = useContext(AuthContext);
 
   const history = useHistory();
@@ -18,9 +18,9 @@ const AuthWithGoogle = () => {
 
   useEffect(() => {
     if (tokenFromParams) {
-      setAuthSuccess(true);
+      setGetToken(true);
       localStorage.setItem("access_token", tokenFromParams);
-      setIsLoading(false);
+      setTokenLoading(false);
     }
   }, [tokenFromParams]);
 
@@ -30,34 +30,35 @@ const AuthWithGoogle = () => {
 
   const backToAuth = () => {
     history.push("/auth");
+    localStorage.clear();
   };
 
   let messageAndLink = (
     <div className="google-auth-message">
       <p>구글 인증에 실패했습니다.</p>
-      <Button onClick={backToAuth}>로그인 창으로 돌아가기</Button>
+      <Button onClick={backToAuth} variant="warning">
+        로그인 페이지로 돌아가기
+      </Button>
     </div>
   );
 
-  if (authSuccess) {
+  if (getToken) {
     messageAndLink = (
       <div className="google-auth-message">
         <p>구글 인증이 완료되었습니다. 구글 아이디로 로그인 하시겠습니까?</p>
-        <Button onClick={loginWithGoogleInFirebase}>로그인</Button>
+        <Button onClick={loginWithGoogleInFirebase} variant="success">
+          로그인
+        </Button>
+        <Button onClick={backToAuth} variant="warning">
+          로그인 페이지로 돌아가기
+        </Button>
       </div>
     );
   }
 
   return (
     <Container className="google-auth-message-container">
-      {isLoading ? (
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-      ) : (
-        messageAndLink
-      )}
-      {/* {authSuccess && !isLoading ? welcomeAndRedirect : noAccessTokenRedirect} */}
+      {authContext.isLoading || tokenLoading ? <Spinner /> : messageAndLink}
     </Container>
   );
 };

@@ -13,3 +13,7 @@
 .google-auth-message p {
   color: white;
 }
+
+.google-auth-message button:not(:last-child) {
+  margin-right: 15px;
+}
