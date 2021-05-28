@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 
 import Navigation from "../UI/Navigation/Navigation";
+
 import "./Layout.css";
 
 const Layout = (props) => {

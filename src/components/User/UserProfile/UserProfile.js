@@ -2,11 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "../../../context/auth-context";
 
+import { Link } from "react-router-dom";
 import { Container, Spinner, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import Modal from "../../UI/Modal/Modal";
+
 import "./UserProfile.css";
-import { Link } from "react-router-dom";
 
 const UserProfile = () => {
   const [nameEditing, setNameEditing] = useState(false);
@@ -128,6 +130,7 @@ const UserProfile = () => {
           </React.Fragment>
         </React.Fragment>
       )}
+      <Modal error={authContext.error} />
     </Container>
   );
 };

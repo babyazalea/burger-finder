@@ -13,8 +13,13 @@ export const useAuth = () => {
   const [userName, setUserName] = useState(null);
   const [sendedVerification, setSendedVerification] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
+  const [error, setError] = useState(null);
 
   const history = useHistory();
+
+  const infitializeError = () => {
+    setError(null);
+  };
 
   const initializeAuthMode = () => {
     setSignUpMode(false);
@@ -75,8 +80,9 @@ export const useAuth = () => {
       setIsLoading(false);
       history.push("/");
     } catch (error) {
-      console.log(error);
+      const errorResponse = error.response.data;
       setIsLoading(false);
+      setError(errorResponse.error.message);
     }
   };
 
@@ -112,9 +118,9 @@ export const useAuth = () => {
       history.push("/");
       setIsLoading(false);
     } catch (err) {
-      console.log(err);
+      const errorResponse = error.response.data;
       setIsLoading(false);
-      throw err;
+      setError(errorResponse.error.message);
     }
   };
 
@@ -133,8 +139,9 @@ export const useAuth = () => {
       setIsLoading(false);
       setSendedVerification(true);
     } catch (err) {
-      console.log(err);
+      const errorResponse = error.response.data;
       setIsLoading(false);
+      setError(errorResponse.error.message);
     }
   };
 
@@ -165,8 +172,9 @@ export const useAuth = () => {
       setIsLoading(false);
       history.push("/");
     } catch (err) {
-      console.log(err);
+      const errorResponse = error.response.data;
       setIsLoading(false);
+      setError(errorResponse.error.message);
     }
   };
 
@@ -185,8 +193,9 @@ export const useAuth = () => {
       console.log(response);
       setIsLoading(false);
     } catch (err) {
-      console.log(err);
+      const errorResponse = error.response.data;
       setIsLoading(false);
+      setError(errorResponse.error.message);
     }
   };
 
@@ -203,11 +212,13 @@ export const useAuth = () => {
     isLoading,
     signUpMode,
     isLoggedIn,
+    error,
     token,
     userId,
     userName,
     sendedVerification,
     isVerified,
+    infitializeError,
     initializeAuthMode,
     changeToSignUp,
     authWithEmailAndPassword,
