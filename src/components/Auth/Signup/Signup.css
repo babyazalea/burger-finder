@@ -1,0 +1,29 @@
+.signup__wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup__wrapper form {
+  max-width: 450px;
+}
+
+.signup__wrapper form {
+  margin-bottom: 5px;
+}
+
+.signup__wrapper form {
+  display: flex;
+}
+
+.signup__wrapper form > div:not(:last-child) {
+  margin-right: 10px;
+}
+
+.signup__input-group {
+  display: grid;
+  row-gap: 10px;
+}

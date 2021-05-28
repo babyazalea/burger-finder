@@ -11,10 +11,6 @@
   max-width: 450px;
 }
 
-/* .auth__wrapper form div:not(:last-child) {
-  margin-bottom: 5px;
-} */
-
 .auth__wrapper form {
   margin-bottom: 5px;
 }

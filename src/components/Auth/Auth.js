@@ -1,15 +1,12 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { AuthContext } from "../../context/auth-context";
 
-import {
-  Container,
-  FormControl,
-  InputGroup,
-  Button,
-  Spinner,
-} from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
+import Input from "../UI/Input/Input";
 import Modal from "../UI/Modal/Modal";
+import Spinner from "../UI/Spinner/Spinner";
 
 import "./Auth.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,26 +15,18 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const emailInputEl = useRef();
-  const passwordInputEl = useRef();
-
   const authContext = useContext(AuthContext);
 
   const onChange = (event) => {
     const {
-      target: { name },
+      target: { name, value },
     } = event;
 
     if (name === "email") {
-      setEmail(emailInputEl.current.value);
+      setEmail(value);
     } else if (name === "password") {
-      setPassword(passwordInputEl.current.value);
+      setPassword(value);
     }
-  };
-
-  const onSignup = (event) => {
-    event.preventDefault();
-    authContext.authWithEmailAndPassword(email, password, "signup");
   };
 
   const onLogin = (event) => {
@@ -52,69 +41,52 @@ const Auth = () => {
   const url = `https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&include_granted_scopes=true&response_type=token&state=state_parameter_passthrough_value&redirect_uri=${redirectUri}&client_id=${cliId}`;
 
   return (
-    <Container className="auth__wrapper">
-      {authContext.isLoading ? (
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-      ) : (
-        <React.Fragment>
-          <form>
-            <div className="auth__input-group">
-              <InputGroup className="sm-3">
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="basic-addon1">ID</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                  placeholder="e-mail"
-                  aria-label="user-email"
+    <React.Fragment>
+      <Container className="auth__wrapper">
+        {authContext.isLoading ? (
+          <Spinner />
+        ) : (
+          <React.Fragment>
+            <form>
+              <div className="auth__input-group">
+                <Input
+                  label="ID"
+                  type="text"
+                  placeholder="이메일"
                   name="email"
-                  ref={emailInputEl}
-                  onChange={onChange}
-                  aria-describedby="basic-addon1"
+                  aria-label="email"
+                  change={(e) => onChange(e)}
                 />
-              </InputGroup>
-              <InputGroup className="sm-3">
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="basic-addon1">PW</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
+                <Input
+                  label="PW"
                   type="password"
                   placeholder="비밀번호"
                   name="password"
                   aria-label="password"
-                  ref={passwordInputEl}
-                  onChange={onChange}
-                  aria-describedby="basic-addon1"
+                  change={(e) => onChange(e)}
                 />
-              </InputGroup>
-            </div>
-            <div className="auth__submit-controll">
-              {authContext.signUpMode ? (
-                <Button onClick={onSignup}>가입</Button>
-              ) : (
+              </div>
+              <div className="auth__submit-controll">
                 <Button variant="success" onClick={onLogin}>
                   로그인
                 </Button>
-              )}
-            </div>
-          </form>
-          {authContext.signUpMode ? null : (
+              </div>
+            </form>
             <div className="auth__control">
               <a href={url}>
                 <Button>
                   <FontAwesomeIcon icon={["fab", "google"]} />
                 </Button>
               </a>
-              <Button onClick={authContext.changeToSignUp}>
-                가입하러 가기
-              </Button>
+              <Link to="/auth/signup">
+                <Button>가입하러 가기</Button>
+              </Link>
             </div>
-          )}
-          <Modal error={authContext.error} />
-        </React.Fragment>
-      )}
-    </Container>
+          </React.Fragment>
+        )}
+      </Container>
+      <Modal error={authContext.error} />
+    </React.Fragment>
   );
 };
 
