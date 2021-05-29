@@ -16,7 +16,7 @@ const Modal = (props) => {
 
   const handleClose = () => {
     setShow(false);
-    authContext.infitializeError();
+    props.close();
   };
 
   return (

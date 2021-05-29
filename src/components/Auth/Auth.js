@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useHttp } from "../../hooks/http-hook";
 import { AuthContext } from "../../context/auth-context";
 
 import { Container, Button } from "react-bootstrap";
@@ -17,6 +18,10 @@ const Auth = () => {
 
   const authContext = useContext(AuthContext);
 
+  const { isLoading, error, initializeError, sendRequest } = useHttp();
+
+  const googleOAuthUrl = process.env.REACT_APP_GOOGLE_OAUTH_URL;
+
   const onChange = (event) => {
     const {
       target: { name, value },
@@ -29,21 +34,38 @@ const Auth = () => {
     }
   };
 
-  const onLogin = (event) => {
+  const onLogin = async (event) => {
     event.preventDefault();
-    authContext.authWithEmailAndPassword(email, password, "login");
+
+    const loginUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+
+    const getUserDataUrl = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+
+    const loginData = {
+      email,
+      password,
+      returnSecureToken: true,
+    };
+
+    try {
+      const responseData = await sendRequest(loginUrl, loginData);
+
+      const token = { idToken: responseData["idToken"] };
+      const userDataResponse = await sendRequest(getUserDataUrl, token);
+      const userData = await userDataResponse.data.users[0];
+
+      authContext.login(responseData, userData);
+    } catch (err) {}
   };
 
-  const cliId = process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID;
-
-  const redirectUri = encodeURIComponent("http://localhost:3000/auth/google/");
-
-  const url = `https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile&include_granted_scopes=true&response_type=token&state=state_parameter_passthrough_value&redirect_uri=${redirectUri}&client_id=${cliId}`;
+  const confirmError = () => {
+    initializeError();
+  };
 
   return (
     <React.Fragment>
       <Container className="auth__wrapper">
-        {authContext.isLoading ? (
+        {isLoading ? (
           <Spinner />
         ) : (
           <React.Fragment>
@@ -73,7 +95,7 @@ const Auth = () => {
               </div>
             </form>
             <div className="auth__control">
-              <a href={url}>
+              <a href={googleOAuthUrl}>
                 <Button>
                   <FontAwesomeIcon icon={["fab", "google"]} />
                 </Button>
@@ -85,7 +107,7 @@ const Auth = () => {
           </React.Fragment>
         )}
       </Container>
-      <Modal error={authContext.error} />
+      <Modal error={error} close={() => confirmError()} />
     </React.Fragment>
   );
 };

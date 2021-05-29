@@ -77,6 +77,26 @@ export const useAuth = () => {
     }
   };
 
+  const login = (loginData, userData) => {
+    setToken(loginData["idToken"]);
+    setUserEmail(loginData["email"]);
+    setUserId(loginData["localId"]);
+    setUserName(loginData["displayName"]);
+    setIsVerified(userData["emailVerified"]);
+    setIsLoggedIn(true);
+
+    const loginDataKeys = Object.keys(loginData);
+
+    for (let key in loginDataKeys) {
+      const name = loginDataKeys[key];
+      localStorage.setItem(name, loginData[name]);
+    }
+
+    history.push("/");
+  };
+
+  const signup = () => {};
+
   const signInToFirebase = async () => {
     setIsLoading(true);
     const accessToken = localStorage.getItem("access_token");
@@ -215,5 +235,6 @@ export const useAuth = () => {
     updateProfile,
     sendPasswordReset,
     logout,
+    login,
   };
 };

@@ -33,6 +33,7 @@ function App() {
     updateProfile,
     sendPasswordReset,
     logout,
+    login,
   } = useAuth();
 
   let routes = (
@@ -67,6 +68,7 @@ function App() {
           updateProfile: updateProfile,
           sendPasswordReset: sendPasswordReset,
           logout: logout,
+          login,
         }}
       >
         <BurgerContextProvider>
