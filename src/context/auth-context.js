@@ -10,10 +10,11 @@ export const AuthContext = createContext({
   sendedVerification: false,
   isVerified: false,
   initializeError: () => {},
-  authWithEmailAndPassword: () => {},
+  login: () => {},
   signInToFirebase: () => {},
   emailVerification: () => {},
   updateProfile: () => {},
   sendPasswordReset: () => {},
   logout: () => {},
+  test: () => {},
 });

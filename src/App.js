@@ -27,13 +27,12 @@ function App() {
     sendedVerification,
     isVerified,
     initializeError,
-    authWithEmailAndPassword,
+    login,
     signInToFirebase,
     emailVerification,
     updateProfile,
     sendPasswordReset,
     logout,
-    login,
   } = useAuth();
 
   let routes = (
@@ -62,13 +61,12 @@ function App() {
           sendedVerification: sendedVerification,
           isVerified: isVerified,
           initializeError: initializeError,
-          authWithEmailAndPassword: authWithEmailAndPassword,
+          login: login,
           signInToFirebase: signInToFirebase,
           emailVerification: emailVerification,
           updateProfile: updateProfile,
           sendPasswordReset: sendPasswordReset,
           logout: logout,
-          login,
         }}
       >
         <BurgerContextProvider>

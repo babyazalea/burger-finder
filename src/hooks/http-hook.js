@@ -15,13 +15,10 @@ export const useHttp = () => {
 
     try {
       const response = await axios.post(url, sendingData);
-      const responseData = response.data;
-
-      if (!response.ok) {
-        throw new Error(responseData.message);
-      }
+      const responseData = await response.data;
 
       setIsLoading(false);
+
       return responseData;
     } catch (error) {
       const errorResponse = error.response.data;

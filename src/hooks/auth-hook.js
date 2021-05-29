@@ -20,63 +20,6 @@ export const useAuth = () => {
     setError(null);
   };
 
-  const authWithEmailAndPassword = async (email, password, authMode) => {
-    setIsLoading(true);
-    const authData = {
-      email,
-      password,
-      returnSecureToken: true,
-    };
-
-    let url;
-
-    if (authMode === "signup") {
-      url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
-    } else if (authMode === "login") {
-      url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
-    }
-
-    try {
-      const response = await axios.post(url, authData);
-      const responseData = await response.data;
-
-      if (authMode === "signup") {
-        console.log("signup success");
-      } else if (authMode === "login") {
-        try {
-          const responseDataKeys = Object.keys(responseData);
-
-          for (let key in responseDataKeys) {
-            const name = responseDataKeys[key];
-            localStorage.setItem(name, responseData[name]);
-          }
-
-          const getUserDataUrl = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
-          const tokenData = { idToken: responseData["idToken"] };
-          const userDataResponse = await axios.post(getUserDataUrl, tokenData);
-          const userData = await userDataResponse.data.users[0];
-
-          console.log("login success.");
-          setToken(responseData["idToken"]);
-          setUserEmail(responseData["email"]);
-          setUserId(responseData["localId"]);
-          setUserName(responseData["displayName"]);
-          setIsVerified(userData["emailVerified"]);
-          setIsLoggedIn(true);
-        } catch (err) {
-          console.log(err);
-          setIsLoading(false);
-        }
-      }
-      setIsLoading(false);
-      history.push("/");
-    } catch (error) {
-      const errorResponse = error.response.data;
-      setIsLoading(false);
-      setError(errorResponse.error.message);
-    }
-  };
-
   const login = (loginData, userData) => {
     setToken(loginData["idToken"]);
     setUserEmail(loginData["email"]);
@@ -94,8 +37,6 @@ export const useAuth = () => {
 
     history.push("/");
   };
-
-  const signup = () => {};
 
   const signInToFirebase = async () => {
     setIsLoading(true);
@@ -229,12 +170,11 @@ export const useAuth = () => {
     sendedVerification,
     isVerified,
     initializeError,
-    authWithEmailAndPassword,
+    login,
     signInToFirebase,
     emailVerification,
     updateProfile,
     sendPasswordReset,
     logout,
-    login,
   };
 };

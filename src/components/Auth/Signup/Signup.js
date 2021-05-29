@@ -1,6 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 
-import { AuthContext } from "../../../context/auth-context";
+import { useHistory } from "react-router-dom";
+import { useHttp } from "../../../hooks/http-hook";
 
 import Input from "../../UI/Input/Input";
 import Modal from "../../UI/Modal/Modal";
@@ -12,9 +13,22 @@ import "./Signup.css";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPassowordError] = useState(true);
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const authContext = useContext(AuthContext);
+  const { isLoading, error, initializeError, sendRequest } = useHttp();
+
+  const history = useHistory();
+
+  useEffect(() => {
+    if (
+      password === confirmPassword &&
+      password !== "" &&
+      confirmPassword !== ""
+    ) {
+      setPassowordError(false);
+    }
+  }, [password, confirmPassword]);
 
   const onChange = (event) => {
     const {
@@ -30,17 +44,37 @@ const Signup = () => {
     }
   };
 
-  const onSignup = (event) => {
+  const onSignup = async (event) => {
     event.preventDefault();
+
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+
+    const signupData = {
+      email,
+      password,
+      returnSecureToken: true,
+    };
+
     if (password === confirmPassword) {
-      authContext.authWithEmailAndPassword(email, password, "signup");
+      try {
+        await sendRequest(url, signupData);
+
+        history.push("/");
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
     }
+  };
+
+  const confirmError = () => {
+    initializeError();
   };
 
   return (
     <React.Fragment>
       <div className="signup__wrapper">
-        {authContext.isLoading ? (
+        {isLoading ? (
           <Spinner />
         ) : (
           <form>
@@ -71,14 +105,18 @@ const Signup = () => {
               />
             </div>
             <div className="auth__submit-controll">
-              <Button variant="success" onClick={onSignup}>
+              <Button
+                variant="success"
+                onClick={onSignup}
+                disabled={passwordError}
+              >
                 가입
               </Button>
             </div>
           </form>
         )}
       </div>
-      <Modal error={authContext.error} />
+      <Modal error={error} close={confirmError} />
     </React.Fragment>
   );
 };

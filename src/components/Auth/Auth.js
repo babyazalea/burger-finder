@@ -52,10 +52,12 @@ const Auth = () => {
 
       const token = { idToken: responseData["idToken"] };
       const userDataResponse = await sendRequest(getUserDataUrl, token);
-      const userData = await userDataResponse.data.users[0];
+      const userData = await userDataResponse.users[0];
 
       authContext.login(responseData, userData);
-    } catch (err) {}
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const confirmError = () => {
