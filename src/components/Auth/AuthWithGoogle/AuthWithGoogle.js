@@ -8,6 +8,7 @@ import Spinner from "../../UI/Spinner/Spinner";
 
 import { Container, Button } from "react-bootstrap";
 import "./AuthWithGoogle.css";
+import Modal from "../../UI/Modal/Modal";
 
 const AuthWithGoogle = () => {
   const [getToken, setGetToken] = useState(false);
@@ -77,9 +78,22 @@ const AuthWithGoogle = () => {
   }
 
   return (
-    <Container className="google-auth-message-container">
-      {authContext.isLoading || tokenLoading ? <Spinner /> : messageAndLink}
-    </Container>
+    <React.Fragment>
+      <Container className="google-auth-message-container">
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <React.Fragment>
+            {authContext.isLoading || tokenLoading ? (
+              <Spinner />
+            ) : (
+              messageAndLink
+            )}
+          </React.Fragment>
+        )}
+      </Container>
+      <Modal error={error} />
+    </React.Fragment>
   );
 };
 
