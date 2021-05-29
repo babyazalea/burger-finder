@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 
+import { useHttp } from "../../../hooks/http-hook";
 import { AuthContext } from "../../../context/auth-context";
 
 import Spinner from "../../UI/Spinner/Spinner";
@@ -11,9 +12,11 @@ import "./AuthWithGoogle.css";
 const AuthWithGoogle = () => {
   const [getToken, setGetToken] = useState(false);
   const [tokenLoading, setTokenLoading] = useState(true);
-  const authContext = useContext(AuthContext);
 
+  const { isLoading, error, initializeError, sendRequest } = useHttp();
+  const authContext = useContext(AuthContext);
   const history = useHistory();
+
   const tokenFromParams = window.location.href.split("&")[1].split("=")[1];
 
   useEffect(() => {
@@ -24,8 +27,25 @@ const AuthWithGoogle = () => {
     }
   }, [tokenFromParams]);
 
-  const loginWithGoogleInFirebase = () => {
-    authContext.signInToFirebase();
+  const loginWithGoogleInFirebase = async () => {
+    const accessToken = localStorage.getItem("access_token");
+
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+
+    const authData = {
+      postBody: `access_token=${accessToken}&providerId=google.com`,
+      requestUri: "http://localhost:3000",
+      returnIdpCredential: true,
+      returnSecureToken: true,
+    };
+
+    try {
+      const responseData = await sendRequest(url, authData);
+
+      authContext.googleLogin(responseData);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const backToAuth = () => {

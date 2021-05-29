@@ -38,42 +38,21 @@ export const useAuth = () => {
     history.push("/");
   };
 
-  const signInToFirebase = async () => {
-    setIsLoading(true);
-    const accessToken = localStorage.getItem("access_token");
+  const googleLogin = (responseData) => {
+    setToken(responseData["idToken"]);
+    setUserEmail(responseData["email"]);
+    setUserId(responseData["localId"]);
+    setUserName(responseData["displayName"]);
+    setIsVerified(true);
+    setIsLoggedIn(true);
 
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+    const responseDataKeys = Object.keys(responseData);
 
-    const authData = {
-      postBody: `access_token=${accessToken}&providerId=google.com`,
-      requestUri: "http://localhost:3000",
-      returnIdpCredential: true,
-      returnSecureToken: true,
-    };
-
-    try {
-      const response = await axios.post(url, authData);
-      const responseData = await response.data;
-
-      const responseDataKeys = Object.keys(responseData);
-
-      for (let key in responseDataKeys) {
-        const name = responseDataKeys[key];
-        localStorage.setItem(name, responseData[name]);
-      }
-      setIsLoggedIn(true);
-      setToken(responseData["idToken"]);
-      setUserEmail(responseData["email"]);
-      setUserId(responseData["localId"]);
-      setUserName(responseData["displayName"]);
-      setIsVerified(true);
-      history.push("/");
-      setIsLoading(false);
-    } catch (err) {
-      const errorResponse = error.response.data;
-      setIsLoading(false);
-      setError(errorResponse.error.message);
+    for (let key in responseDataKeys) {
+      const name = responseDataKeys[key];
+      localStorage.setItem(name, responseData[name]);
     }
+    history.push("/");
   };
 
   const emailVerification = async () => {
@@ -171,7 +150,7 @@ export const useAuth = () => {
     isVerified,
     initializeError,
     login,
-    signInToFirebase,
+    googleLogin,
     emailVerification,
     updateProfile,
     sendPasswordReset,

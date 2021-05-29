@@ -11,7 +11,7 @@ export const AuthContext = createContext({
   isVerified: false,
   initializeError: () => {},
   login: () => {},
-  signInToFirebase: () => {},
+  googleLogin: () => {},
   emailVerification: () => {},
   updateProfile: () => {},
   sendPasswordReset: () => {},
