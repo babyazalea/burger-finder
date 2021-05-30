@@ -14,13 +14,10 @@ const Navigation = (props) => {
 
   const authContext = useContext(AuthContext);
 
-  const gotId = localStorage.getItem("localId");
-  const gotName = localStorage.getItem("displayName");
-
   useEffect(() => {
-    setUserId(gotId);
-    setUserName(gotName);
-  }, [gotId, gotName]);
+    setUserName(props.userName);
+    setUserId(props.userId);
+  }, [props.userName, props.userId]);
 
   const clearLocalStorage = () => {
     localStorage.clear();

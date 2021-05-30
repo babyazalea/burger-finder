@@ -1,18 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { useHistory, Link } from "react-router-dom";
 import { useHttp } from "../../../hooks/http-hook";
 import { AuthContext } from "../../../context/auth-context";
 
 import Spinner from "../../UI/Spinner/Spinner";
+import Modal from "../../UI/Modal/Modal";
 
 import { Container, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import Modal from "../../UI/Modal/Modal";
-
 import "./UserProfile.css";
 
-const UserProfile = () => {
+const UserProfile = (props) => {
   const [token, setToken] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
   const [userName, setUserName] = useState(null);
@@ -21,18 +20,23 @@ const UserProfile = () => {
   const [sendedVerification, setSendedVerification] = useState(false);
 
   const { isLoading, error, initializeError, sendRequest } = useHttp();
+  const history = useHistory();
   const authContext = useContext(AuthContext);
 
+  const isMounted = useRef(false);
+
   useEffect(() => {
-    setToken(localStorage.getItem("idToken"));
-    setUserEmail(localStorage.getItem("email"));
-    setUserName(
-      localStorage.getItem("displayName") !== ""
-        ? localStorage.getItem("displayName")
-        : "이름 없음"
-    );
-    setPhotoUrl(localStorage.getItem("photoUrl") || null);
-  }, []);
+    if (!isMounted.current) {
+      setToken(props.token);
+      setUserEmail(props.userEmail);
+      setUserName(props.userName !== "" ? props.userName : "이름 없음");
+      setPhotoUrl(props.photoUrl || null);
+    }
+
+    return () => {
+      isMounted.current = true;
+    };
+  }, [props]);
 
   const toggleEditMode = () => {
     setNameEditing(!nameEditing);
@@ -74,8 +78,10 @@ const UserProfile = () => {
     };
 
     try {
-      const respondeData = await sendRequest(url, dataForUpdate);
-      authContext.updateProfile(respondeData);
+      const responseData = await sendRequest(url, dataForUpdate);
+      authContext.updateProfile(responseData);
+      setNameEditing(false);
+      history.push("/");
     } catch (err) {
       console.log(err);
     }

@@ -13,7 +13,7 @@ const Layout = (props) => {
       fluid="true"
     >
       <header>
-        <Navigation />
+        <Navigation userName={props.userName} userId={props.userId} />
       </header>
       <main>{props.children}</main>
     </Container>

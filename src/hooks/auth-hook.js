@@ -1,20 +1,27 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
 
+import { storingData } from "../utils/storing-data";
+
 export const useAuth = () => {
+  const [token, setToken] = useState(null);
+  const [userName, setUserName] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
+  const [photoUrl, setPhotoUrl] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
 
   const history = useHistory();
 
   const login = (loginData, userData) => {
-    const loginDataKeys = Object.keys(loginData);
+    storingData(loginData);
 
-    for (let key in loginDataKeys) {
-      const name = loginDataKeys[key];
-      localStorage.setItem(name, loginData[name]);
-    }
-
+    setToken(loginData["idToken"]);
+    setUserName(loginData["displayName"]);
+    setUserEmail(loginData["email"]);
+    setPhotoUrl(loginData["photoUrl"]);
+    setUserId(loginData["localId"]);
     setIsVerified(userData["emailVerified"]);
     setIsLoggedIn(true);
 
@@ -22,13 +29,13 @@ export const useAuth = () => {
   };
 
   const googleLogin = (responseData) => {
-    const responseDataKeys = Object.keys(responseData);
+    storingData(responseData);
 
-    for (let key in responseDataKeys) {
-      const name = responseDataKeys[key];
-      localStorage.setItem(name, responseData[name]);
-    }
-
+    setToken(responseData["idToken"]);
+    setUserName(responseData["displayName"]);
+    setUserEmail(responseData["email"]);
+    setPhotoUrl(responseData["photoUrl"]);
+    setUserId(responseData["localId"]);
     setIsVerified(true);
     setIsLoggedIn(true);
 
@@ -36,12 +43,10 @@ export const useAuth = () => {
   };
 
   const updateProfile = (responseData) => {
-    const responseDataKeys = Object.keys(responseData);
+    storingData(responseData);
 
-    for (let key in responseDataKeys) {
-      const name = responseDataKeys[key];
-      localStorage.setItem(name, responseData[name]);
-    }
+    setUserName(responseData["displayName"]);
+    setUserId(responseData["localId"]);
 
     history.push("/");
   };
@@ -54,6 +59,11 @@ export const useAuth = () => {
   };
 
   return {
+    token,
+    userName,
+    userEmail,
+    userId,
+    photoUrl,
     isLoggedIn,
     isVerified,
     login,

@@ -18,9 +18,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const {
+    token,
+    userName,
+    userEmail,
+    userId,
+    photoUrl,
     isLoggedIn,
     isVerified,
-    initializeError,
     login,
     googleLogin,
     updateProfile,
@@ -33,7 +37,14 @@ function App() {
       <Route path="/analyze" component={BurgerAnalyzer} exact />
       <Route path="/burger-maker" component={Burger} exact />
       <Route path="/users/:id/reset-password" component={ResetPassword} />
-      <Route path="/users/:id" component={UserProfile} />
+      <Route path="/users/:id">
+        <UserProfile
+          token={token}
+          userName={userName}
+          userEmail={userEmail}
+          photoUrl={photoUrl}
+        />
+      </Route>
       <Route path="/auth" component={Auth} exact />
       <Route path="/auth/signup" component={Signup} exact />
       <Route path="/auth/google" component={AuthWithGoogle} />
@@ -46,7 +57,6 @@ function App() {
         value={{
           isLoggedIn: isLoggedIn,
           isVerified: isVerified,
-          initializeError: initializeError,
           login: login,
           googleLogin,
           updateProfile: updateProfile,
@@ -54,7 +64,9 @@ function App() {
         }}
       >
         <BurgerContextProvider>
-          <Layout>{routes}</Layout>
+          <Layout userName={userName} userId={userId}>
+            {routes}
+          </Layout>
         </BurgerContextProvider>
       </AuthContext.Provider>
     </div>
