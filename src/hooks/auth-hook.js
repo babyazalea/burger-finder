@@ -10,7 +10,6 @@ export const useAuth = () => {
   const [userEmail, setUserEmail] = useState(null);
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState(null);
-  const [sendedVerification, setSendedVerification] = useState(false);
   const [isVerified, setIsVerified] = useState(false);
   const [error, setError] = useState(null);
 
@@ -55,58 +54,16 @@ export const useAuth = () => {
     history.push("/");
   };
 
-  const emailVerification = async () => {
-    setIsLoading(true);
+  const updateProfile = (responseData) => {
+    const responseDataKeys = Object.keys(responseData);
 
-    const idToken = localStorage.getItem("idToken");
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
-    const verifingData = {
-      requestType: "VERIFY_EMAIL",
-      idToken: idToken,
-    };
-
-    try {
-      await axios.post(url, verifingData);
-      setIsLoading(false);
-      setSendedVerification(true);
-    } catch (err) {
-      const errorResponse = error.response.data;
-      setIsLoading(false);
-      setError(errorResponse.error.message);
+    for (let key in responseDataKeys) {
+      const name = responseDataKeys[key];
+      localStorage.setItem(name, responseData[name]);
     }
-  };
 
-  const updateProfile = async (newUserName) => {
-    setIsLoading(true);
-
-    const dataForUpdate = {
-      idToken: token,
-      displayName: newUserName,
-      photoUrl: "",
-      deleteAttribute: ["PHOTO_URL"],
-      returnSecureToken: true,
-    };
-
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
-
-    try {
-      const response = await axios.post(url, dataForUpdate);
-      const responseData = await response.data;
-      const responseDataKeys = Object.keys(responseData);
-
-      for (let key in responseDataKeys) {
-        const name = responseDataKeys[key];
-        localStorage.setItem(name, responseData[name]);
-      }
-
-      setUserName(responseData["displayName"]);
-      setIsLoading(false);
-      history.push("/");
-    } catch (err) {
-      const errorResponse = error.response.data;
-      setIsLoading(false);
-      setError(errorResponse.error.message);
-    }
+    setUserName(responseData["displayName"]);
+    history.push("/");
   };
 
   const sendPasswordReset = async () => {
@@ -146,12 +103,10 @@ export const useAuth = () => {
     token,
     userId,
     userName,
-    sendedVerification,
     isVerified,
     initializeError,
     login,
     googleLogin,
-    emailVerification,
     updateProfile,
     sendPasswordReset,
     logout,

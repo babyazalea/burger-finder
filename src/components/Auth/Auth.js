@@ -109,7 +109,7 @@ const Auth = () => {
           </React.Fragment>
         )}
       </Container>
-      <Modal error={error} close={() => confirmError()} />
+      <Modal error={error} close={confirmError} />
     </React.Fragment>
   );
 };

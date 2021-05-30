@@ -54,6 +54,10 @@ const AuthWithGoogle = () => {
     localStorage.clear();
   };
 
+  const confirmError = () => {
+    initializeError();
+  };
+
   let messageAndLink = (
     <div className="google-auth-message">
       <p>구글 인증에 실패했습니다.</p>
@@ -92,7 +96,7 @@ const AuthWithGoogle = () => {
           </React.Fragment>
         )}
       </Container>
-      <Modal error={error} />
+      <Modal error={error} close={confirmError} />
     </React.Fragment>
   );
 };

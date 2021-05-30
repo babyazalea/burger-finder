@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
+import { useHttp } from "../../../hooks/http-hook";
 import { AuthContext } from "../../../context/auth-context";
 
-import { Link } from "react-router-dom";
-import { Container, Spinner, Button } from "react-bootstrap";
+import Spinner from "../../UI/Spinner/Spinner";
+
+import { Container, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Modal from "../../UI/Modal/Modal";
@@ -11,14 +13,18 @@ import Modal from "../../UI/Modal/Modal";
 import "./UserProfile.css";
 
 const UserProfile = () => {
-  const [nameEditing, setNameEditing] = useState(false);
+  const [token, setToken] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
   const [userName, setUserName] = useState(null);
   const [photoUrl, setPhotoUrl] = useState(null);
+  const [nameEditing, setNameEditing] = useState(false);
+  const [sendedVerification, setSendedVerification] = useState(false);
 
+  const { isLoading, error, initializeError, sendRequest } = useHttp();
   const authContext = useContext(AuthContext);
 
   useEffect(() => {
+    setToken(localStorage.getItem("idToken"));
     setUserEmail(localStorage.getItem("email"));
     setUserName(
       localStorage.getItem("displayName") !== ""
@@ -38,6 +44,45 @@ const UserProfile = () => {
     } = event;
 
     setUserName(value);
+  };
+
+  const emailVerification = async () => {
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+
+    const verifingData = {
+      requestType: "VERIFY_EMAIL",
+      idToken: token,
+    };
+
+    try {
+      await sendRequest(url, verifingData);
+      setSendedVerification(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const changeName = async () => {
+    const url = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${process.env.REACT_APP_FIREBASE_API_KEY}`;
+
+    const dataForUpdate = {
+      idToken: token,
+      displayName: userName,
+      photoUrl: "",
+      deleteAttribute: ["PHOTO_URL"],
+      returnSecureToken: true,
+    };
+
+    try {
+      const respondeData = await sendRequest(url, dataForUpdate);
+      authContext.updateProfile(respondeData);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const confirmError = () => {
+    initializeError();
   };
 
   let profile;
@@ -72,15 +117,13 @@ const UserProfile = () => {
   let verficaion;
   verficaion = authContext.isVerified ? null : (
     <div className="user__email__verification">
-      {authContext.sendedVerification ? (
+      {sendedVerification ? (
         <p>
           인증 메일을 {userEmail}로 보냈습니다. 이메일을 확인하시고 다시 로그인
           해주세요.
         </p>
       ) : (
-        <Button onClick={authContext.emailVerification}>
-          이메일 인증 하기
-        </Button>
+        <Button onClick={emailVerification}>이메일 인증 하기</Button>
       )}
     </div>
   );
@@ -93,10 +136,7 @@ const UserProfile = () => {
           <Button onClick={toggleEditMode} variant="warning">
             수정 취소
           </Button>
-          <Button
-            variant="success"
-            onClick={() => authContext.updateProfile(userName)}
-          >
+          <Button variant="success" onClick={changeName}>
             이대로 수정
           </Button>
         </React.Fragment>
@@ -109,29 +149,29 @@ const UserProfile = () => {
   ) : null;
 
   return (
-    <Container className="profile-container">
-      {authContext.isLoading || userEmail === null || userName === null ? (
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-      ) : (
-        <React.Fragment>
-          {profile}
+    <React.Fragment>
+      <Container className="profile-container">
+        {isLoading || userEmail === null || userName === null ? (
+          <Spinner />
+        ) : (
           <React.Fragment>
-            {verficaion}
-            {nameEditButton}
-            {authContext.isVerified ? (
-              <div className="user-password__change-btn">
-                <Link to={`/users/${authContext.userId}/password-change`}>
-                  <Button>비밀번호 변경</Button>
-                </Link>
-              </div>
-            ) : null}
+            {profile}
+            <React.Fragment>
+              {verficaion}
+              {nameEditButton}
+              {authContext.isVerified ? (
+                <div className="user-password__change-btn">
+                  <Link to={`/users/${authContext.userId}/password-change`}>
+                    <Button>비밀번호 변경</Button>
+                  </Link>
+                </div>
+              ) : null}
+            </React.Fragment>
           </React.Fragment>
-        </React.Fragment>
-      )}
-      <Modal error={authContext.error} />
-    </Container>
+        )}
+      </Container>
+      <Modal error={error} close={confirmError} />
+    </React.Fragment>
   );
 };
 
