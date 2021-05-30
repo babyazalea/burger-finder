@@ -18,12 +18,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const {
-    isLoading,
     isLoggedIn,
-    error,
-    token,
-    userId,
-    userName,
     isVerified,
     initializeError,
     login,
@@ -49,12 +44,7 @@ function App() {
     <div className="App" id="App">
       <AuthContext.Provider
         value={{
-          isLoading: isLoading,
           isLoggedIn: isLoggedIn,
-          error: error,
-          token: token,
-          userId: userId,
-          userName: userName,
           isVerified: isVerified,
           initializeError: initializeError,
           login: login,
