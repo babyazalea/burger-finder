@@ -29,7 +29,6 @@ function App() {
     login,
     googleLogin,
     updateProfile,
-    sendPasswordReset,
     logout,
   } = useAuth();
 
