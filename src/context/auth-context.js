@@ -3,7 +3,6 @@ import { createContext } from "react";
 export const AuthContext = createContext({
   isLoading: false,
   isLoggedIn: false,
-  error: null,
   token: null,
   userId: null,
   userName: null,
@@ -11,7 +10,6 @@ export const AuthContext = createContext({
   login: () => {},
   googleLogin: () => {},
   updateProfile: () => {},
-  sendPasswordReset: () => {},
   logout: () => {},
   test: () => {},
 });

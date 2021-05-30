@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 import { Nav, Navbar } from "react-bootstrap";
@@ -9,7 +9,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Navigation.css";
 
 const Navigation = (props) => {
+  const [userName, setUserName] = useState(null);
+  const [userId, setUserId] = useState(null);
+
   const authContext = useContext(AuthContext);
+
+  const gotId = localStorage.getItem("localId");
+  const gotName = localStorage.getItem("displayName");
+
+  useEffect(() => {
+    setUserId(gotId);
+    setUserName(gotName);
+  }, [gotId, gotName]);
 
   const clearLocalStorage = () => {
     localStorage.clear();
@@ -35,15 +46,12 @@ const Navigation = (props) => {
             </NavLink>
           )}
           {authContext.isLoggedIn && (
-            <NavLink
-              to={`/users/${authContext.userId}`}
-              className="nav-link__user-profile"
-            >
+            <NavLink to={`/users/${userId}`} className="nav-link__user-profile">
               {authContext.isVerified ? (
                 <div className="user-name__display">
                   <FontAwesomeIcon icon="user-circle" />
-                  {authContext.userName !== "" ? (
-                    <span>{authContext.userName}</span>
+                  {userName !== "" ? (
+                    <span>{userName}</span>
                   ) : (
                     <span>이름 없음</span>
                   )}

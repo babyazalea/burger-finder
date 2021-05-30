@@ -161,7 +161,7 @@ const UserProfile = () => {
               {nameEditButton}
               {authContext.isVerified ? (
                 <div className="user-password__change-btn">
-                  <Link to={`/users/${authContext.userId}/password-change`}>
+                  <Link to={`/users/${authContext.userId}/reset-password`}>
                     <Button>비밀번호 변경</Button>
                   </Link>
                 </div>
