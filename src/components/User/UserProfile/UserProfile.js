@@ -6,6 +6,7 @@ import { AuthContext } from "../../../context/auth-context";
 
 import Spinner from "../../UI/Spinner/Spinner";
 import Modal from "../../UI/Modal/Modal";
+import Input from "../../UI/Input/Input";
 
 import { Container, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,13 +40,7 @@ const UserProfile = (props) => {
     return () => {
       isMounted.current = true;
     };
-  }, [
-    props.token,
-    props.userId,
-    props.userEmail,
-    props.userName,
-    props.photoUrl,
-  ]);
+  }, []);
 
   const toggleEditMode = () => {
     setNameEditing(!nameEditing);
@@ -115,7 +110,13 @@ const UserProfile = (props) => {
         </div>
         <p className="user__email">{userEmail}</p>
         {nameEditing ? (
-          <input value={userName} onChange={userNameHandle} />
+          <Input
+            type="text"
+            placeholder="이름"
+            passedValue={userName}
+            name="name"
+            onChange={userNameHandle}
+          />
         ) : (
           <p className="user__name">{userName}</p>
         )}

@@ -76,7 +76,7 @@ const Auth = (props) => {
                   placeholder="이메일"
                   name="email"
                   aria-label="email"
-                  change={(e) => onChange(e)}
+                  onChange={(e) => onChange(e)}
                 />
                 <Input
                   label="PW"
@@ -84,7 +84,7 @@ const Auth = (props) => {
                   placeholder="비밀번호"
                   name="password"
                   aria-label="password"
-                  change={(e) => onChange(e)}
+                  onChange={(e) => onChange(e)}
                 />
               </div>
               <div className="auth__submit-controll">

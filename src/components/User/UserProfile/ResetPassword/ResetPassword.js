@@ -53,11 +53,10 @@ const ResetPassword = (props) => {
     passwordResetPart = (
       <React.Fragment>
         <Input
-          label="E-mail"
           type="email"
           placeholder="이메일"
           name="email"
-          change={onChange}
+          onChange={onChange}
         />
         <Button variant="success" onClick={() => sendPasswordReset(userEmail)}>
           비밀번호 재설정 메일 보내기
