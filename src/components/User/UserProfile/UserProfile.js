@@ -23,13 +23,13 @@ const UserProfile = (props) => {
   const [sendedVerification, setSendedVerification] = useState(false);
 
   const { isLoading, error, initializeError, sendRequest } = useHttp();
-  const history = useHistory();
+
   const authContext = useContext(AuthContext);
 
-  const isMounted = useRef(false);
+  const isMounted = useRef(true);
 
   useEffect(() => {
-    if (!isMounted.current) {
+    if (isMounted.current === true) {
       setToken(props.token);
       setUserId(props.userId);
       setUserEmail(props.userEmail);
@@ -38,9 +38,15 @@ const UserProfile = (props) => {
     }
 
     return () => {
-      isMounted.current = true;
+      isMounted.current = false;
     };
-  }, []);
+  }, [
+    props.token,
+    props.userId,
+    props.userName,
+    props.userEmail,
+    props.photoUrl,
+  ]);
 
   const toggleEditMode = () => {
     setNameEditing(!nameEditing);
@@ -84,8 +90,6 @@ const UserProfile = (props) => {
     try {
       const responseData = await sendRequest(url, dataForUpdate);
       props.updateProfile(responseData);
-      setNameEditing(false);
-      history.push("/");
     } catch (err) {
       console.log(err);
     }

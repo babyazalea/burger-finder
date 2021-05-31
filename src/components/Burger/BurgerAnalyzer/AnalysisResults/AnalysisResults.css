@@ -55,35 +55,6 @@
   margin-bottom: 30px;
 }
 
-.modal-parent-base-card {
-  display: block;
-  z-index: 500;
-  width: 400px;
-  height: 250px;
-  min-width: 350px;
-  min-height: 180px;
-  background-color: #feca57;
-  transition: height 0.3s ease;
-  display: flex;
-  justify-content: center;
-}
-
-.burger-modal-text {
-  display: grid;
-  width: 250px;
-  height: 250px;
-  align-content: center;
-  justify-items: center;
-  align-items: center;
-  grid-template-rows: 0.5fr 1fr 0.2fr 0.5fr;
-  font-family: "Poor Story";
-  z-index: 1000;
-}
-
-.burger-modal-text span {
-  display: block;
-}
-
 .burger-ranking-rank {
   font-size: 1rem;
   align-self: flex-end;
@@ -98,52 +69,6 @@
 .burger-ranking-score {
   font-size: 0.8rem;
   font-style: italic;
-}
-
-.modal-expension-btn {
-  outline: none;
-  background: none;
-  border: none;
-  color: rgba(0, 0, 0, 0.5);
-  transition: color 0.3s;
-}
-.modal-expension-btn:hover {
-  color: rgba(0, 0, 0, 1);
-  animation: upAndDown 1.5s ease infinite;
-}
-
-@keyframes upAndDown {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(2px);
-  }
-}
-
-.modal-child-base-card {
-  margin-top: 50px;
-  width: 100%;
-  height: 80%;
-  background-color: #fff;
-}
-
-.modal-child-base-card a {
-  text-decoration: none;
-  color: black;
-  display: block;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  background-repeat: no-repeat;
-  background-position: right 6% bottom 0;
-  background-size: 25%;
-}
-
-.modal-child-base-card span {
-  padding-left: 18%;
 }
 
 .burgerking-link {

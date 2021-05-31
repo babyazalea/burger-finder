@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import BaseCard from "../../../UI/BaseCard/BaseCard";
-import Modal from "../../../UI/Modal/Modal";
+import BurgerModal from "../../../UI/BurgerModal/BurgerModal";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -22,6 +22,7 @@ const AnalysisResults = (props) => {
 
   const showModal = () => {
     setModalState(true);
+    console.log(modalState);
   };
 
   const closeModal = (prevState) => {
@@ -111,7 +112,7 @@ const AnalysisResults = (props) => {
     }
 
     urlExtension = (
-      <BaseCard customClassName="modal-child-base-card">
+      <BaseCard customClassName="burger__modal-child-base-card">
         <a
           href={brandUrl}
           target="_blank"
@@ -148,19 +149,16 @@ const AnalysisResults = (props) => {
           </div>
         </BaseCard>
       </li>
-      <Modal isOpen={modalState} closeModal={closeModal}>
-        <BaseCard
-          customClassName={`${cardAnimationClass} modal-parent-base-card`}
-        >
-          <div className="burger-modal-text">
-            <span className="burger-ranking-rank">{burgerRankText}</span>
-            <span className="burger-ranking-name">{props.name}</span>
-            <span className="burger-ranking-score">( {burgerScoreText} )</span>
-            {urlExtensionBtn}
-            {urlExtension}
-          </div>
-        </BaseCard>
-      </Modal>
+      <BurgerModal
+        isOpen={modalState}
+        closeModal={closeModal}
+        name={props.name}
+        cardAnimationClass={cardAnimationClass}
+        urlExtension={urlExtension}
+        urlExtensionBtn={urlExtensionBtn}
+        burgerRankText={burgerRankText}
+        burgerScoreText={burgerScoreText}
+      ></BurgerModal>
     </React.Fragment>
   );
 };
