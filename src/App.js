@@ -43,11 +43,16 @@ function App() {
           userName={userName}
           userEmail={userEmail}
           photoUrl={photoUrl}
+          updateProfile={updateProfile}
         />
       </Route>
-      <Route path="/auth" component={Auth} exact />
+      <Route path="/auth" exact>
+        <Auth login={login} />
+      </Route>
       <Route path="/auth/signup" component={Signup} exact />
-      <Route path="/auth/google" component={AuthWithGoogle} />
+      <Route path="/auth/google">
+        <AuthWithGoogle googleLogin={googleLogin} />
+      </Route>
     </Switch>
   );
 
@@ -57,14 +62,10 @@ function App() {
         value={{
           isLoggedIn: isLoggedIn,
           isVerified: isVerified,
-          login: login,
-          googleLogin,
-          updateProfile: updateProfile,
-          logout: logout,
         }}
       >
         <BurgerContextProvider>
-          <Layout userName={userName} userId={userId}>
+          <Layout userName={userName} userId={userId} logout={logout}>
             {routes}
           </Layout>
         </BurgerContextProvider>

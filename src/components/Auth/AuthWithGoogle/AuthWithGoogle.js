@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 
 import { useHttp } from "../../../hooks/http-hook";
-import { AuthContext } from "../../../context/auth-context";
 
 import Spinner from "../../UI/Spinner/Spinner";
 
@@ -10,12 +9,12 @@ import { Container, Button } from "react-bootstrap";
 import "./AuthWithGoogle.css";
 import Modal from "../../UI/Modal/Modal";
 
-const AuthWithGoogle = () => {
+const AuthWithGoogle = (props) => {
   const [getToken, setGetToken] = useState(false);
   const [tokenLoading, setTokenLoading] = useState(true);
 
   const { isLoading, error, initializeError, sendRequest } = useHttp();
-  const authContext = useContext(AuthContext);
+
   const history = useHistory();
 
   const tokenFromParams = window.location.href.split("&")[1].split("=")[1];
@@ -43,7 +42,7 @@ const AuthWithGoogle = () => {
     try {
       const responseData = await sendRequest(url, authData);
 
-      authContext.googleLogin(responseData);
+      props.googleLogin(responseData);
     } catch (err) {
       console.log(err);
     }
@@ -88,11 +87,7 @@ const AuthWithGoogle = () => {
           <Spinner />
         ) : (
           <React.Fragment>
-            {authContext.isLoading || tokenLoading ? (
-              <Spinner />
-            ) : (
-              messageAndLink
-            )}
+            {isLoading || tokenLoading ? <Spinner /> : messageAndLink}
           </React.Fragment>
         )}
       </Container>

@@ -1,8 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useHttp } from "../../hooks/http-hook";
-import { AuthContext } from "../../context/auth-context";
 
 import { Container, Button } from "react-bootstrap";
 import Input from "../UI/Input/Input";
@@ -12,11 +11,9 @@ import Spinner from "../UI/Spinner/Spinner";
 import "./Auth.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Auth = () => {
+const Auth = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const authContext = useContext(AuthContext);
 
   const { isLoading, error, initializeError, sendRequest } = useHttp();
 
@@ -54,7 +51,7 @@ const Auth = () => {
       const userDataResponse = await sendRequest(getUserDataUrl, token);
       const userData = await userDataResponse.users[0];
 
-      authContext.login(responseData, userData);
+      props.login(responseData, userData);
     } catch (err) {
       console.log(err);
     }

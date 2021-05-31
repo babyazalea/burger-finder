@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useHttp } from "../../../hooks/http-hook";
+
 import { AuthContext } from "../../../context/auth-context";
 
 import Spinner from "../../UI/Spinner/Spinner";
@@ -79,7 +80,7 @@ const UserProfile = (props) => {
 
     try {
       const responseData = await sendRequest(url, dataForUpdate);
-      authContext.updateProfile(responseData);
+      props.updateProfile(responseData);
       setNameEditing(false);
       history.push("/");
     } catch (err) {
