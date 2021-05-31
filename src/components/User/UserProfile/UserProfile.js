@@ -14,6 +14,7 @@ import "./UserProfile.css";
 
 const UserProfile = (props) => {
   const [token, setToken] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
   const [userName, setUserName] = useState(null);
   const [photoUrl, setPhotoUrl] = useState(null);
@@ -29,6 +30,7 @@ const UserProfile = (props) => {
   useEffect(() => {
     if (!isMounted.current) {
       setToken(props.token);
+      setUserId(props.userId);
       setUserEmail(props.userEmail);
       setUserName(props.userName !== "" ? props.userName : "이름 없음");
       setPhotoUrl(props.photoUrl || null);
@@ -37,7 +39,13 @@ const UserProfile = (props) => {
     return () => {
       isMounted.current = true;
     };
-  }, [props]);
+  }, [
+    props.token,
+    props.userId,
+    props.userEmail,
+    props.userName,
+    props.photoUrl,
+  ]);
 
   const toggleEditMode = () => {
     setNameEditing(!nameEditing);
@@ -168,7 +176,7 @@ const UserProfile = (props) => {
               {nameEditButton}
               {authContext.isVerified ? (
                 <div className="user-password__change-btn">
-                  <Link to={`/users/${authContext.userId}/reset-password`}>
+                  <Link to={`/users/${userId}/reset-password`}>
                     <Button>비밀번호 변경</Button>
                   </Link>
                 </div>

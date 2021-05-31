@@ -36,10 +36,16 @@ function App() {
       <Route path="/" component={Burger} exact />
       <Route path="/analyze" component={BurgerAnalyzer} exact />
       <Route path="/burger-maker" component={Burger} exact />
-      <Route path="/users/:id/reset-password" component={ResetPassword} />
+      <Route path="/users/reset-password" exact>
+        <ResetPassword notLoggedIn={true} />
+      </Route>
+      <Route path="/users/:id/reset-password">
+        <ResetPassword userEmail={userEmail} />
+      </Route>
       <Route path="/users/:id">
         <UserProfile
           token={token}
+          userId={userId}
           userName={userName}
           userEmail={userEmail}
           photoUrl={photoUrl}

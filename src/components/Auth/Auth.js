@@ -102,6 +102,9 @@ const Auth = (props) => {
               <Link to="/auth/signup">
                 <Button>가입하러 가기</Button>
               </Link>
+              <Link to="/users/reset-password">
+                <Button>비밀번호를 잃어버리셨나요?</Button>
+              </Link>
             </div>
           </React.Fragment>
         )}
