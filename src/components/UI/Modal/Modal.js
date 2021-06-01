@@ -1,12 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
-
-import { AuthContext } from "../../../context/auth-context";
+import React, { useEffect, useState } from "react";
 
 import { Modal as BootstrapModal, Button } from "react-bootstrap";
 
 const Modal = (props) => {
   const [show, setShow] = useState(false);
-  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     if (props.error !== null) {

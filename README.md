@@ -40,9 +40,10 @@
         - [x] auth-input & spinner 리팩토링.
         - [x] singup-page 분리.
         - [x] error-modal 만들기.(authentication 85% 완성, 2021/05/29)
+        - [x] auto-login, auto-logout 추가.
         - [x] auth-hook 리팩토링.
-        - [ ] App.js 리팩토링 마무리.
         - [x] auth-page에 password-reset 추가.
+        - [ ] App.js 리팩토링 마무리.
         - [ ] 이메일로 가입한 회원과 구글로 로그인한 회원 간에 충돌 여부 확인 해보기(이메일이 같을 때).
         - [ ] 지속적으로 에러 체크 & 디버깅.
 - 햄버거랑 유저랑 연결할 시간~

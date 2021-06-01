@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useHttp } from "../../../hooks/http-hook";
 
 import { AuthContext } from "../../../context/auth-context";
@@ -26,20 +26,12 @@ const UserProfile = (props) => {
 
   const authContext = useContext(AuthContext);
 
-  const isMounted = useRef(true);
-
   useEffect(() => {
-    if (isMounted.current === true) {
-      setToken(props.token);
-      setUserId(props.userId);
-      setUserEmail(props.userEmail);
-      setUserName(props.userName !== "" ? props.userName : "이름 없음");
-      setPhotoUrl(props.photoUrl || null);
-    }
-
-    return () => {
-      isMounted.current = false;
-    };
+    setToken(props.token);
+    setUserId(props.userId);
+    setUserEmail(props.userEmail);
+    setUserName(props.userName !== "" ? props.userName : "이름 없음");
+    setPhotoUrl(props.photoUrl || null);
   }, [
     props.token,
     props.userId,

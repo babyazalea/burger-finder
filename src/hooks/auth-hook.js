@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useHistory } from "react-router";
 
 import { storingData } from "../utils/storing-data";
@@ -15,6 +15,7 @@ export const useAuth = () => {
   const history = useHistory();
 
   const login = (loginData, userData) => {
+    loginData.emailVerified = userData["emailVerified"];
     storingData(loginData);
 
     setToken(loginData["idToken"]);
@@ -36,7 +37,7 @@ export const useAuth = () => {
     setUserEmail(responseData["email"]);
     setPhotoUrl(responseData["photoUrl"]);
     setUserId(responseData["localId"]);
-    setIsVerified(true);
+    setIsVerified(responseData["emailVerified"]);
     setIsLoggedIn(true);
 
     history.push("/");
@@ -51,12 +52,33 @@ export const useAuth = () => {
     history.push("/");
   };
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setIsLoggedIn(false);
     setIsVerified(false);
     localStorage.clear();
     history.push("/");
-  };
+  }, [history]);
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("userData");
+    if (!storedData) {
+      logout();
+    } else {
+      const parsingData = JSON.parse(storedData);
+      const expDate = new Date(parsingData.expirationDate);
+      if (expDate <= new Date()) {
+        logout();
+      } else {
+        setToken(parsingData.idToken);
+        setUserName(parsingData.displayName);
+        setUserEmail(parsingData.email);
+        setPhotoUrl(parsingData.photoUrl);
+        setUserId(parsingData.localId);
+        setIsVerified(parsingData.emailVerified);
+        setIsLoggedIn(true);
+      }
+    }
+  }, [logout]);
 
   return {
     token,
