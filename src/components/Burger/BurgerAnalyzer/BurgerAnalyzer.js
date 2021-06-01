@@ -1,48 +1,15 @@
 import React from "react";
 
-import burgers from "../../../assets/data/burgers-data";
+import { burgerRanker } from "../../../utils/burger-ranker";
 
+import MyBurger from "./MyBurger/MyBurger";
 import AnalysisResults from "./AnalysisResults/AnalysisResults";
 
-import "./BurgerAnalyzer.css";
 import { Container } from "react-bootstrap";
+import "./BurgerAnalyzer.css";
 
 const BurgerAnalyzer = (props) => {
-  let scoreBoard = [];
-
-  // burger finder start
-  const burgerKeys = Object.keys(burgers);
-
-  const scoringFunction = (userIngs, burgerIngs) => {
-    let score = 100;
-
-    const userIngsKeys = Object.keys(userIngs);
-
-    userIngsKeys.forEach((key) => {
-      if (userIngs[key] !== burgerIngs[key]) {
-        score -= 1;
-      }
-    });
-
-    return score;
-  };
-
-  for (let burgerKey in burgerKeys) {
-    const burgerName = burgerKeys[burgerKey];
-    let score = scoringFunction(props.ings, burgers[burgerName]);
-
-    const burgerResult = {
-      name: burgerName,
-      score: burgers[burgerName].realBurger ? (score += 1) : score,
-      realBurger: burgers[burgerName].realBurger
-        ? burgers[burgerName].realBurger
-        : null,
-    };
-    scoreBoard.push(burgerResult);
-  }
-  // burger finder end
-
-  /// burgers sorting start
+  const scoreBoard = burgerRanker(props.ings);
 
   const sortedScoreBoard = scoreBoard
     .sort(function (a, b) {
@@ -57,8 +24,6 @@ const BurgerAnalyzer = (props) => {
       return 0;
     })
     .slice(0, 3);
-
-  /// burgers sorting end
 
   let analyzer = <p>not...ok</p>;
 
@@ -79,6 +44,7 @@ const BurgerAnalyzer = (props) => {
   return (
     <Container className="burger-analyzer">
       <div className="result-board">
+        <MyBurger />
         <ul>{analyzer}</ul>
       </div>
     </Container>

@@ -33,7 +33,13 @@ function App() {
   let routes = (
     <Switch>
       <Route path="/" component={Burger} exact />
-      <Route path="/analyze" component={BurgerAnalyzer} exact />
+      <Route path="/analyze" exact>
+        <BurgerAnalyzer
+          isLoggedIn={isLoggedIn}
+          isVerified={isVerified}
+          userId={userId}
+        />
+      </Route>
       <Route path="/burger-maker" component={Burger} exact />
       <Route path="/users/reset-password" exact>
         <ResetPassword notLoggedIn={true} />

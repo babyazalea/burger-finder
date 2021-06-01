@@ -29,6 +29,7 @@ yarn-error.log*
 burgers-data.js
 initial-ingredients.js
 converting-text.js
+burger-ranker.js
 
 #vscode
 .vscode
