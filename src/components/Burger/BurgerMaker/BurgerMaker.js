@@ -5,11 +5,16 @@ import BurgerController from "./BurgerController/BurgerController";
 
 import "./BurgerMaker.css";
 
-const BurgerMaker = () => {
+const BurgerMaker = (props) => {
   return (
     <Container className="burger-maker">
-      <BurgerController />
-      <BurgerText />
+      <BurgerController
+        addIngredient={props.addIngredient}
+        clearIngredients={props.clearIngredients}
+        fixedIngredients={props.fixedIngredients}
+        initBurgerAnalyze={props.initBurgerAnalyze}
+      />
+      <BurgerText ings={props.ings} />
     </Container>
   );
 };

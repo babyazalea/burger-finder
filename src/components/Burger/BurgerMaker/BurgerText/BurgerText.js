@@ -1,20 +1,15 @@
-import React, { useContext } from "react";
-import { BurgerContext } from "../../../../context/burger-context";
+import React from "react";
 
 import BurgerIngredient from "./BurgerIngredient/BurgerIngredient";
 import { Container } from "react-bootstrap";
 import "./BurgerText.css";
 
 const BurgerText = (props) => {
-  const burgerContext = useContext(BurgerContext);
-
-  let transformedIngredients = Object.keys(burgerContext.ingredients).map(
-    (igKey) => {
-      return [...Array(burgerContext.ingredients[igKey])].map((_, i) => {
-        return <BurgerIngredient key={igKey + i} type={igKey} />;
-      });
-    }
-  );
+  let transformedIngredients = Object.keys(props.ings).map((igKey) => {
+    return [...Array(props.ings[igKey])].map((_, i) => {
+      return <BurgerIngredient key={igKey + i} type={igKey} />;
+    });
+  });
   return (
     <Container className="burger-text">{transformedIngredients}</Container>
   );

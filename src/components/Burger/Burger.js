@@ -1,20 +1,32 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 
-import { BurgerContext } from "../../context/burger-context";
+import { useBurger } from "../../hooks/burger-hooks";
 
 import BurgerAnalyzer from "./BurgerAnalyzer/BurgerAnalyzer";
 import BurgerMaker from "./BurgerMaker/BurgerMaker";
 
 const Burger = () => {
-  const burgerContext = useContext(BurgerContext);
-  useEffect(() => {
-    burgerContext.initBurgerAnalyze();
-  }, []);
+  const {
+    ings,
+    isAnalyzed,
+    addIngredient,
+    clearIngredients,
+    fixedIngredients,
+    initBurgerAnalyze,
+  } = useBurger();
 
-  let burger = <BurgerMaker />;
+  let burger = (
+    <BurgerMaker
+      ings={ings}
+      addIngredient={addIngredient}
+      clearIngredients={clearIngredients}
+      fixedIngredients={fixedIngredients}
+      initBurgerAnalyze={initBurgerAnalyze}
+    />
+  );
 
-  if (burgerContext.isAnalyzed) {
-    burger = <BurgerAnalyzer />;
+  if (isAnalyzed) {
+    burger = <BurgerAnalyzer ings={ings} isAnalyzed={isAnalyzed} />;
   }
 
   return burger;

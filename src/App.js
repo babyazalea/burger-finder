@@ -3,7 +3,6 @@ import { Route, Switch } from "react-router-dom";
 
 import { AuthContext } from "./context/auth-context";
 import { useAuth } from "./hooks/auth-hook";
-import BurgerContextProvider from "./context/burger-context";
 
 import Layout from "./components/Layout/Layout";
 import Burger from "./components/Burger/Burger";
@@ -70,11 +69,9 @@ function App() {
           isVerified: isVerified,
         }}
       >
-        <BurgerContextProvider>
-          <Layout userName={userName} userId={userId} logout={logout}>
-            {routes}
-          </Layout>
-        </BurgerContextProvider>
+        <Layout userName={userName} userId={userId} logout={logout}>
+          {routes}
+        </Layout>
       </AuthContext.Provider>
     </div>
   );

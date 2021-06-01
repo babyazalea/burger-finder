@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 
-import { BurgerContext } from "../../../context/burger-context";
 import burgers from "../../../assets/data/burgers-data";
 
 import AnalysisResults from "./AnalysisResults/AnalysisResults";
@@ -8,9 +7,7 @@ import AnalysisResults from "./AnalysisResults/AnalysisResults";
 import "./BurgerAnalyzer.css";
 import { Container } from "react-bootstrap";
 
-const BurgerAnalyzer = () => {
-  const burgerContext = useContext(BurgerContext);
-
+const BurgerAnalyzer = (props) => {
   let scoreBoard = [];
 
   // burger finder start
@@ -32,7 +29,7 @@ const BurgerAnalyzer = () => {
 
   for (let burgerKey in burgerKeys) {
     const burgerName = burgerKeys[burgerKey];
-    let score = scoringFunction(burgerContext.ingredients, burgers[burgerName]);
+    let score = scoringFunction(props.ings, burgers[burgerName]);
 
     const burgerResult = {
       name: burgerName,
@@ -65,7 +62,7 @@ const BurgerAnalyzer = () => {
 
   let analyzer = <p>not...ok</p>;
 
-  if (burgerContext.isAnalyzed && sortedScoreBoard.length) {
+  if (props.isAnalyzed && sortedScoreBoard.length) {
     analyzer = sortedScoreBoard.map((burgerResult, index) => {
       return (
         <AnalysisResults

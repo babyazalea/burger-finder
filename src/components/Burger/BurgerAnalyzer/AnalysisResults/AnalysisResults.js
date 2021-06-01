@@ -22,7 +22,6 @@ const AnalysisResults = (props) => {
 
   const showModal = () => {
     setModalState(true);
-    console.log(modalState);
   };
 
   const closeModal = (prevState) => {
